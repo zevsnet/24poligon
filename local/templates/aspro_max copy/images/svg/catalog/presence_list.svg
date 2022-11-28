@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #888;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Rounded_Rectangle_1034" data-name="Rounded Rectangle 1034" class="cls-1" d="M1120,3632h-4a1,1,0,0,1,0-2h4A1,1,0,0,1,1120,3632Zm0-3h-4a1,1,0,0,1,0-2h4A1,1,0,0,1,1120,3629Zm-7,6h-1a1,1,0,0,1,0-2h1A1,1,0,0,1,1113,3635Zm0-3h-1a1,1,0,0,1,0-2h1A1,1,0,0,1,1113,3632Zm0-3h-1a1,1,0,0,1,0-2h1A1,1,0,0,1,1113,3629Zm3,4h4a1,1,0,0,1,0,2h-4A1,1,0,0,1,1116,3633Z" transform="translate(-1111 -3627)"/>
+</svg>

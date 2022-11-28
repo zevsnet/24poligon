@@ -1,0 +1,1 @@
+<?define("askaron_parallel1c_TEMPORARY_CACHE", "czUHVHw3VgE5CHllUTBWfFJ1");?>

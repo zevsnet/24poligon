@@ -1,0 +1,12 @@
+.top_blocks{
+    text-align: left;
+}
+.top_blocks .sb_title{
+    display: inline-block;
+    margin: 0 38px 0 0;
+    margin-bottom: 0px;
+    font-size: 20px;
+    color: #1d2029;
+    line-height: 30px;
+    font-weight: 500;
+}swiper-button-next

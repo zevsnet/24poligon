@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="12" viewBox="0 0 46 12">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #333;
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Rounded_Rectangle_1052_copy_6" data-name="Rounded Rectangle 1052 copy 6" class="cls-1" d="M1696,822h-4v4a1,1,0,0,1-2,0v-4h-4a1,1,0,0,1,0-2h4v-4a1,1,0,0,1,2,0v4h4A1,1,0,0,1,1696,822Z" transform="translate(-1685 -815)"/>
+  <path id="Rounded_Rectangle_1052_copy_5" data-name="Rounded Rectangle 1052 copy 5" class="cls-1" d="M1703.4,820.985l3.3,3.294a1,1,0,0,1-1.41,1.41l-3.31-3.294-3.3,3.293a1,1,0,1,1-1.41-1.409l3.3-3.294-3.29-3.281a1,1,0,0,1,1.41-1.41l3.3,3.281,3.29-3.281a1,1,0,1,1,1.41,1.41Z" transform="translate(-1685 -815)"/>
+  <path id="Rounded_Rectangle_1052_copy_8" data-name="Rounded Rectangle 1052 copy 8" class="cls-2" d="M1707,827v-6a1,1,0,0,0,1,1h4v4a1,1,0,0,0,2,0v-4h4a1,1,0,0,0,0-2h-4v-4a1,1,0,0,0-.99-1H1719v12h-12Zm5-11v4h-4a1,1,0,0,0-1,1v-6h5.99A1,1,0,0,0,1712,816Z" transform="translate(-1685 -815)"/>
+  <path id="Rounded_Rectangle_1052_copy_7" data-name="Rounded Rectangle 1052 copy 7" class="cls-2" d="M1719,827V815h12v12h-12Zm10.69-9.3a1,1,0,1,0-1.41-1.41l-3.29,3.281-3.3-3.281a1,1,0,0,0-1.41,1.41l3.29,3.281-3.3,3.294a1,1,0,1,0,1.41,1.409l3.3-3.293,3.31,3.294a1,1,0,0,0,1.41-1.41l-3.3-3.294Z" transform="translate(-1685 -815)"/>
+</svg>

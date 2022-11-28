@@ -1,0 +1,30 @@
+#personal_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.links.rows_block.soc_icons {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+#auth_params {
+    display: inline-block;
+}
+
+.module-enter.have-user {
+    display: inline-block;
+}
+
+#personal_block .soc_icons .item_block a,
+#personal_block .bx-authform-social ul li .bx-authform-social-icon {
+}
+
+@media only screen and (max-width: 600px) {
+    .links.rows_block.soc_icons {
+        display: none;
+
+    }
+}
+

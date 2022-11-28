@@ -1,0 +1,43 @@
+<div class="modal fade" id="modal-energy" tabindex="-1" role="dialog" aria-labelledby="modal-energy">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Выбор пункта самовывоза</h4>
+            </div>
+            <div class="modal-body">
+                <div class="energy-pickup-point">
+                    <el-row>
+                        <el-col :span="24" :md="8">
+                            <div class="info">
+                                <h4>Город: {{service.cityName}} </h4>
+                                <h5 v-if="!isValidPoints">Нет точек в этом городе</h5>
+                                <ul class="isValidPoints">
+                                    <li v-for="point in points" v-if="point.address" class="point" @click="selectPoint(point)" :class="{'point_selected': point === currentPoint}">
+                                        <p>{{point['address']}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </el-col>
+                        <el-col v-if="isValidPoints" :span="24" :md="16">
+                            <gmap-map :center="center" :zoom="zoom">
+                                <gmap-marker v-for="(point,index) in points" :key="index" :position="getPosition(point)"
+                                             :clickable="true" :draggable="true" @click="selectPoint(point)"></gmap-marker>
+                            </gmap-map>
+                            <div v-if="currentPoint.title" class="point-info">
+                                <h4 v-if="currentPoint.title">{{currentPoint.title}}</h4>
+                                <p v-if="currentPoint.phone">Телефон: {{currentPoint.phone}}</p>
+                                <p v-if="currentPoint.address">Адрес: {{currentPoint.address}}</p>
+                                <p v-if="currentPoint.zipcode">Индекс: {{currentPoint.zipcode}}</p>
+                                <p v-if="currentPoint.workTime[currentDay()]">Время работы: {{currentPoint.workTime[currentDay()]['begin']}} - {{currentPoint.workTime[currentDay()]['end']}}</p>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <el-button data-dismiss="modal" type="success">Выбрать склад</el-button>
+            </div>
+        </div>
+    </div>
+</div>

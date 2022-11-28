@@ -1,0 +1,4 @@
+@media(max-width: 550px){
+	.map_type_1 .contacts_map_list .contacts_map {min-height:200px;}
+	.map_type_1 .contacts_map_list .contacts_map .bx-yandex-view-map .bx-yandex-map{height: 200px!important;}
+}

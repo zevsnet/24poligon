@@ -1,0 +1,11 @@
+<div id="posuda-application">
+    <template v-if="!getComponentName() ">
+        Компонент не подключен!
+    </template>
+    <template v-if="getComponentName() == 'order'">
+        <Order :application="getComponentData()"></Order>
+    </template>
+    <template v-if="getComponentName() == 'basket'">
+        <Basket :application="getComponentData()"></Basket>
+    </template>
+</div>

@@ -1,0 +1,3 @@
+<?php
+$MESS['SB_VENDOR_DEFF'] ='Россия';
+$MESS['SB_VENDOR_DEFF_CODE'] ='RUSSIA';

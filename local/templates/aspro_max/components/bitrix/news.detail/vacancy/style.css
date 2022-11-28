@@ -1,0 +1,15 @@
+.detail.vacancy{margin: 0px 0px 40px;}
+.vacancy-detail1 .add_resume{margin:0 0 39px;position:relative;}
+.vacancy-detail1 .add_resume:after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#ececec;}
+.vacancy-detail1 .add_resume .button_wrap{position:relative;padding:0 33px 0 0;display:inline-block;vertical-align:top;background:#FFF;z-index:1;}
+
+.detail.vacancy-detail1 .top_content{margin:0 0 42px;}
+.detail.vacancy-detail1 .text{margin:0 0 42px;}
+.detail.vacancy-detail1 .properties{margin:0;padding:28px 44px 25px;background:#fafafa;}
+.detail.vacancy-detail1 .properties .property{margin:8px 0;}
+.detail.vacancy-detail1 .properties .property .title-prop{margin:0 0 5px;}
+.detail.vacancy-detail1 .properties .property .value{font-size:1.0667em;}
+.detail.vacancy-detail1 .properties{border-bottom-right-radius: 3px;border-bottom-left-radius: 3px;}
+
+.detail.vacancy-detail1 .top_content .image{margin-bottom: -1px;}
+.detail.vacancy-detail1 .top_content .image img{border-radius: 3px 3px 0 0;}   

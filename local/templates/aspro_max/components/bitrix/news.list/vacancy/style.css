@@ -1,0 +1,197 @@
+.list-type-block.vacancy-list1 .period-block {
+	margin: 0 0 14px;
+}
+
+.list-type-block.item-views.vacancy-list1.wide_img.list .item .previewtext{
+	margin-top: 22px;
+}
+
+.item-views.list-type-block.vacancy-list1 .item .previewtext p:first-child{
+	margin-top: 0;
+}
+
+.list-type-block.item-views.vacancy-list1.wide_img .item .body-info .arrow_link{
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: inline-block;
+	width: 38px;
+	height: 38px;
+}
+
+
+.list-type-block.item-views.vacancy-list1.wide_img.image_right .item .body-info .arrow_link{
+	/*right: 290px;*/
+	display: none;
+}
+.list-type-block.item-views.vacancy-list1.wide_img.image_right .item .image + .body-info.has-link {
+    padding-right: 293px;
+    padding-left: 0px;
+}
+
+.item-views.list-type-block.vacancy-list1 .items .item_wrap{
+	/*padding: 39px;*/
+	padding: 33px 39px 34px;
+	margin: 0px 0px -1px;
+}
+
+.list-type-block.item-views.vacancy-list1.wide_img .item .svg.svg-inline-right-arrow{
+	position: absolute;
+	top: 13px;
+	left: 12px;
+}
+
+.vacancy-list1 .item_wrap:hover .body-info .arrow_link .svg-inline-right-arrow path{
+	fill: #fff!important;
+}
+
+
+.list-type-block.item-views.vacancy-list1.wide_img .item .period-block-bottom{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.list-type-block.item-views.vacancy-list1.image_left.wide_img .item.wti.wdate{
+	padding-bottom: 20px;
+}
+
+.list-type-block.item-views.vacancy-list1.image_left.wide_img .item .image + .body-info .period-block-bottom{
+	position: absolute;
+	bottom: 0;
+	left: 293px;
+}
+
+.list-type-block.item-views.vacancy-list1 .item .section-name-block{
+	display: block;
+	margin: 0 0 10px;
+}
+
+.list-type-block.item-views.vacancy-list1.wide_img .item .image + .body-info{padding-left:293px; padding-right:70px;}
+
+.list-type-block.item-views.vacancy-list1 .item .body-info .info-sticker-block.static-block{position: static;}
+
+.list-type-block.item-views.vacancy-list1 .item_wrap > .item .period-block .svg,
+.list-type-block.item-views.vacancy-list1 .item_wrap > .item .period-block-bottom .svg{padding: 0px 9px 1px 0px;}
+
+.list-type-block.item-views.vacancy-list1 .item .body-info:not(.with-section) > .period-block {
+	margin-top: -6px;
+}
+
+.list-type-block.item-views.vacancy-list1 .item:not(.wdate) .body-info:not(.with-section) > .title{
+	margin-top: -6px;
+}
+
+.item-views.list-type-block.vacancy-list1.wide_img .items.row >.col-md-12{
+	z-index:10;
+}
+
+/*compact mode*/
+/*.compact-view.item-views.list-type-block .items .item_wrap{padding: 2.266rem;}*/
+/*.compact-view.list-type-block.item-views.wide_img .item .image + .body-info{padding-left: 12.333rem;}*/
+.compact-view.list-type-block.item-views.vacancy-list1 .item .title{margin-bottom:0.8rem;}
+.compact-view.item-views.list-type-block.vacancy-list1 .items .item_wrap{padding: 2.27rem;}
+.compact-view.list-type-block.vacancy-list1.item-views.wide_img .item .image + .body-info{padding-left: 12.27rem;}
+
+/*vacancy*/
+.list-type-block.item-views.compact-view.vacancy-list1 .item_wrap{padding-top: 1.866rem;}
+/*.list-type-block.item-views.vacancy-list1 .item.wti .body-info{padding-right: 68px;}*/
+.list-type-block.item-views.vacancy-list1 .item .title{margin-bottom: 6px;}
+.list-type-block.item-views.vacancy-list1 .top-block .properties{/*margin-bottom: -4px;*/ margin-top: 11px;padding-bottom: 22px;}
+.list-type-block.item-views.vacancy-list1 .top-block .properties .inner-wrapper{font-size: 1em;padding-bottom: 0px;position: relative;}
+.list-type-block.item-views.vacancy-list1 .top-block .properties .inner-wrapper .separator{z-index: 2;position: absolute;right: -6px;top: 0px;}
+.list-type-block.item-views.vacancy-list1 .top-block .properties .inner-wrapper:last-of-type .separator{display: none;}
+.vacancy-list1 .top-block__pay{font-weight: bold;}
+/*.list-type-block.item-views.wide_img.vacancy-list1 .item .body-info .arrow_link{top:6px;}*/
+/*.list-type-block.item-views.wide_img.vacancy-list1 .item .body-info .arrow_link{top:-2px;}*/
+body .compact-view.list-type-block.item-views.list.vacancy-list1 .item .previewtext{margin-top:1.333rem;}
+
+body .compact-view.list-type-block.item-views.list.vacancy-list1 .item .previewtext{margin:0px;}
+
+.item-views.vacancy-list1 .group-content .tab-pane {margin-bottom:42px;}
+.item-views.vacancy-list1.linked .group-content .tab-pane{margin-bottom:0;}
+
+.item-views.list-type-block.vacancy-list1 .item .previewtext{margin-bottom: 0;}
+.list-type-block.item-views.vacancy-list1.wide_img.list .item .previewtext.no-props {margin-top: 7px;}
+
+
+.item-views.list-type-block.vacancy-list1.accordion-mode .items .item_wrap{
+    padding:0;
+}
+
+.item-views.list-type-block.vacancy-list1.accordion-mode .accordion-type-1 .item-accordion-wrapper .accordion-head{
+    /*padding: 39px;*/
+    padding: 33px 39px 34px;
+}
+
+.item-views.list-type-block.vacancy-list1.accordion-mode .panel-collapse .accordion-body {
+    padding: 0 39px 39px 39px;
+}
+
+.item-views.list-type-block.vacancy-list1.accordion-mode .accordion-type-1 .item-accordion-wrapper .accordion-head .arrow_open {
+    top: 33px;
+    right: 39px;
+    width: 38px;
+    height: 38px;
+}
+
+.item-views.list-type-block.vacancy-list1.accordion-mode .item-accordion-wrapper.opened .accordion-head:before{top:40px;}
+
+
+
+/*.vacancy-list1 .add_resume{margin:0 0 39px;position:relative;}
+.vacancy-list1 .add_resume:after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#f1f1f1;}
+.vacancy-list1 .add_resume .button_wrap{position:relative;padding:0 33px 0 0;display:inline-block;vertical-align:top;background:#FFF;z-index:1;}*/
+/*.vacancy-list1.accordion-mode .item-accordion-wrapper .button_wrap{margin: 29px 0 0; display: inline-block;}*/
+
+
+/* start media */
+
+@media(min-width: 768px){
+	.list-type-block.item-views.vacancy-list1 .item.wti .body-info{padding-right: 68px;}
+}
+
+@media (max-width: 767px){
+	.list-type-block.item-views.vacancy-list1.wide_img .item .body-info .arrow_link{
+		display:none;
+	}
+	.list-type-block.item-views.vacancy-list1.wide_img .item .image + .body-info {
+		padding-right: 0;
+	}
+
+	.item-views.list-type-block.vacancy-list1.accordion-mode .accordion-type-1 .item-accordion-wrapper .accordion-head .arrow_open {display:none;}
+}
+
+@media (min-width: 601px){
+	.compact-view.list-type-block.item-views.vacancy-list1.wide_img .item > .image{width: 150px;}
+	.item-views.list-type-block.vacancy-list1 .item_wrap .body-info .top-block.flexbox .top-block__pay {margin-top: 7px;}
+	.item-views.list-type-block.vacancy-list1 .item_wrap .body-info .top-block.flexbox {align-items: flex-start;}
+}
+@media (max-width: 600px){
+
+	/*.item-views.list-type-block.vacancy-list1 .items .item_wrap{padding: 20px;}*/
+	
+	.list-type-block.item-views.vacancy-list1.image_left.wide_img .item .period-block-bottom,
+	.list-type-block.item-views.vacancy-list1.image_right.wide_img .item .period-block-bottom{position: absolute;bottom: 0;left: 0;}
+
+	.item-views.vacancy-list1 .top-block.flexbox{flex-direction:column;align-items: flex-start;}
+    .item-views.vacancy-list1 .top-block .top-block__pay{width:100%;margin-top:15px;}
+    .item-views.vacancy-list1 .top-block .properties{margin-top:11px;}
+
+    .item-views.vacancy-list1 .top-block .top-block__pay.no-props {margin-top: 6px;}
+
+}
+
+@media(min-width:601px) and (max-width:991px){
+     .item-views.vacancy-list1 .top-block .properties {max-width:400px}
+}
+@media(min-width:992px) and (max-width:1199px){
+     .with_left_block .item-views.vacancy-list1 .top-block .properties {max-width:400px}
+     .item-views.vacancy-list1 .top-block .properties {max-width:600px}
+}
+@media(min-width:1200px){
+     .with_left_block .item-views.vacancy-list1 .top-block .properties {max-width:700px}
+     .item-views.vacancy-list1.top-block .properties {max-width:1000px}
+}
+
+/*end media*/

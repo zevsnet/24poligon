@@ -1,0 +1,19 @@
+<svg id="Group_252_copy" data-name="Group 252 copy" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #1d7ce6;
+      }
+
+      .cls-1 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        opacity: 0.1;
+      }
+    </style>
+  </defs>
+  <path id="Rounded_Rectangle_1004_copy_2" data-name="Rounded Rectangle 1004 copy 2" class="cls-1" d="M685,369a25,25,0,1,1,25-25A25,25,0,0,1,685,369Zm0-48a23,23,0,1,0,23,23A23,23,0,0,0,685,321Zm-2.18,29.553a1.032,1.032,0,0,1-1.55.135,0.881,0.881,0,0,1-.09-0.135l-5.869-5.857a1,1,0,0,1,1.414-1.416L682,348.543l11.275-11.263a1,1,0,0,1,1.414,1.416Z" transform="translate(-660 -319)"/>
+  <circle class="cls-2" cx="25" cy="25" r="19"/>
+</svg>

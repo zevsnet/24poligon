@@ -1,0 +1,17 @@
+<?
+$MESS ['ASKARON_PARALLEL1C1_MENU_MAIN'] = "Параллельный и ускоренный обмен с 1С";
+$MESS ['ASKARON_PARALLEL1C1_MENU_MAIN_TITLE'] = "Параллельный и ускоренный обмен с 1С";
+
+$MESS ['ASKARON_PARALLEL1C1_MENU_EXCHANGES'] = "Настройки обменов с 1С";
+$MESS ['ASKARON_PARALLEL1C1_MENU_EXCHANGES_TITLE'] = "";
+
+//$MESS ['ASKARON_PARALLEL1C1_MENU_HANDLERS_CATALOG'] = "Доступные обработчики данных";
+//$MESS ['ASKARON_PARALLEL1C1_MENU_HANDLERS_CATALOG_TITLE'] = "";
+//
+//$MESS ["ASKARON_PARALLEL1C1_MENU_HANDLERS_INIT_VIEW"] = "Файл инициализации";
+//$MESS ["ASKARON_PARALLEL1C1_MENU_HANDLERS_INIT_VIEW_TITLE"] = "Просмотр файла инициализации";
+
+$MESS ['ASKARON_PARALLEL1C1_SETTINGS_PAGE'] = "Настройки модуля";
+$MESS ['ASKARON_PARALLEL1C1_SETTINGS_PAGE_TITLE'] = "Настройки модуля";
+
+?>

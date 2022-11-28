@@ -1,0 +1,58 @@
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+.swiper-container .inner_wrap{
+    min-height: 400px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-container .swiper-button-prev,
+.swiper-container .swiper-container-rtl .swiper-button-next {
+
+    /*background: url('/local/templates/aspro_optimus/images/arrows2.png') 3px -20px no-repeat;*/
+    background: url('/local/templates/aspro_optimus/images/arrowleft.png') no-repeat;
+    opacity: 0.5;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+
+    left: 10px;
+    right: auto;
+}
+
+.swiper-container .swiper-button-next,
+.swiper-container .swiper-container-rtl .swiper-button-prev {
+    background: url('/local/templates/aspro_optimus/images/arrowleft.png') no-repeat;
+    transform: rotate(180deg);
+    opacity: 0.5;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    right: 10px;
+    left: auto;
+}
+
+.swiper-container .swiper-button-prev:hover,
+.swiper-container .swiper-button-next:hover{
+    opacity: 1;
+}

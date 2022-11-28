@@ -1,0 +1,21 @@
+create table if not exists b_askaron_parallel1c_exchange (
+	`ID` int(18) not null auto_increment,
+	`CODE` varchar(255) not null,
+	`NAME` varchar(255) not null,
+	`PATH` varchar(255) not null,
+	`DISALLOW_ALL` char(1) not null default 'N',
+	`PARAMS` text null,
+    `MODIFIED_BY` int(18) null,
+	`TIMESTAMP_X` datetime null,
+	`IMPORT_XML_NEW_ONLY` char(1) not null default 'N',
+	`DISALLOW_IMPORT_XML_STEP` char(1) not null default 'N',
+	`DISALLOW_OFFERS_XML_STEP` char(1) not null default 'N',
+	`DISALLOW_PRICES_XML_STEP` char(1) not null default 'N',
+	`DISALLOW_RESTS_XML_STEP` char(1) not null default 'N',
+	`DISALLOW_DEACTIVATE_STEP` char(1) not null default 'N',
+	`ALLOW_DEACTIVATE_IBLOCKS` text null,
+	`COMPONENT_IMPORT_VER` varchar(255) not null default 'last',
+	`CML2_IMPORT_VER` varchar(255) not null default 'bitrix',
+	primary key (ID),
+ 	index IX_PATH (PATH)
+);

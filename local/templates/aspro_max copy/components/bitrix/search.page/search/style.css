@@ -1,0 +1,15 @@
+.search-page-wrap .path{display: block;list-style: none;background: 0 0;margin: 0;padding: 0 0px 5px;}
+.search-page-wrap .path>li{margin: 0 0 0 11px;padding: 0;display: inline-block;vertical-align: top;zoom:1;font-size: .8667em;color: #bbb}
+.search-page-wrap .path>li:first-of-type{margin-left: 0}
+.search-page-wrap .path>li:before{margin-right: 10px;margin-left: 0;color: #ddd}
+.search-page-wrap .path>li:first-of-type:before{display: none}
+.search-page-wrap .path>li a{color: #bbb}
+
+.search-page-wrap form{position: relative;}
+.search-page-wrap .searchinput{padding: 0px 0px 26px;}
+.search-page-wrap .dropdown-select{padding: 0px 0px 16px;}
+.search-page-wrap .item{padding: 32px 40px 33px;margin-top:-1px;background:#fff;}
+.search-page-wrap .item .title{display: block;padding: 0px 0px 16px;}
+.search-page-wrap .item .arrow_link{position: absolute;right: 39px;top: 39px;display: inline-block;width: 38px;height: 38px;}
+.search-page-wrap .item .arrow_link .svg{position: absolute;top: 13px;left: 12px;}
+.search-page-wrap .item:hover .arrow_link .svg path{fill: #fff;}

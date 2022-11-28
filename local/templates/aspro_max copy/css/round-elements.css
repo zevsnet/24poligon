@@ -1,0 +1,31 @@
+.btn:not(.round-ignore) {border-radius: 26px!important;}
+.footer_button .btn {border-radius: 0 0 3px 3px!important;}
+
+.catalog_block .counter_wrapp > div .btn {border-radius: 0px!important;}
+
+.display_list .counter_block {border-radius: 22px;}
+.table-view .counter_block {border-radius: 22px;}
+.catalog_detail.element_1 .counter_block {border-radius: 22px;}
+.catalog_detail.element_1 .wrapp-one-click > span {border-radius: 22px;}
+.catalog_detail.element_2 .counter_block {border-radius: 22px;}
+.catalog_detail.element_2 .wrapp-one-click > span {border-radius: 22px;}
+.catalog_detail.element_4 .counter_block {border-radius: 22px;}
+.catalog_detail.element_5 .counter_block {border-radius: 22px;}
+.fastview-product__info .counter_block {border-radius: 22px;}
+.header-cart .basket_fly .items .item .buy_block .counter_block {border-radius: 22px;}
+.fastview-product__info .wrapp-one-click .btn {border-radius: 26px;}
+
+.flexslider .flex-direction-nav a {border-radius: 50%;}
+.owl-carousel.owl-theme.owl-bg-nav .owl-nav button {border-radius: 50%;}
+.navigation-wrapper-fast-view .fast-view-nav {border-radius: 50%;}
+
+.fast_view_button > span {border-radius: 50%;}
+.wrapp_one_click > span {border-radius: 50%;}
+.compare_item_button > span {border-radius: 50%;}
+.wish_item_button > span {border-radius: 50%;}
+
+.module-pagination .nums span.cur {border-radius: 50%;}
+.social-block .social-icons ul li a {border-radius: 50%;}
+.soc-avt .row a i {border-radius: 50%;}
+
+.option-round {border-radius: 50%!important;}

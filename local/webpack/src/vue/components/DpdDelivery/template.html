@@ -1,0 +1,45 @@
+<div class="modal fade" id="modal-dpd" tabindex="-1" role="dialog" aria-labelledby="modal-dpd">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" type="button" class="close"><span aria-hidden="true">&times;</span>
+                </button>
+                <div id="SB_DPD_pvz_popup">
+                    <div id="SB_DPD_pvz">
+                        <div id="SB_DPD_map">
+                            <gmap-map :center="center" :zoom="zoom">
+                                <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen"
+                                                  @closeclick="infoWinOpen=false">
+                                    <div v-html="infoContent"></div>
+                                    <a href="javascript:void(0)" class="DPD_button big_btn button" data-dismiss="modal" type="success">Выбрать</a>
+
+                                </gmap-info-window>
+                                <gmap-marker v-for="(point,index) in points" :key="index" :position="getPosition(point)"
+                                             :clickable="true" :draggable="true"
+                                             @click="selectPoint(point,index)"></gmap-marker>
+                            </gmap-map>
+                        </div>
+                        <div id="SB_DPD_info">
+                            <div id="SB_DPD_sign">Пункты самовывоза</div>
+                            <div id="SB_DPD_delivInfo_PVZ">
+                                <div>Регион: {{service.regionName}}</div>
+                            </div>
+                            <div>
+                                <div id="SB_DPD_wrapper">
+                                    <p v-for="point in points"
+                                       v-if="point.ADDR"
+                                       :class="{'DPD_chosen': point === currentPoint,'SB_DPD_terminalSelect':point}"
+                                       @click="selectPoint(point)">{{point['TITLE']}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <el-button class="btn big_btn button" data-dismiss="modal" type="success" @click="close_modal()">Выбрать склад</el-button>
+            </div>
+        </div>
+    </div>
+</div>

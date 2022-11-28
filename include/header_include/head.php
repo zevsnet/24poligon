@@ -1,0 +1,1 @@
+<?include_once('head_custom.php');?>

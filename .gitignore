@@ -1,0 +1,58 @@
+# PhpStorm project files
+/.idea/
+
+# OS or Editor folders
+.DS_Store
+
+# css/js/image assets
+/assets/
+
+# css/js/image assets
+/bower_components/
+
+
+
+# Bitrix download folder
+/upload
+/upload_/
+
+# composer folder
+/vendor/
+
+# root robots
+/robots.txt
+
+# root htaccess
+/.htaccess
+
+# root htsecure
+/.htsecure
+
+# work scripts
+/work/
+
+# node modules
+node_modules/
+
+# root images
+/images/
+
+# bitrix24 interration
+/desktop_app/
+
+# all logs
+logs/
+
+# some files
+*.log
+
+*.txt
+*.xml
+*.dt
+/personal/price_opt/*
+/personal/order/payment/*
+/personal/price_all/*
+#!/bitrix/modules/primepix.propertytoolkit/
+
+# Bitrix core
+/bitrix/
