@@ -177,7 +177,7 @@ $arTheme["FILTER_VIEW"]["VALUE"] = 'VERTICAL';
 				$sort = $arAvailableSort["PRICE"][0];
 			}
 			if($sort == "CATALOG_AVAILABLE"){
-				$sort = "CATALOG_QUANTITY";
+				$sort = CMax::checkVersionModule('20.100.0', 'main') ? "CATALOG_AVAILABLE" : "CATALOG_QUANTITY";
 			}
 			?>
 		</div>

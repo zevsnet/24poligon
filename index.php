@@ -1,13 +1,19 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetPageProperty("viewed_show", "Y");
-$APPLICATION->SetTitle("Военторг Полигон");
+$APPLICATION->SetTitle("Военторг Полигон в #REGION_NAME_DECLINE_PP#");
+$APPLICATION->SetPageProperty("description",  "Продажа военных товаров в интернет-магазине «Полигон» в #REGION_NAME_DECLINE_PP# по выгодным ценам – оптом и в розницу. Широкий ассортимент армейских товаров, высокое качество"); 
 ?>
 
     <style>
-        .logo-row.paddings{
+		/*
+		   .logo-row.paddings{
             background: #000000bd;
         }
-        .logo_and_menu-row .phone a{color: #fff!important;.fill_bg_n .menu-row.bgcolored, .fill_bg_y .menu-row.bgcolored > .maxwidth-theme}
+		*/
+		/*.logo_and_menu-row .phone a{color: #fff!important;}*/
+
+		/*.fill_bg_n .menu-row.bgcolored, .fill_bg_y .menu-row.bgcolored > .maxwidth-theme*/
+		/*
         .phone.with_dropdown:hover a{
             fill: #000!important;
             color: #000!important;
@@ -56,14 +62,17 @@ $APPLICATION->SetTitle("Военторг Полигон");
             opacity: 1;
         }
 
-
+		*/
     </style>
-    <script>
-        $( document ).ready(function() {
+     <script>
+		 /*
+		    $( document ).ready(function() {
             setInterval(function(){
                 $('.logo img').attr('src','/images/logo_white.png');
             }, 300);
 
         });
+		*/
     </script>
+
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

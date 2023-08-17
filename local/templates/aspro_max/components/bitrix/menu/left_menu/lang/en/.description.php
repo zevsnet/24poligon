@@ -1,4 +1,3 @@
-<?
-$MESS ['MENU_DOT_DEFAULT_NAME'] = "Default vertical menu";
-$MESS ['MENU_DOT_DEFAULT_DESC'] = "Default vertical menu";
-?>
+<?php
+$MESS["MENU_DOT_DEFAULT_DESC"] = "Vertical menu by default";
+$MESS["MENU_DOT_DEFAULT_NAME"] = "Vertical menu by default";

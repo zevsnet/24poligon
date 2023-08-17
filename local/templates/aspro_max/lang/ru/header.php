@@ -22,10 +22,11 @@ $MESS["JS_PASSWORD_LENGTH"] = 'Минимум 6 символов';
 $MESS["JS_ERROR"] = 'Неверно заполнено поле';
 $MESS["JS_FILE_SIZE"] = 'Максимальный размер 5мб';
 $MESS["JS_FILE_BUTTON_NAME"] = 'Выберите файл';
-$MESS["JS_FILE_DEFAULT"] = 'ДОБАВИТЬ ФОТО НАШИВКИ';
+$MESS["JS_FILE_DEFAULT"] = 'Прикрепите файл';
 $MESS["JS_DATE"] = 'Некорректная дата';
 $MESS['JS_DATETIME'] = 'Некорректная дата/время';
 $MESS["JS_REQUIRED_LICENSES"] = 'Согласитесь с условиями';
+$MESS["JS_REQUIRED_OFFER"] = 'Согласитесь с условиями';
 $MESS["LICENSE_PROP"] = 'Согласие на обработку персональных данных';
 $MESS["LOGIN_LEN"] = 'Введите минимум {0} символа';
 $MESS["FANCY_CLOSE"] = 'Закрыть';
@@ -138,4 +139,11 @@ $MESS["SHOW_MORE_SCU_MAIN"] = "Еще #COUNT#";
 $MESS["SHOW_MORE_SCU_1"] = "предложение";
 $MESS["SHOW_MORE_SCU_2"] = "предложения";
 $MESS["SHOW_MORE_SCU_3"] = "предложений";
+
+$MESS["PARENT_ITEM_NOT_FOUND"] = "Не найден основной товар для услуги в корзине. Обновите страницу и попробуйте снова.";
+
+$MESS["INVALID_NUMBER"] = "Неверный номер";
+$MESS["INVALID_COUNTRY_CODE"] = "Неверный код страны";
+$MESS["TOO_SHORT"] = "Номер слишком короткий";
+$MESS["TOO_LONG"] = "Номер слишком длинный";
 ?>

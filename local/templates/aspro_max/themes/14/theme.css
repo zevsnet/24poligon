@@ -13,7 +13,7 @@
 .colored_theme_bg_hovered_hover:hover {
   background-color: #6e6ee1;
 }
-.colored_theme_hover_bg-block:hover .colored_theme_hover_bg-el-svg svg path {
+.bx-ie .colored_theme_hover_bg-block:hover .colored_theme_hover_bg-el-svg svg path {
   fill: #5555dc;
 }
 .colored_theme_n_hover_bg-svg-stroke:not(:hover) svg * {
@@ -40,11 +40,11 @@ a.scroll-to-top.RECT_COLOR:hover {
 .cls-marker2 {
   fill: #5555dc !important;
 }
-.color-theme-hover:hover,
-.color-theme-hover:hover * {
+.bx-ie .color-theme-hover:hover,
+.bx-ie .color-theme-hover:hover * {
   color: #5555dc !important;
 }
-#main .basket_hover_block .tabs_content .foot > .pull-left:hover .svg-inline-closes * {
+.bx-ie #main .basket_hover_block .tabs_content .foot > .pull-left:hover .svg-inline-closes * {
   fill: #5555dc !important;
 }
 #main .basket_hover_block .tabs_content .items .item .remove-cell:hover * {
@@ -63,8 +63,8 @@ a.scroll-to-top.RECT_COLOR:hover {
 .basket_print i {
   background-color: #3f3fd9;
 }
-.btn_basket_heading:hover .title,
-.basket-checkout-block-share:hover .title {
+.bx-ie .btn_basket_heading:hover .title,
+.bx-ie .basket-checkout-block-share:hover .title {
   color: #5555dc;
 }
 .rss_feed_icon {
@@ -139,16 +139,16 @@ ul.menu li b.space,
 .popup .soc-avt .row a {
   color: #fff;
 }
-.breadcrumbs__item:hover .breadcrumbs__link .breadcrumbs__item-name {
+.bx-ie .breadcrumbs__item:hover .breadcrumbs__link .breadcrumbs__item-name {
   color: #5555dc;
 }
 .forgot:hover {
   color: #5555dc !important;
 }
-.delivery_note:hover .title {
+.bx-ie .delivery_note:hover .title {
   color: #5555dc;
 }
-.delivery_note:hover .svg * {
+.bx-ie .delivery_note:hover .svg * {
   fill: #5555dc;
 }
 .basket_hover_block .tabs_content .buttons .basket_back a:hover {
@@ -244,20 +244,20 @@ blockquote:before {
 .basket_button.in-cart span {
   background-position: 0px -127px !important;
 }
-.catalog_item:hover .item-title a,
-.item:hover .info a,
-.item:hover .name a,
-.item:hover .title a,
-.item .title a:hover {
+.bx-ie .catalog_item:hover .item-title a,
+.bx-ie .item:hover .info a,
+.bx-ie .item:hover .name a,
+.bx-ie .item:hover .title a,
+.bx-ie .item .title a:hover {
   color: #3f3fd9;
 }
 .style-switcher .left-block .section-block .subitems .subsection-block.active:before {
   background-color: #5555dc;
 }
-.style-switcher .right-block .action_block .header-inner:hover {
+.bx-ie .style-switcher .right-block .action_block .header-inner:hover {
   color: #5555dc;
 }
-.style-switcher .right-block .action_block .header-inner:hover svg path {
+.bx-ie .style-switcher .right-block .action_block .header-inner:hover svg path {
   fill: #5555dc;
 }
 .style-switcher .presets .presets_subtabs .presets_subtab.active:after,
@@ -279,10 +279,10 @@ blockquote:before {
   box-shadow: 0px 0px 0px 1px inset #5555dc;
   border-color: #5555dc;
 }
-.contents.parametrs .dynamic_left_side .items_inner .bottom_description a svg path,
-.colored_theme_svg svg path,
-.colored_theme_svg,
-.muted:not(.ncolor):hover svg path {
+.bx-ie .contents.parametrs .dynamic_left_side .items_inner .bottom_description a svg path,
+.bx-ie .colored_theme_svg svg path,
+.bx-ie .colored_theme_svg,
+.bx-ie .muted:not(.ncolor):hover svg path {
   fill: #5555dc;
 }
 .more-item-info.opened,
@@ -674,12 +674,12 @@ body .basket-link .js-basket-block .count,
 .bx_element label.selected .bx_logotype {
   border-color: #5555dc;
 }
-a,
-.link,
+.bx-ie a,
+.bx-ie .link,
 .button.transparent,
 .button.transparent:hover,
-.specials_slider_wrapp ul.tabs > li span,
-.basket_wrapp .basket_block .link:hover + .wraps_icon_block + .text .title,
+.specials_slider_wrapp ul.tabs>li span,
+.basket_wrapp .basket_block .link:hover+.wraps_icon_block+.text .title,
 .stores .stores_list .item a span,
 .phones .order_wrap_btn,
 .footer_bottom .all_menu_block ul li a:hover,
@@ -687,28 +687,28 @@ a,
 .avtorization-call.enter:hover span,
 .top-h-row .h-user-block a:hover,
 ul.menu .child li.menu_item a,
-#header .catalog_menu ul.menu > li.current > a,
+#header .catalog_menu ul.menu>li.current>a,
 ul.menu .child .depth3 a,
 ul.menu .child li.menu_title a:hover,
 #header ul.menu li .child.submenu .child_wrapp a:not(.title),
 .img_block_capcha .reload,
-.h_color_white .center_block .menu.full > li:hover > a,
-.m_color_white #header .wrapper_middle_menu .menu.bottom > li:hover > a,
-.m_color_white #header .wrapper_middle_menu .menu.bottom > li.hover > a,
-body #header ul.menu li .child.line .child_wrapp > a:hover,
-.basket_sort ul.tabs li .wrap_li > span *,
-.basket_sort ul.tabs li .wrap_li > span,
-.left_block .internal_sections_list .child_wrapp .child li.cur > a,
+.h_color_white .center_block .menu.full>li:hover>a,
+.m_color_white #header .wrapper_middle_menu .menu.bottom>li:hover>a,
+.m_color_white #header .wrapper_middle_menu .menu.bottom>li.hover>a,
+body #header ul.menu li .child.line .child_wrapp>a:hover,
+.basket_sort ul.tabs li .wrap_li>span *,
+.basket_sort ul.tabs li .wrap_li>span,
+.left_block .internal_sections_list .child_wrapp .child li.cur>a,
 .left_block .internal_sections_list .child_wrapp .child li.depth3 a.menu_item.cur,
 .left_block .internal_sections_list .child_wrapp a:hover,
-.breadcrumbs a:hover span,
+.bx-ie .breadcrumbs a:hover span,
 .tabs-head li.current span,
 .reviews-post-reply-buttons a:hover,
 h4.hover,
 .button.transparent.white:hover,
 .button.white_bg,
-.item .child_container .child_wrapp .menu_item.current a,
-.item .child_container .child_wrapp .menu_item:hover a {
+.bx-ie .item .child_container .child_wrapp .menu_item.current a,
+.bx-ie .item .child_container .child_wrapp .menu_item:hover a {
   color: #3f3fd9;
 }
 button.button,
@@ -871,7 +871,6 @@ h4:hover .opener_icon,
 .btn.btn-transparent {
   background-color: rgba(255,255,255,0);
   border-color: rgba(255,255,255,0);
-  color: #000000;
 }
 .btn.btn-transparent:hover,
 .btn.btn-transparent:active,
@@ -912,11 +911,11 @@ h4:hover .opener_icon,
   background-color: #5555dc;
   border: 1px solid #5555dc;
 }
-.btn.btn-transparent-border-color {
+.bx-ie .btn.btn-transparent-border-color {
   border-color: rgba(85,85,220,0.35);
   color: #5555dc;
 }
-.btn.btn-transparent-border-color:hover {
+.bx-ie .btn.btn-transparent-border-color:hover {
   background-color: #5555dc;
   border-color: #5555dc;
 }
@@ -952,7 +951,7 @@ h4:hover .opener_icon,
   color: #5555dc;
   border-color: #5555dc;
 }
-.catalog_section_list .separator {
+.bx-ie .catalog_section_list .separator {
   color: rgba(85,85,220,0.35);
 }
 .btn-inline {
@@ -1025,8 +1024,8 @@ body .fa.big-icon.grey {
 footer .info .email a:hover {
   color: #5555dc;
 }
-.logo.colored svg .icon-path,
-.svg.colored * {
+.bx-ie .logo.colored svg .icon-path,
+.bx-ie .svg.colored * {
   fill: #5555dc;
 }
 .product-item-detail-tabs-container-fixed .product-item-detail-tabs-list li a:before {
@@ -1053,9 +1052,9 @@ footer .info .email a:hover {
 #headerfixed .menu-block.rows:hover {
   background-color: #5555dc;
 }
-#headerfixed .menu-block .navs ul li.active > a,
-#headerfixed .menu-block .navs ul li a:hover,
-#headerfixed .menu-block .navs ul li a:focus {
+.bx-ie #headerfixed .menu-block .navs ul li.active>a,
+.bx-ie #headerfixed .menu-block .navs ul li a:hover,
+.bx-ie #headerfixed .menu-block .navs ul li a:focus {
   color: #5555dc;
 }
 .top-block.colored {
@@ -1086,7 +1085,7 @@ header .line-row,
 .menu-row.bgcolored .menu-only {
   background: #5555dc;
 }
-.wrapper1:not(.light-menu-color) .header_wrap:not(.light-menu-color) .logo_and_menu-row .wrap_icon .top-btn:hover .title {
+.bx-ie .wrapper1:not(.light-menu-color) .header_wrap:not(.light-menu-color) .logo_and_menu-row .wrap_icon .top-btn:hover .title {
   color: #5555dc;
 }
 .search-tags-cloud .tags a:hover {
@@ -1095,25 +1094,25 @@ header .line-row,
 .logo.colored a img {
   background-color: #5050dc;
 }
-.dark-color:hover,
-a.colored,
-.colored,
-body#main .colored_theme_text,
-body#main .colored_theme_text_with_hover:not(:hover),
-body#main .colored_theme_hover_text:hover,
-.top-block .menu >li>a:hover {
+.bx-ie .dark-color:hover,
+.bx-ie a.colored,
+.bx-ie .colored,
+.bx-ie body#main .colored_theme_text,
+.bx-ie body#main .colored_theme_text_with_hover:not(:hover),
+.bx-ie body#main .colored_theme_hover_text:hover,
+.bx-ie .top-block .menu >li>a:hover {
   color: #5555dc;
 }
-.colored_theme_block_text:hover .colored_theme_el_text {
+.bx-ie .colored_theme_block_text:hover .colored_theme_el_text {
   color: #5555dc !important;
 }
 .dark-color:hover svg:not(.not_fill) rect,
 .dark-color:hover svg:not(.not_fill) circle {
   stroke: #5555dc;
 }
-body#main .colored_theme_text_with_hover:not(:hover) .svg svg path,
-body#main .colored_theme_hover_text:hover svg path,
-.fancybox-is-open svg:hover path {
+.bx-ie body#main .colored_theme_text_with_hover:not(:hover) .svg svg path,
+.bx-ie body#main .colored_theme_hover_text:hover svg path,
+.bx-ie .fancybox-is-open svg:hover path {
   fill: #5555dc;
 }
 .bx_filter.compact .bx_filter_parameters_box.set .bx_filter_parameters_box_title.title,
@@ -1178,14 +1177,14 @@ html:not(.bx-touch) .like_icons .wish_item.added:not(.btn):hover i {
 .phone_block .phone_wrap .icons {
   color: #3f3fd9;
 }
-header .menu_top_block li.catalog>.dropdown>li:hover>a,
-header .menu_top_block li.catalog>.dropdown>li>.dropdown>li.current>a:not(.section) {
+.bx-ie header .menu_top_block li.catalog>.dropdown>li:hover>a,
+.bx-ie header .menu_top_block li.catalog>.dropdown>li>.dropdown>li.current>a:not(.section) {
   color: #3f3fd9;
 }
-header .menu_top_block li .dropdown>li.current >a.section1,
-.menu_top_block li .dropdown>li >a.section1:hover,
-#header .catalog_menu.menu_light ul.menu > li.current > a,
-#header .catalog_menu.menu_light ul.menu > li:hover > a {
+.bx-ie header .menu_top_block li .dropdown>li.current>a.section1,
+.bx-ie .menu_top_block li .dropdown>li>a.section1:hover,
+.bx-ie #header .catalog_menu.menu_light ul.menu>li.current>a,
+.bx-ie #header .catalog_menu.menu_light ul.menu>li:hover>a {
   color: #3f3fd9;
 }
 .menu_top_block .dropdown> li.v_bottom a:hover .svg.svg-inline-down,
@@ -1213,16 +1212,16 @@ body .basket-link.basket-count .count {
 .logo_and_menu-row .basket-link:hover .title {
   color: #5555dc;
 }
-.top-block-item  .basket-link:hover  .title {
+.bx-ie .top-block-item  .basket-link:hover  .title {
   color: #5555dc;
 }
 .top-btn:hover .svg:not(.inline) {
   background-color: #5555dc;
 }
-.top-btn .svg.inline:hover svg path,
-.top-btn:hover .svg.inline svg path,
-.svg.inline:not(.colored):hover svg path,
-a:hover .svg.inline path {
+.bx-is .top-btn .svg.inline:hover svg path,
+.bx-is .top-btn:hover .svg.inline svg path,
+.bx-is .svg.inline:not(.colored):hover svg path,
+.bx-is a:hover .svg.inline path {
   fill: #5555dc;
 }
 .fill_bg_n .menu-row.bgcolored,
@@ -1242,11 +1241,11 @@ body .has-secion-banner .fix-logo .menu-row .menu-only-wr {
 .mega-menu ul.nav li:hover {
   background-color: #5555dc;
 }
-.mega-menu table td.active .wrap > a,
-.mega-menu table td:not(.search-item):hover .wrap > a {
+.bx-ie .mega-menu table td.active .wrap>a,
+.bx-ie .mega-menu table td:not(.search-item):hover .wrap>a {
   color: #5555dc;
 }
-.mega-menu table td.active .wrap > a .svg path {
+.bx-ie .mega-menu table td.active .wrap>a .svg path {
   fill: #5555dc;
 }
 .topmenu-LIGHT .mega-menu table td.active .wrap > .more-items span:before,
@@ -1259,12 +1258,12 @@ body .has-secion-banner .fix-logo .menu-row .menu-only-wr {
 .topmenu-LIGHT .mega-menu table .tail {
   border-bottom: 6px solid #4444d9;
 }
-.mega-menu table .wide_menu .dropdown-menu li > a:hover,
-.mega-menu table .wide_menu .dropdown-submenu:hover > a,
-.mega-menu table .dropdown-submenu:hover > a:after,
-.mega-menu table .dropdown-menu li.active > a,
-.mega-menu table .dropdown-submenu.active > a,
-.mega-menu table .dropdown-submenu.active  > a:after {
+.bx-ie .mega-menu table .wide_menu .dropdown-menu li>a:hover,
+.bx-ie .mega-menu table .wide_menu .dropdown-submenu:hover>a,
+.bx-ie .mega-menu table .dropdown-submenu:hover>a:after,
+.bx-ie .mega-menu table .dropdown-menu li.active>a,
+.bx-ie .mega-menu table .dropdown-submenu.active>a,
+.bx-ie .mega-menu table .dropdown-submenu.active>a:after {
   color: #5555dc;
 }
 body .mega-menu table td .wrap > .dropdown-menu > li:first-of-type:before {
@@ -1276,21 +1275,21 @@ body .mega-menu table td .wrap > .dropdown-menu > li:first-of-type:before {
 .top_big_banners.half_block .flexslider .banner_title .head-title:after {
   background-color: #5555dc;
 }
-body .wrapper1 .menu-wrapper .menu_top_block.catalog_block .menu > li:not(.current):hover > a,
-body .wrapper1 .menu-wrapper .menu_top_block.catalog_block .menu li:hover > a,
-body .wrapper1 .menu-wrapper .menu_top_block.catalog_block .menu li.current > a,
-.top-block .menu.topest li.current > a {
+.bx-ie body .wrapper1 .menu-wrapper .menu_top_block.catalog_block .menu > li:not(.current):hover > a,
+.bx-ie body .wrapper1 .menu-wrapper .menu_top_block.catalog_block .menu li:hover>a,
+.bx-ie body .wrapper1 .menu-wrapper .menu_top_block.catalog_block .menu li.current>a,
+.bx-ie .top-block .menu.topest li.current>a {
   color: #5555dc;
 }
-.top-block .menu.topest li.current > a .svg path,
-body .wrapper1 .menu-wrapper .menu_top_block.catalog_block .menu > li:not(.current):hover > a .svg path,
-.wrapper1.sticky_menu .menu-wrapper .menu_top_block.catalog_block .menu > li.current a .svg svg path {
+.bx-ie .top-block .menu.topest li.current>a .svg path,
+.bx-ie body .wrapper1 .menu-wrapper .menu_top_block.catalog_block .menu>li:not(.current):hover>a .svg path,
+.bx-ie .wrapper1.sticky_menu .menu-wrapper .menu_top_block.catalog_block .menu>li.current a .svg svg path {
   fill: #5555dc;
 }
-.wrapper1.sticky_menu .menu-wrapper .menu_top_block.catalog_block .menu > li .image .svg-inline-cat_icons * {
+.bx-ie .wrapper1.sticky_menu .menu-wrapper .menu_top_block.catalog_block .menu>li .image .svg-inline-cat_icons * {
   fill: #5555dc;
 }
-.wrapper1.sticky_menu .menu-wrapper .menu_top_block.catalog_block .menu > li .image .svg-inline-picture * {
+.bx-ie .wrapper1.sticky_menu .menu-wrapper .menu_top_block.catalog_block .menu>li .image .svg-inline-picture * {
   fill: #5555dc;
 }
 .tabs .nav-tabs li.active:after {
@@ -1406,7 +1405,7 @@ section.toggle.active > label {
 .page_not_found td.image img {
   background: #7777e3;
 }
-.header-cart .basket_fly .opener >div.cur svg path {
+.bx-ie .header-cart .basket_fly .opener >div.cur svg path {
   fill: #5555dc;
 }
 .header-cart .basket_fly .items .item .buy_block .counter_block .plus:hover:before,
@@ -1439,17 +1438,17 @@ a .zoom {
 .bx_ordercart .bx_item_detail_size_small_noadaptive .bx_size ul li:not(.bx_active):hover a {
   color: #3f3fd9;
 }
-a.dark_link:hover,
-.dark_link:hover span,
-.dl:hover a,
-.selected a.dark_link,
-a.muted:hover,
-.hover_color_theme:hover {
+.bx-ie a.dark_link:hover,
+.bx-ie .dark_link:hover span,
+.bx-ie .dl:hover a,
+.bx-ie .selected a.dark_link,
+.bx-ie a.muted:hover,
+.bx-ie .hover_color_theme:hover {
   color: #3f3fd9 !important;
 }
-.menu_top_block.catalog_block .dropdown>li.full>.dropdown>li>a:hover span,
-body .menu_top_block.catalog_block .v_bottom li.current>a,
-header .menu_top_block.catalogfirst li.full>.dropdown>li:not(.current)>a {
+.bx-ie .menu_top_block.catalog_block .dropdown>li.full>.dropdown>li>a:hover span,
+.bx-ie body .menu_top_block.catalog_block .v_bottom li.current>a,
+.bx-ie header .menu_top_block.catalogfirst li.full>.dropdown>li:not(.current)>a {
   color: #3f3fd9;
 }
 .middle_phone .phone_wrap .icons,
@@ -1653,9 +1652,10 @@ body .bx_filter.compact .bx_filter_parameters_box.set .title.bx_filter_parameter
 .item-views .item .bottom-props .value {
   background-color: #5555dc;
 }
-footer .light .bottom-menu .item .title a:hover,
-footer .light .bottom-menu .wrap .item .title a:hover,
-footer .light .info .email a:hover {
+.bx-ie footer .light .bottom-menu .item .title a:hover,
+.bx-ie footer .light .bottom-menu .wrap .item .title a:hover,
+.bx-ie footer .light .info .email a:hover,
+.bx-ie footer .light .info .address a:hover {
   color: #5555dc;
 }
 footer .info .subscribe_button .btn:hover {
@@ -1694,4 +1694,8 @@ footer .info .subscribe_button .btn:hover {
 .bottom-icons-panel__content-link--active svg rect,
 .bottom-icons-panel__content-link--active svg circle {
   stroke: #5555dc !important;
+}
+.services_order_item .services_order_item_title:before,
+.services_top_hover_item .services_top_hover_item_title:before {
+  background-color: #6d69e1;
 }

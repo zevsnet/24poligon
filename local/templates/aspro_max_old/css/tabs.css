@@ -1,0 +1,31 @@
+.tabs.tabs--compact {
+  margin: 0px;
+}
+.tabs.tabs--compact > .form-control {
+  margin-bottom: 0px;
+}
+.tabs.tabs--compact .nav {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin: 0px;
+}
+.tabs.tabs--compact .nav:before,
+.tabs.tabs--compact .nav:after {
+  display: none;
+}
+.tabs.tabs--compact .nav li {
+  margin: 0px;
+  background: none;
+}
+.tabs.tabs--compact .nav li.active:after {
+  top: 100%;
+}
+.tabs.tabs--compact .nav li a {
+  padding: 4px 0px;
+  font-size: 0.8666rem;
+}
+
+.tabs.tabs--compact .tab-content {
+  padding-top: 34px;
+}

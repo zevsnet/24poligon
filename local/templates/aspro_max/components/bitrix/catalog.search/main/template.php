@@ -19,6 +19,7 @@ $APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");?>
 	$arParams["FILTER_NAME"] = "searchFilter";
 }
 
+
 $bShowFilter = ($arTheme["SEARCH_VIEW_TYPE"]["VALUE"] == "with_filter");
 $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.history.js');
 
@@ -32,6 +33,11 @@ $arSKU = array();
 if($arParams['IBLOCK_ID']){
 	$arSKU = CCatalogSKU::GetInfoByProductIBlock($arParams['IBLOCK_ID']);
 	if($arSKU['IBLOCK_ID']){
+		$bUseModuleProps = \Bitrix\Main\Config\Option::get('iblock', 'property_features_enabled', 'N') === 'Y';
+		if ($bUseModuleProps) {
+			$arParams['OFFERS_CART_PROPERTIES'] = (array)\Bitrix\Catalog\Product\PropertyCatalogFeature::getBasketPropertyCodes($arSKU['IBLOCK_ID'], ['CODE' => 'Y']);
+		}
+
 		$dbRes = CIBlock::GetByID($arSKU['IBLOCK_ID']);
 		if($arSkuIblock = $dbRes ->Fetch()){
 			$arSearchPageFilter['arrFILTER'][] = 'iblock_'.$arSkuIblock['IBLOCK_TYPE_ID'];
@@ -47,9 +53,6 @@ if($arParams['IBLOCK_ID']){
 // show bitrix.search_page content
 $APPLICATION->ShowViewContent('comp_search_page');
 
-?>
-
-<?
 // include bitrix.search_page
 ob_start();
 include 'include_search_page.php';
@@ -423,8 +426,39 @@ if($arLanding){
 $bHideLeftBlock = $APPLICATION->GetDirProperty('HIDE_LEFT_BLOCK') == 'Y' || ($arTheme['HEADER_TYPE']['VALUE'] == 28 || $arTheme['HEADER_TYPE']['VALUE'] == 29);?>
 
 <div class="main-catalog-wrapper">
-	<div class="section-content-wrapper <?=($arElements && !$bHideLeftBlock ? 'with-leftblock' : '');?> <?=($bShowFilter ? 'with-filter' : '');?> js-load-wrapper">
+	<div class="section-content-wrapper <?=($arElements && !$bHideLeftBlock ? 'with-leftblock' : '');?> <?=($bShowFilter ? 'with-filter' : '');?> js-load-wrapper<?=($arTheme["LAZYLOAD_BLOCK_CATALOG"]["VALUE"] === "Y" ? ' with-load-block' : '')?>">
 		<?
+		if($arRegion)
+		{
+			if($arRegion['LIST_PRICES'])
+			{
+				if(reset($arRegion['LIST_PRICES']) != 'component')
+					$arParams['PRICE_CODE'] = array_keys($arRegion['LIST_PRICES']);
+			}
+			if($arRegion['LIST_STORES'])
+			{
+				if(reset($arRegion['LIST_STORES']) != 'component')
+					$arParams['STORES'] = $arRegion['LIST_STORES'];
+			}
+		}
+
+		if($arParams['LIST_PRICES'])
+		{
+			foreach($arParams['LIST_PRICES'] as $key => $price)
+			{
+				if(!$price)
+					unset($arParams['LIST_PRICES'][$key]);
+			}
+		}
+
+		if($arParams['STORES'])
+		{
+			foreach($arParams['STORES'] as $key => $store)
+			{
+				if(!$store)
+					unset($arParams['STORES'][$key]);
+			}
+		}
 		if (is_array($arElements) && !empty($arElements))
 		{
 			if($arSKU)
@@ -454,38 +488,6 @@ $bHideLeftBlock = $APPLICATION->GetDirProperty('HIDE_LEFT_BLOCK') == 'Y' || ($ar
 
 			if($arParams['HIDE_NOT_AVAILABLE'] === 'Y'){
 				$GLOBALS[$arParams["FILTER_NAME"]]['CATALOG_AVAILABLE'] = 'Y';
-			}
-
-			if($arRegion)
-			{
-				if($arRegion['LIST_PRICES'])
-				{
-					if(reset($arRegion['LIST_PRICES']) != 'component')
-						$arParams['PRICE_CODE'] = array_keys($arRegion['LIST_PRICES']);
-				}
-				if($arRegion['LIST_STORES'])
-				{
-					if(reset($arRegion['LIST_STORES']) != 'component')
-						$arParams['STORES'] = $arRegion['LIST_STORES'];
-				}
-			}
-
-			if($arParams['LIST_PRICES'])
-			{
-				foreach($arParams['LIST_PRICES'] as $key => $price)
-				{
-					if(!$price)
-						unset($arParams['LIST_PRICES'][$key]);
-				}
-			}
-
-			if($arParams['STORES'])
-			{
-				foreach($arParams['STORES'] as $key => $store)
-				{
-					if(!$store)
-						unset($arParams['STORES'][$key]);
-				}
 			}
 
 			if($arRegion)
@@ -580,6 +582,15 @@ $bHideLeftBlock = $APPLICATION->GetDirProperty('HIDE_LEFT_BLOCK') == 'Y' || ($ar
 				$htmlFilter = ob_get_clean();
 				if ($arTheme["FILTER_VIEW"]["VALUE"] == 'VERTICAL') {
 					$APPLICATION->AddViewContent('filter_content', $htmlFilter);
+				}
+
+				if($sort === 'RANK'){
+					if($bReplaceElementsByCustomFilter){
+						$arElements = CMax::SortBySearchRank($searchQuery, $arElements, $arSearchPageParams);
+					}
+
+					$sort = 'ID';
+					$sort_order = CMax::SortBySearchOrder($arElements, $arItems);
 				}
 			}
 			?>
@@ -766,9 +777,11 @@ $bHideLeftBlock = $APPLICATION->GetDirProperty('HIDE_LEFT_BLOCK') == 'Y' || ($ar
 									"ADD_DETAIL_TO_SLIDER" => $arParams["DETAIL_ADD_DETAIL_TO_SLIDER"],
 									"MAX_SCU_COUNT_VIEW" => $arParams['MAX_SCU_COUNT_VIEW'],
 									'CURRENT_BASE_PAGE' => $arLanding && strlen($arLanding['PROPERTY_URL_CONDITION_VALUE']) ? $canonicalUrl : null,
-									"SET_SKU_TITLE" => (($arTheme["TYPE_SKU"]["VALUE"] == "TYPE_1" && $arTheme["CHANGE_TITLE_ITEM"]["VALUE"] == "Y") ? "Y" : ""),
+									"SET_SKU_TITLE" => (($arTheme["TYPE_SKU"]["VALUE"] == "TYPE_1" && $arTheme["CHANGE_TITLE_ITEM_LIST"]["VALUE"] == "Y") ? "Y" : ""),
 									"IBINHERIT_TEMPLATES" => $arLanding ? $arIBInheritTemplates : array(),
 									'OFFER_SHOW_PREVIEW_PICTURE_PROPS' => $arParams['OFFER_SHOW_PREVIEW_PICTURE_PROPS'],
+									"REVIEWS_VIEW" => $arTheme["REVIEWS_VIEW"]["VALUE"] == "EXTENDED",
+									"COMPATIBLE_MODE" => "Y",
 								),
 								$arResult["THEME_COMPONENT"]
 							);?>
@@ -788,7 +801,81 @@ $bHideLeftBlock = $APPLICATION->GetDirProperty('HIDE_LEFT_BLOCK') == 'Y' || ($ar
 			else
 				echo '<div class="alert alert-danger">'.GetMessage("CT_BCSE_NOT_FOUND")."</div>";
 
-			$APPLICATION->AddViewContent('top_class', 'emptys');
+			/*big data*/
+			if($arParams["USE_BIG_DATA_IN_SEARCH"] == "Y"){
+				$APPLICATION->IncludeComponent("bitrix:catalog.bigdata.products", "main", array(
+					"USE_REGION" => $arParams["USE_REGION"],
+					"STORES" => $arParams['STORES'],
+					"LINE_ELEMENT_COUNT" => 5,
+					"TEMPLATE_THEME" => (isset($arParams['TEMPLATE_THEME']) ? $arParams['TEMPLATE_THEME'] : ''),
+					"DETAIL_URL" => (array_key_exists('FOLDER', $arResult)  ? $arResult['FOLDER'] : '').(array_key_exists('URL_TEMPLATES', $arResult) && array_key_exists('element', $arResult['URL_TEMPLATES'])  ? $arResult['URL_TEMPLATES']['element'] : ''),
+					"BASKET_URL" => $arParams["BASKET_URL"],
+					"ACTION_VARIABLE" => (!empty($arParams["ACTION_VARIABLE"]) ? $arParams["ACTION_VARIABLE"] : "action")."_cbdp",
+					"PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
+					"PRODUCT_QUANTITY_VARIABLE" => $arParams["PRODUCT_QUANTITY_VARIABLE"],
+					"SHOW_MEASURE_WITH_RATIO" => $arParams["SHOW_MEASURE_WITH_RATIO"],
+					"ADD_PROPERTIES_TO_BASKET" => "N",
+					"PRODUCT_PROPS_VARIABLE" => $arParams["PRODUCT_PROPS_VARIABLE"],
+					"PARTIAL_PRODUCT_PROPERTIES" => (isset($arParams["PARTIAL_PRODUCT_PROPERTIES"]) ? $arParams["PARTIAL_PRODUCT_PROPERTIES"] : ''),
+					"SHOW_OLD_PRICE" => $arParams["SHOW_OLD_PRICE"],
+					"SHOW_DISCOUNT_PERCENT" => $arParams["SHOW_DISCOUNT_PERCENT"],
+					"SLIDER" => "Y",
+					"ROW" => "Y",
+					"PRICE_CODE" => $arParams['PRICE_CODE'],
+					"USE_PRICE_COUNT" => $arParams["USE_PRICE_COUNT"],
+					"SHOW_PRICE_COUNT" => $arParams["SHOW_PRICE_COUNT"],
+					"PRODUCT_SUBSCRIPTION" => $arParams['PRODUCT_SUBSCRIPTION'],
+					"PRICE_VAT_INCLUDE" => $arParams["PRICE_VAT_INCLUDE"],
+					"USE_PRODUCT_QUANTITY" => $arParams['USE_PRODUCT_QUANTITY'],
+					"TITLE_SLIDER" => $arParams['TITLE_SLIDER_IN_SEARCH'],
+					"FILTER_NAME" => "arrFilterBigDataSearch",
+					"SHOW_NAME" => "Y",
+					"SHOW_IMAGE" => "Y",
+					"SHOW_MEASURE" => $arParams["SHOW_MEASURE"],
+					"SHOW_RATING" => $arParams["SHOW_RATING"],
+					"MESS_BTN_BUY" => $arParams['MESS_BTN_BUY'],
+					"MESS_BTN_DETAIL" => $arParams['MESS_BTN_DETAIL'],
+					"MESS_BTN_SUBSCRIBE" => $arParams['MESS_BTN_SUBSCRIBE'],
+					"MESS_NOT_AVAILABLE" => $arParams['MESS_NOT_AVAILABLE'],
+					"PAGE_ELEMENT_COUNT" => ($arParams['RECOMEND_IN_SEARCH_COUNT'] ? $arParams['RECOMEND_IN_SEARCH_COUNT'] : 10),
+					"SHOW_FROM_SECTION" => $arBigData['BIGDATA_SHOW_FROM_SECTION'],
+					"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+					"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+					"SALE_STIKER" => $arParams["SALE_STIKER"],
+					"STIKERS_PROP" => $arParams["STIKERS_PROP"],
+					"DEPTH" => "2",
+					"CACHE_TYPE" => $arParams["CACHE_TYPE"],
+					"CACHE_TIME" => $arParams["CACHE_TIME"],
+					"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+					"SHOW_PRODUCTS_".$arParams["IBLOCK_ID"] => "Y",
+					"ADDITIONAL_PICT_PROP_".$arParams["IBLOCK_ID"] => $arParams['ADD_PICT_PROP'],
+					"LABEL_PROP_".$arParams["IBLOCK_ID"] => "-",
+					"HIDE_NOT_AVAILABLE" => $arParams["HIDE_NOT_AVAILABLE"],
+					'HIDE_NOT_AVAILABLE_OFFERS' => $arParams["HIDE_NOT_AVAILABLE_OFFERS"],
+					"CONVERT_CURRENCY" => $arParams["CONVERT_CURRENCY"],
+					"CURRENCY_ID" => $arParams["CURRENCY_ID"],
+					"SECTION_ID" => $arBigData["SECTION_ID"],
+					"SECTION_ELEMENT_ID" => $arBigData["SECTION_ID"],
+					"ID" => '',
+					"PROPERTY_CODE_".$arParams["IBLOCK_ID"] => $arParams["LIST_PROPERTY_CODE"],
+					"CART_PROPERTIES_".$arParams["IBLOCK_ID"] => $arParams["PRODUCT_PROPERTIES"],
+					"RCM_TYPE" => (isset($arParams['BIG_DATA_IN_SEARCH_RCM_TYPE']) ? $arParams['BIG_DATA_IN_SEARCH_RCM_TYPE'] : ''),
+					"DISPLAY_WISH_BUTTONS" => $arParams["DISPLAY_WISH_BUTTONS"],
+					"DISPLAY_COMPARE" => $arParams["USE_COMPARE"],
+					"OFFERS_LIMIT" => $arParams["LIST_OFFERS_LIMIT"],
+					"ONLY_POPUP_PRICE" => "Y",
+					),
+					false,
+					array("HIDE_ICONS" => "Y", "ACTIVE_COMPONENT" => "Y")
+				);
+			}
+			/*bd end*/
+
+			$APPLICATION->AddViewContent('top_class', 'emptys');?>
+			
+			<script src="<?=SITE_TEMPLATE_PATH;?>/vendor/js/carousel/owl/owl.carousel.js" data-skip-moving="true" async=""></script>
+			<?
+			$APPLICATION->AddHeadString('<link href="'.$APPLICATION->oAsset->getFullAssetPath(SITE_TEMPLATE_PATH.'/vendor/css/carousel/owl/owl.carousel.css').'" data-template-style="true" rel="stylesheet">');
 		}
 		?>
 		<?if($arLanding):?>

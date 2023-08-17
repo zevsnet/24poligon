@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 50 40">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #307edd;
+      }
+
+      .cls-1 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        opacity: 0.1;
+      }
+    </style>
+  </defs>
+  <path id="Rounded_Rectangle_925_copy" data-name="Rounded Rectangle 925 copy" class="cls-1" d="M1118,402h-40a5,5,0,0,1-5-5V367a5,5,0,0,1,5-5h40a5,5,0,0,1,5,5v30A5,5,0,0,1,1118,402Zm3-36a2,2,0,0,0-2-2h-42a2,2,0,0,0-2,2v4h46v-4Zm0,6h-46v7h46v-7Zm0,9h-46v17a2,2,0,0,0,2,2h42a2,2,0,0,0,2-2V381Zm-24,13h-5a1,1,0,0,1,0-2h5A1,1,0,0,1,1097,394Zm-10,0h-5a1,1,0,0,1,0-2h5A1,1,0,0,1,1087,394Z" transform="translate(-1073 -362)"/>
+  <rect class="cls-2" x="4" y="12" width="44" height="5"/>
+</svg>

@@ -6,7 +6,7 @@ global $USER;
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.order.ajax", 
-	"v1",
+	"v2", 
 	array(
 		"PAY_FROM_ACCOUNT" => "N",
 		"ONLY_FULL_PAY_FROM_ACCOUNT" => "N",
@@ -33,7 +33,7 @@ global $USER;
 		"DISABLE_BASKET_REDIRECT" => "N",
 		"DISPLAY_IMG_WIDTH" => "90",
 		"DISPLAY_IMG_HEIGHT" => "90",
-		"COMPONENT_TEMPLATE" => "v1",
+		"COMPONENT_TEMPLATE" => "v2",
 		"ALLOW_NEW_PROFILE" => "N",
 		"SHOW_PAYMENT_SERVICES_NAMES" => "Y",
 		"COMPATIBLE_MODE" => "Y",
@@ -156,7 +156,9 @@ global $USER;
 			3 => "47",
 			4 => "51",
 		),
-		"MESS_MORE_DETAILS" => "Подробнее"
+		"MESS_MORE_DETAILS" => "Подробнее",
+		"PROPS_FADE_LIST_6" => array(
+		)
 	),
 	false
 );?>

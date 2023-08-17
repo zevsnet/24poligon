@@ -1,21 +1,14 @@
-<?
-
-$MESS ['TSB1_PERSONAL'] = "Персональный раздел";
-
-$MESS ['TSB1_EXPAND'] = "Раскрыть";
-$MESS ['TSB1_COLLAPSE'] = "Скрыть";
-
-$MESS ['TSB1_CART'] = "Корзина";
-$MESS ['TSB1_TOTAL_PRICE'] = "На сумму";
-
-$MESS ['TSB1_YOUR_CART'] = "Ваша корзина";
-
-$MESS ['TSB1_READY'] = "Готовые к покупке товары";
-$MESS ['TSB1_DELAY'] = "Отложенные товары";
-$MESS ['TSB1_NOTAVAIL'] = "Недоступные товары";
-$MESS ['TSB1_SUBSCRIBE'] = "Подписанные товары";
-
-$MESS ['TSB1_SUM'] = "на сумму";
-$MESS ['TSB1_DELETE'] = "Удалить";
-
-$MESS ['TSB1_2ORDER'] = "Оформить заказ";
+<?php
+$MESS["TSB1_2ORDER"] = "Checkout";
+$MESS["TSB1_CART"] = "Cart";
+$MESS["TSB1_COLLAPSE"] = "Hide";
+$MESS["TSB1_DELAY"] = "Postponed goods";
+$MESS["TSB1_DELETE"] = "Delete";
+$MESS["TSB1_EXPAND"] = "To uncover";
+$MESS["TSB1_NOTAVAIL"] = "Unavailable Products";
+$MESS["TSB1_PERSONAL"] = "Personal section";
+$MESS["TSB1_READY"] = "Ready-to-buy items";
+$MESS["TSB1_SUBSCRIBE"] = "Signed goods";
+$MESS["TSB1_SUM"] = "for the amount";
+$MESS["TSB1_TOTAL_PRICE"] = "For the amount";
+$MESS["TSB1_YOUR_CART"] = "Your shopping cart";

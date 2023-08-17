@@ -12,12 +12,12 @@ class Events
     static public function addEventHandlers()
     {
         /*Отмена изменения символьного кода*/
-        AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", [__CLASS__, 'DoIBlockBeforeSave']);
-        AddEventHandler("catalog", "OnBeforeCatalogStoreUpdate", [__CLASS__, 'OnBeforeCatalogStoreUpdate']);
-        AddEventHandler("catalog", "OnBeforeCatalogStoreAdd", [__CLASS__, 'OnBeforeCatalogStoreAdd']);
+		//AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", [__CLASS__, 'DoIBlockBeforeSave']);
+		//AddEventHandler("catalog", "OnBeforeCatalogStoreUpdate", [__CLASS__, 'OnBeforeCatalogStoreUpdate']);
+		//AddEventHandler("catalog", "OnBeforeCatalogStoreAdd", [__CLASS__, 'OnBeforeCatalogStoreAdd']);
         /* Обновление полей при изменении/добавлении элемента (для выгрузки на маркетплейсы) */
-        AddEventHandler("iblock", "OnAfterIBlockElementAdd", [__CLASS__,"OnAfterIBlockElementUpdateHandler"]);
-        AddEventHandler("iblock", "OnAfterIBlockElementUpdate",[__CLASS__,"OnAfterIBlockElementUpdateHandler"]);
+		//AddEventHandler("iblock", "OnAfterIBlockElementAdd", [__CLASS__,"OnAfterIBlockElementUpdateHandler"]);
+		//AddEventHandler("iblock", "OnAfterIBlockElementUpdate",[__CLASS__,"OnAfterIBlockElementUpdateHandler"]);
     }
     /**
      * @param $arFields

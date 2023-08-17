@@ -5,20 +5,87 @@ use Bitrix\Main\Loader,
 	Bitrix\Main\ModuleManager,
 	Bitrix\Main\Localization\Loc;
 
-global $arTheme;
+global $arTheme, $arRegion;
 
 $arBlockOrder = explode(",", $arParams["DETAIL_BLOCKS_ORDER"]);
 $arTabOrder = explode(",", $arParams["DETAIL_BLOCKS_TAB_ORDER"]);
 
+//add new blocks in update
+if( !in_array('buy_services', $arTabOrder) ){
+	$arTabOrder[] = 'buy_services';
+}
+
 $bCombineStoresMode = ($arTheme['STORE_AMOUNT_VIEW']['VALUE'] == "COMBINE_AMOUNT");
 
-if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
+$bServicesRegionality = $arTheme['SERVICES_REGIONALITY']['VALUE'] === 'Y' && $arTheme['USE_REGIONALITY']['VALUE'] === 'Y' && $arTheme['USE_REGIONALITY']['DEPENDENT_PARAMS']['REGIONALITY_FILTER_ITEM']['VALUE'] === 'Y';
+
+if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y'){
 	$arBlockOrder = explode(",", $arParams["DETAIL_BLOCKS_ALL_ORDER"]);
+	
+	//add new blocks in update
+	if( !in_array('buy_services', $arBlockOrder) ){
+		$arBlockOrder[] = 'buy_services';
+	}
+}
+
+//add new blocks in update
+if( !in_array('modules', $arBlockOrder) ){
+	$arBlockOrder[] = 'modules';
+}
+
+$currentProductId = $templateData['OFFERS_INFO']["CURRENT_OFFER"] ?? $arResult['ID'] ;
+
 ?>
 <?if($arResult["ID"]):?>
+	<?if ($templateData['OUT_OF_PRODUCTION']):?>
+		<?
+		ob_start();
+			$APPLICATION->IncludeFile(SITE_DIR . "include/element_detail_out_of_production_title.php", [], ["MODE" => "html"]);
+		$out_of_production_text = trim(ob_get_clean());
+		
+		ob_start();
+			$APPLICATION->IncludeFile(SITE_DIR . "include/element_detail_out_of_production_note.php", [], ["MODE" => "html"]);
+		$out_of_production_note = trim(ob_get_clean());
+		
+		$arOptions = [
+			'ID' => $templateData['OUT_OF_PRODUCTION']['SHOW_ANALOG']['ID'],
+			'SITE_ID' => SITE_ID,
+			'PARAMS' => [
+				'IBLOCK_ID' => $templateData['OUT_OF_PRODUCTION']['SHOW_ANALOG']['IBLOCK_ID'],
+				'DISPLAY_WISH_BUTTONS' => $arParams['DISPLAY_WISH_BUTTONS'],
+				'DISPLAY_COMPARE' => $arParams['DISPLAY_COMPARE'] ? "Y" : "N",
+				'MESSAGE_FROM' => Loc::getMessage('FROM'),
+				'CACHE_TIME' => $arParams['CACHE_TIME'],
+
+				'BASKET_URL' => $arParams['BASKET_URL'],
+				'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
+				'CURRENCY_ID' => $arParams['CURRENCY_ID'],
+				'DEFAULT_COUNT' => $arParams['DEFAULT_COUNT'],
+				'PRICE_CODE' => $arParams['PRICE_CODE'],
+				'PRICE_VAT_INCLUDE' => $arParams['PRICE_VAT_INCLUDE'],
+				'SHOW_COUNTER_LIST' => $arParams['SHOW_COUNTER_LIST'],
+				'SHOW_DISCOUNT_PERCENT' => $arParams['SHOW_DISCOUNT_PERCENT'],
+				'SHOW_DISCOUNT_PERCENT_NUMBER' => $arParams['SHOW_DISCOUNT_PERCENT_NUMBER'],
+				'SHOW_DISCOUNT_TIME' => $arParams['SHOW_DISCOUNT_TIME'],
+				'SHOW_MEASURE' => $arParams['SHOW_MEASURE'],
+				'SHOW_OLD_PRICE' => $arParams['SHOW_OLD_PRICE'],
+				'STORES' => $arParams['STORES'],
+				'STORES' => $arParams['STORES'],
+				'USE_PRICE_COUNT' => $arParams['USE_PRICE_COUNT'] ? 'Y' : 'N',
+				'USE_REGION' => $arParams['USE_REGION'],
+
+				'TEXT' => $out_of_production_text,
+				'NOTE' => $out_of_production_note,
+			],
+		];
+		?>
+		<div id="js-item-analog" data-params='<?=str_replace('\'', '"', CUtil::PhpToJSObject($arOptions, false))?>'></div>
+		<?unset($arOptions); ?>
+	<?endif;?>
 	<?//tizers?>
 	<?if($templateData['LINK_TIZERS'] && $arParams['IBLOCK_TIZERS_ID']):?>
-		<?$GLOBALS['arrTizersFilter'] = array('ID' => $templateData['LINK_TIZERS']);?>
+		<?$GLOBALS['arrTizersFilter'] = array('ID' => $templateData['LINK_TIZERS']);
+		  $GLOBALS['arrTizersFilter'] = array_merge($GLOBALS['arrTizersFilter'], (array)$GLOBALS['arRegionLink']);?>
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"front_tizers",
@@ -96,7 +163,8 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 	<?//sales?>
 	<?if($templateData['LINK_SALES'] && $arParams['IBLOCK_LINK_SALE_ID']):?>
 		<?ob_start()?>
-			<?$GLOBALS['arrSalesFilter'] = array('ID' => $templateData['LINK_SALES']);?>
+			<?$GLOBALS['arrSalesFilter'] = array('ID' => $templateData['LINK_SALES']);
+			  $GLOBALS['arrSalesFilter'] = array_merge($GLOBALS['arrSalesFilter'], (array)$GLOBALS['arRegionLink']);?>
 			<?$APPLICATION->IncludeComponent(
 				"bitrix:news.list",
 				"linked_sales",
@@ -156,12 +224,97 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 		<?$APPLICATION->AddViewContent('PRODUCT_SIDE_INFO', $html, 100);?>
 	<?endif;?>
 
+	<?$bShowAllServicesInAnounce = $templateData["OFFERS_INFO"]["OFFERS_MORE"] || (isset($arParams["SHOW_ALL_SERVICES_IN_SLIDE"]) && $arParams["SHOW_ALL_SERVICES_IN_SLIDE"] === 'Y');?>
+	<?if($templateData['LINK_SERVICES'] && !$templateData['OUT_OF_PRODUCTION']):?>
+		<?//buy_services in anounce	
+		ob_start();		
+			$GLOBALS['arBuyServicesFilter']['ID'] = $templateData['LINK_SERVICES'];
+			$GLOBALS['arBuyServicesFilter']['PROPERTY_ALLOW_BUY_VALUE'] = 'Y';
+			if( $bServicesRegionality && isset($arRegion['ID']) ){
+				$GLOBALS['arBuyServicesFilter'][] = array( "PROPERTY_LINK_REGION" => $arRegion['ID'] );
+			}
+			?>										
+			<?$APPLICATION->IncludeComponent(
+				"bitrix:catalog.section",
+				"services_list",
+				[
+					'IBLOCK_ID' => $arParams['IBLOCK_SERVICES_ID'],
+					'PRICE_CODE' => $arParams['PRICE_CODE'],
+					'FILTER_NAME' => 'arBuyServicesFilter',
+					'PROPERTIES' => [],
+					"SHOW_OLD_PRICE" => $arParams["SHOW_OLD_PRICE"],
+					'CACHE_TYPE' => $arParams['CACHE_TYPE'],
+					'CACHE_TIME' => $arParams['CACHE_TIME'],
+					'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
+					'SHOW_ALL_WO_SECTION' => 'Y',
+					"CONVERT_CURRENCY" => $arParams["CONVERT_CURRENCY"],
+					"CURRENCY_ID" => $arParams["CURRENCY_ID"],
+					"PRICE_VAT_INCLUDE" => $arParams["PRICE_VAT_INCLUDE"] ? 'Y' : 'N',
+					"PAGE_ELEMENT_COUNT" => $bShowAllServicesInAnounce ? '999' : $arParams["COUNT_SERVICES_IN_ANNOUNCE"],
+					"SHOW_BUTTON_ALL" => 'Y',
+					"SHOW_ALL_IN_SLIDE" => $bShowAllServicesInAnounce ? 'Y' : 'N' ,
+					"COUNT_SERVICES_IN_ANNOUNCE" => $bShowAllServicesInAnounce ? $arParams["COUNT_SERVICES_IN_ANNOUNCE"] : 0,
+					//"SHOW_PLACE" => 'announce',
+					"COMPACT_MODE" => 'Y',
+					"COMPATIBLE_MODE" => "Y",
+				],
+				false, array("HIDE_ICONS"=>"Y")
+			);?>
+		<?$htmlBuyServicesAnounce=ob_get_clean();
+		if($htmlBuyServicesAnounce && trim($htmlBuyServicesAnounce) && strpos($htmlBuyServicesAnounce, 'error') === false){?>
+			<?
+			$htmlBuyServicesAnounceBefore = '<div class=" buy_services_wrap in_announce js-services-hide" data-parent_product='.$currentProductId.'>';
+			$htmlBuyServicesAnounce = $htmlBuyServicesAnounceBefore.$htmlBuyServicesAnounce.'</div>';			
+			$APPLICATION->AddViewContent('PRODUCT_SIDE_INFO', $htmlBuyServicesAnounce, 550);			
+			?>
+			<?\Aspro\Max\Functions\Extensions::init('buy_services');?>
+		<?}?>
+	<?endif;?>
+
+	<?
+	$buyServices = false;
+	if(!$bShowAllServicesInAnounce):
+		ob_start();		
+			$GLOBALS['arBuyServicesFilter']['ID'] = $templateData['LINK_SERVICES'];
+			$GLOBALS['arBuyServicesFilter']['PROPERTY_ALLOW_BUY_VALUE'] = 'Y';
+			if( $bServicesRegionality && isset($arRegion['ID']) ){
+				$GLOBALS['arBuyServicesFilter'][] = array( "PROPERTY_LINK_REGION" => $arRegion['ID'] );
+			}
+			?>										
+			<?$APPLICATION->IncludeComponent(
+				"bitrix:catalog.section",
+				"services_list",
+				[
+					'IBLOCK_ID' => $arParams['IBLOCK_SERVICES_ID'],
+					'PRICE_CODE' => $arParams['PRICE_CODE'],
+					'FILTER_NAME' => 'arBuyServicesFilter',
+					'PROPERTIES' => [],
+					"SHOW_OLD_PRICE" => $arParams["SHOW_OLD_PRICE"],
+					'CACHE_TYPE' => $arParams['CACHE_TYPE'],
+					'CACHE_TIME' => $arParams['CACHE_TIME'],
+					'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
+					'SHOW_ALL_WO_SECTION' => 'Y',
+					"CONVERT_CURRENCY" => $arParams["CONVERT_CURRENCY"],
+					"CURRENCY_ID" => $arParams["CURRENCY_ID"],
+					"PRICE_VAT_INCLUDE" => $arParams["PRICE_VAT_INCLUDE"] ? 'Y' : 'N',
+					"PAGE_ELEMENT_COUNT" => '999',
+					"COUNT_SERVICES_IN_ANNOUNCE" => $arParams["COUNT_SERVICES_IN_ANNOUNCE"],
+					"COMPATIBLE_MODE" => "Y",
+				],
+				false, array("HIDE_ICONS"=>"Y")
+			);?>
+		<?$htmlBuyServices=ob_get_clean();
+		if($htmlBuyServices && trim($htmlBuyServices) && strpos($htmlBuyServices, 'error') === false){
+			$buyServices = true;
+		}?>
+	<?endif;?>
+
 	<?$i = 0;
 	$templateData["STORES"]["SITE_ID"] = SITE_ID;
 	$bShowDocs = ($templateData["FILES"]);
 	$bShowAdditionalGallery = ($templateData["ADDITIONAL_GALLERY"]);
 	$bShowDetailText = ($templateData['DETAIL_TEXT']);
-	$bShowDetailTextTab = ($bShowDetailText || $bShowDocs || $bShowAdditionalGalleryTab ? ++$i : '');
+	$bShowDetailTextTab = ($bShowDetailText || $bShowDocs || $bShowAdditionalGallery ? ++$i : '');
 	$bShowPropsTab = ($templateData['CHARACTERISTICS'] ? ++$i : '');
 	$bShowVideoTab = (!empty($templateData['VIDEO']) || !empty($templateData['VIDEO_IFRAME']) ? ++$i : '');
 	$bShowFaqTab = (!empty($templateData['LINK_FAQ']) ? ++$i : '');
@@ -172,6 +325,11 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 	$bShowCustomTab = (($arParams['SHOW_ADDITIONAL_TAB'] == 'Y') ? ++$i : '');
 	$bShowStoresTab = ($templateData["STORES"]['USE_STORES'] && $templateData["STORES"]["STORES"] ? ++$i : '');
 	$bShowReviewsTab = ( ($arParams["USE_REVIEW"] == "Y" && ($templateData["YM_ELEMENT_ID"] || IsModuleInstalled("forum")) ) ? ++$i : '');
+	$bShowBuyServicesTab = ($templateData['LINK_SERVICES'] && $buyServices ? ++$i : '');
+
+	if ($templateData['OUT_OF_PRODUCTION']) {
+		$arBlockOrder = array_diff($arBlockOrder, ['complect', 'nabor']);
+	}
 
 	if($bShowPropsTab && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")
 		--$i;?>
@@ -241,13 +399,13 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 				<?elseif($code == 'nabor'):?>
 					<?if($templateData['OFFERS_INFO']['OFFERS']):?>
 						<?if($templateData['OFFERS_INFO']['OFFER_GROUP']):?>
-							<?foreach($templateData['OFFERS_INFO']['OFFERS'] as $arOffer):?>
-								<?if(!$arOffer['OFFER_GROUP']) continue;?>
-								<span id="<?=$templateData['ID_OFFER_GROUP'].$arOffer['ID']?>" style="display: none;">
+							<?foreach($templateData['OFFERS_INFO']['OFFERS'] as $offerId => $arOfferGroup):?>
+								<?if(!$arOfferGroup) continue;?>
+								<span data-offerSetId="<?=$offerId?>" id="<?=$templateData['ID_OFFER_GROUP'].$offerId?>" <?if($offerId != $templateData["OFFERS_INFO"]["CURRENT_OFFER"]):?>style="display: none;"<?endif;?>>
 									<?$APPLICATION->IncludeComponent("bitrix:catalog.set.constructor", "main",
 										array(
 											"IBLOCK_ID" => $templateData['OFFERS_INFO']["OFFERS_IBLOCK"],
-											"ELEMENT_ID" => $arOffer['ID'],
+											"ELEMENT_ID" => $offerId,
 											"PRICE_CODE" => $arParams["PRICE_CODE"],
 											"BASKET_URL" => $arParams["BASKET_URL"],
 											"OFFERS_CART_PROPERTIES" => $arParams["OFFERS_CART_PROPERTIES"],
@@ -288,8 +446,8 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 					<?endif;?>
 				<?//tabs?>
 				<?elseif($code == 'tabs'):?>
-					<?if($bShowDetailTextTab || $bShowPropsTab || $bShowVideoTab || $bShowHowBuyTab || $bShowPaymentTab || $bShowDeliveryTab || $bShowStoresTab || $bShowCustomTab || $bShowReviewsTab):?>
-						<div class="ordered-block js-store-scroll tabs-block">
+					<?if($bShowDetailTextTab || $bShowPropsTab || $bShowVideoTab || $bShowHowBuyTab || $bShowPaymentTab || $bShowDeliveryTab || $bShowStoresTab || $bShowCustomTab || $bShowReviewsTab || $bShowBuyServicesTab):?>
+						<div class="ordered-block js-store-scroll tabs-block" data-hash="Y">
 							<?if($i > 1):?>
 								<div class="tabs arrow_scroll">
 									<ul class="nav nav-tabs font_upper_md">
@@ -298,13 +456,13 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 											<?//show desc block?>
 											<?if($value == "desc"):?>
 												<?if($bShowDetailTextTab || ($arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB" && $bShowPropsTab)):?>
-													<li class="bordered rounded3 <?=(!($iTab++) ? 'active' : '')?>"><a href="#desc" data-toggle="tab"><?=($arParams["T_DESC"] ? $arParams["T_DESC"] : Loc::getMessage("T_DESC"));?></a></li>
+													<li class="bordered rounded3 <?=((!($iTab++) && (!$templateData['HIDE_ADDITIONAL_GALLERY'] || $bShowDetailText || $bShowDocs)) ? 'active' : '')?> <?=$templateData['HIDE_ADDITIONAL_GALLERY'] && !$bShowDocs && !$bShowDetailText ? "hidden" : "";?>"><a href="#desc" data-toggle="tab"><?=($arParams["T_DESC"] ? $arParams["T_DESC"] : Loc::getMessage("T_DESC"));?></a></li>
 												<?endif;?>
 											<?endif;?>
 											<?//show char block?>
 											<?if($value == "char"):?>
 												<?if($bShowPropsTab && $arParams["PROPERTIES_DISPLAY_LOCATION"] == "TAB"):?>
-													<li class="bordered rounded3 <?=(!($iTab++) ? 'active' : '')?>"><a href="#props" data-toggle="tab"><?=($arParams["T_CHARACTERISTICS"] ? $arParams["T_CHARACTERISTICS"] : Loc::getMessage("T_CHARACTERISTICS"));?></a></li>
+													<li class="bordered rounded3 <?=(!($iTab++) || ($templateData['HIDE_ADDITIONAL_GALLERY'] && !$bShowDetailText && !$bShowDocs) ? 'active' : '')?>"><a href="#props" data-toggle="tab"><?=($arParams["T_CHARACTERISTICS"] ? $arParams["T_CHARACTERISTICS"] : Loc::getMessage("T_CHARACTERISTICS"));?></a></li>
 												<?endif;?>
 											<?endif;?>
 											<?//show howbuy block?>
@@ -341,7 +499,12 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 											<?if($value == "reviews"):?>
 												<?if($bShowReviewsTab):?>
 													<li class="bordered rounded3 <?=(!($iTab++) ? 'active' : '')?>">
-														<a href="#reviews" data-toggle="tab"><?=$arParams["TAB_REVIEW_NAME"];?><?$APPLICATION->ShowViewContent('PRODUCT_REVIWS_COUNT_INFO')?></a></li>
+														<a href="#reviews" data-toggle="tab"><?=$arParams["TAB_REVIEW_NAME"];?>
+														<?if ((int)$templateData['REVIEWS_COUNT']){?>
+															<?="(".$templateData['REVIEWS_COUNT'].")";?>
+														<?}?>
+													</a>
+												</li>
 												<?endif;?>
 											<?endif;?>
 											<?//show video block?>
@@ -357,6 +520,16 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 													</li>
 												<?endif;?>
 											<?endif;?>
+											<?//show buy_services block?>
+											<?if($value == "buy_services"):?>
+												<?if($bShowBuyServicesTab):?>
+													<li class="bordered rounded3 <?=(!($iTab++) ? 'active' : '')?>">
+														<a href="#buy_services" data-toggle="tab">
+															<?=$arParams["TAB_BUY_SERVICES_NAME"];?>													
+														</a>
+													</li>
+												<?endif;?>
+											<?endif;?>
 										<?endforeach;?>
 									</ul>
 								</div>
@@ -367,7 +540,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 									<?//detail text?>
 									<?if($value == "desc"):?>
 										<?if($bShowDetailTextTab || ($arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB" && $bShowPropsTab)):?>
-											<div class="tab-pane <?=(!($iTab++) ? 'active' : '')?>" id="desc">
+											<div class="tab-pane <?=(!($iTab++) && (!$templateData['HIDE_ADDITIONAL_GALLERY'] || $bShowDocs || $bShowDetailText) ? 'active' : '')?>" id="desc">
 												<?if($bShowDetailText):?>
 													<?if($i == 1):?>
 														<div class="ordered-block__title option-font-bold font_lg">
@@ -401,7 +574,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 									<?//props?>
 									<?if($value == "char"):?>
 										<?if($bShowPropsTab && $arParams["PROPERTIES_DISPLAY_LOCATION"] == "TAB"):?>
-											<div class="tab-pane <?=$value;?> <?=(!($iTab++) ? 'active' : '')?>" id="props">
+											<div class="tab-pane <?=$value;?> <?=(!($iTab++) || ($templateData['HIDE_ADDITIONAL_GALLERY'] && !$bShowDetailText && !$bShowDocs) ? 'active' : '')?>" id="props">
 												<?if($i == 1):?>
 													<div class="ordered-block__title option-font-bold font_lg">
 														<?=($arParams["T_CHARACTERISTICS"] ? $arParams["T_CHARACTERISTICS"] : Loc::getMessage("T_CHARACTERISTICS"));?>
@@ -473,6 +646,21 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 													</div>
 												<?endif;?>
 												<?$APPLICATION->ShowViewContent('PRODUCT_VIDEO_INFO')?>
+											</div>
+										<?endif;?>
+									<?endif;?>
+									<?//show buy_services block?>
+									<?if($value == "buy_services"):?>
+										<?if($bShowBuyServicesTab):?>
+											<div class="tab-pane <?=$value;?> <?=(!($iTab++) ? 'active' : '')?>" id="buy_services">
+												<?if($i == 1):?>
+													<div class="ordered-block__title option-font-bold font_lg">
+														<?=$arParams["TAB_BUY_SERVICES_NAME"];?>
+													</div>
+												<?endif;?>
+												<div class='buy_services_wrap js-scroll-services' data-parent_product=<?=$currentProductId?>>
+													<?=$htmlBuyServices;?>
+												</div>
 											</div>
 										<?endif;?>
 									<?endif;?>
@@ -576,6 +764,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 																	"COMMENTS_COUNT" => (isset($arParams["MESSAGES_PER_PAGE"]) ? $arParams["MESSAGES_PER_PAGE"] : $arParams['COMMENTS_COUNT']),
 																	"ELEMENT_CODE" => "",
 																	"ELEMENT_ID" => $arResult["ID"],
+																	"XML_ID" => $templateData['XML_ID'].(isset($templateData['OFFERS_INFO']) && isset($templateData['OFFERS_INFO']['OFFERS']) && count($templateData['OFFERS_INFO']['OFFERS']) ? '%' : ''),
 																	"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 																	"IBLOCK_TYPE" => "aspro_max_catalog",
 																	"SHOW_DEACTIVATED" => "N",
@@ -592,10 +781,13 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 																	"RATING_TYPE" => "like_graphic_catalog_reviews",
 																	"MAX_IMAGE_SIZE" => $arParams["MAX_IMAGE_SIZE"],
 																	"BLOG_URL" => $arParams["BLOG_URL"],
+																	"REVIEW_COMMENT_REQUIRED" => $arParams["REVIEW_COMMENT_REQUIRED"],
+																	"REVIEW_FILTER_BUTTONS" => $arParams["REVIEW_FILTER_BUTTONS"],
+																	"REAL_CUSTOMER_TEXT" => $arParams["REAL_CUSTOMER_TEXT"],
 																),
 																false, array("HIDE_ICONS" => "Y")
 															);?>
-															<?=\Aspro\Functions\CAsproMax::showComments()?>
+															<?=\Aspro\Functions\CAsproMax::showComments($arResult['NAME'])?>
 															<?$html=ob_get_clean();?>
 															<?if($html && strpos($html, 'error') === false):?>
 																<div class="ordered-block comments-block">
@@ -641,6 +833,9 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 							<?$APPLICATION->ShowViewContent('PRODUCT_FILES_INFO')?>
 						</div>
 					<?endif;?>
+					<?if($bShowAdditionalGallery):?>
+						<?$APPLICATION->ShowViewContent('PRODUCT_ADDITIONAL_GALLERY_INFO')?>
+					<?endif;?>
 				<?//props?>
 				<?elseif($code == 'char' && $bShowPropsTab):?>
 					<div class="ordered-block <?=$code?>">
@@ -684,9 +879,19 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 						</div>
 						<?$APPLICATION->ShowViewContent('PRODUCT_VIDEO_INFO')?>
 					</div>
+				<?//show buy_services block?>
+				<?elseif($code == "buy_services" && $bShowBuyServicesTab):?>
+					<div class="ordered-block <?=$code?> js-scroll-services">
+						<div class="ordered-block__title option-font-bold font_lg">
+							<?=$arParams["TAB_BUY_SERVICES_NAME"];?>					
+						</div>
+						<div class='buy_services_wrap' data-parent_product=<?=$currentProductId?>>
+							<?=$htmlBuyServices;?>
+						</div>
+					</div>
 				<?//show reviews block?>
 				<?elseif($code == "reviews" && $bShowReviewsTab):?>
-					<div class="ordered-block <?=$code?> <?=$arParams['REVIEWS_VIEW']?>">
+					<div class="ordered-block <?=$code?> <?=$arParams['REVIEWS_VIEW']?> appear-block">
 						<?if($arParams['REVIEWS_VIEW'] == 'EXTENDED'):?>
 							<div class="reviews-title__wrapper">
 
@@ -774,6 +979,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 											"COMMENTS_COUNT" => (isset($arParams["MESSAGES_PER_PAGE"]) ? $arParams["MESSAGES_PER_PAGE"] : $arParams['COMMENTS_COUNT']),
 											"ELEMENT_CODE" => "",
 											"ELEMENT_ID" => $arResult["ID"],
+											"XML_ID" => $templateData['XML_ID'].(isset($templateData['OFFERS_INFO']) && isset($templateData['OFFERS_INFO']['OFFERS']) && count($templateData['OFFERS_INFO']['OFFERS']) ? '%' : ''),
 											"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 											"IBLOCK_TYPE" => "aspro_max_catalog",
 											"SHOW_DEACTIVATED" => "N",
@@ -791,10 +997,13 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 											'SORT_PROP' => $_COOKIE['REVIEW_SORT_PROP'] ? $_COOKIE['REVIEW_SORT_PROP'] : 'UF_ASPRO_COM_RATING',
 											'SORT_ORDER' => $_COOKIE['REVIEW_SORT_ORDER'] ? $_COOKIE['REVIEW_SORT_ORDER'] : 'SORT_DESC',
 											"BLOG_URL" => $arParams["BLOG_URL"],
+											"REVIEW_COMMENT_REQUIRED" => $arParams["REVIEW_COMMENT_REQUIRED"],
+											"REVIEW_FILTER_BUTTONS" => $arParams["REVIEW_FILTER_BUTTONS"],
+											"REAL_CUSTOMER_TEXT" => $arParams["REAL_CUSTOMER_TEXT"],
 										),
 										false, array("HIDE_ICONS" => "Y")
 									);?>
-									<?=\Aspro\Functions\CAsproMax::showComments()?>
+									<?=\Aspro\Functions\CAsproMax::showComments($arResult['NAME'])?>
 									<?$html=ob_get_clean();?>
 									<?if($html && strpos($html, 'error') === false):?>
 										<div class="ordered-block comments-block">
@@ -831,7 +1040,10 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 				<?//services?>
 				<?elseif($code == 'services' && $templateData['LINK_SERVICES']):?>
 					<?ob_start();?>
-						<?$GLOBALS['arrServicesFilter'] = array('ID' => $templateData['LINK_SERVICES']);?>
+						<?$GLOBALS['arrServicesFilter'] = array('ID' => $templateData['LINK_SERVICES']);
+						$GLOBALS['arrServicesFilter']['!PROPERTY_ALLOW_BUY_VALUE'] = 'Y';
+						$GLOBALS['arrServicesFilter'] = array_merge($GLOBALS['arrServicesFilter'], (array)$GLOBALS['arRegionLink']);
+						?>
 						<?$APPLICATION->IncludeComponent(
 							"bitrix:news.list",
 							"news-list",
@@ -876,7 +1088,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"PAGER_TEMPLATE" => ".default",
 								"DISPLAY_TOP_PAGER" => "N",
 								"DISPLAY_BOTTOM_PAGER" => "Y",
-								"PAGER_TITLE" => "Новости",
+								"PAGER_TITLE" => "",
 								"PAGER_SHOW_ALWAYS" => "N",
 								"PAGER_DESC_NUMBERING" => "N",
 								"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -888,6 +1100,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"AJAX_OPTION_ADDITIONAL" => "",
 								"BORDERED" => "Y",
 								"LINKED_MODE" => "Y",
+								"MOBILE_CAROUSEL" => $arParams["MOBILE_CAROUSEL"],
 							),
 							false, array("HIDE_ICONS" => "Y")
 						);?>
@@ -903,7 +1116,8 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 				<?//news?>
 				<?elseif($code == 'news' && $templateData['LINK_NEWS']):?>
 					<?ob_start();?>
-						<?$GLOBALS['arrNewsFilter'] = array('ID' => $templateData['LINK_NEWS']);?>
+						<?$GLOBALS['arrNewsFilter'] = array('ID' => $templateData['LINK_NEWS']);
+						  $GLOBALS['arrNewsFilter'] = array_merge($GLOBALS['arrNewsFilter'], (array)$GLOBALS['arRegionLink']);?>
 						<?$APPLICATION->IncludeComponent(
 							"bitrix:news.list",
 							"news-list",
@@ -949,7 +1163,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"PAGER_TEMPLATE" => ".default",
 								"DISPLAY_TOP_PAGER" => "N",
 								"DISPLAY_BOTTOM_PAGER" => "Y",
-								"PAGER_TITLE" => "Новости",
+								"PAGER_TITLE" => "",
 								"PAGER_SHOW_ALWAYS" => "N",
 								"PAGER_DESC_NUMBERING" => "N",
 								"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -961,6 +1175,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"AJAX_OPTION_ADDITIONAL" => "",
 								"BORDERED" => "Y",
 								"LINKED_MODE" => "Y",
+								"MOBILE_CAROUSEL" => $arParams["MOBILE_CAROUSEL"],
 							),
 							false, array("HIDE_ICONS" => "Y")
 						);?>
@@ -976,7 +1191,8 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 				<?//blog?>
 				<?elseif($code == 'blog' && $templateData['LINK_BLOG']):?>
 					<?ob_start();?>
-						<?$GLOBALS['arrBlogFilter'] = array('ID' => $templateData['LINK_BLOG']);?>
+						<?$GLOBALS['arrBlogFilter'] = array('ID' => $templateData['LINK_BLOG']);
+						  $GLOBALS['arrBlogFilter'] = array_merge($GLOBALS['arrBlogFilter'], (array)$GLOBALS['arRegionLink']);?>
 						<?$APPLICATION->IncludeComponent(
 							"bitrix:news.list",
 							"news-list",
@@ -1022,7 +1238,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"PAGER_TEMPLATE" => ".default",
 								"DISPLAY_TOP_PAGER" => "N",
 								"DISPLAY_BOTTOM_PAGER" => "Y",
-								"PAGER_TITLE" => "Новости",
+								"PAGER_TITLE" => "",
 								"PAGER_SHOW_ALWAYS" => "N",
 								"PAGER_DESC_NUMBERING" => "N",
 								"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -1034,6 +1250,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"AJAX_OPTION_ADDITIONAL" => "",
 								"BORDERED" => "Y",
 								"LINKED_MODE" => "Y",
+								"MOBILE_CAROUSEL" => $arParams["MOBILE_CAROUSEL"],
 							),
 							false, array("HIDE_ICONS" => "Y")
 						);?>
@@ -1049,7 +1266,8 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 				<?//staff?>
 				<?elseif($code == 'staff' && $templateData['LINK_STAFF']):?>
 					<?ob_start();?>
-						<?$GLOBALS['arrStaffFilter'] = array('ID' => $templateData['LINK_STAFF']);?>
+						<?$GLOBALS['arrStaffFilter'] = array('ID' => $templateData['LINK_STAFF']);
+						  $GLOBALS['arrStaffFilter'] = array_merge($GLOBALS['arrStaffFilter'], (array)$GLOBALS['arRegionLink']);?>
 						<?$APPLICATION->IncludeComponent(
 							"bitrix:news.list",
 							$arParams["STAFF_VIEW_TYPE"],
@@ -1097,7 +1315,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"PAGER_TEMPLATE" => ".default",
 								"DISPLAY_TOP_PAGER" => "N",
 								"DISPLAY_BOTTOM_PAGER" => "Y",
-								"PAGER_TITLE" => "Новости",
+								"PAGER_TITLE" => "",
 								"PAGER_SHOW_ALWAYS" => "N",
 								"PAGER_DESC_NUMBERING" => "N",
 								"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -1109,6 +1327,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"AJAX_OPTION_ADDITIONAL" => "",
 								"BORDERED" => "Y",
 								"LINKED_MODE" => "Y",
+								"MOBILE_CAROUSEL" => $arParams["MOBILE_CAROUSEL"],
 							),
 							false, array("HIDE_ICONS" => "Y")
 						);?>
@@ -1124,7 +1343,8 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 				<?//vacancy?>
 				<?elseif($code == 'vacancy' && $templateData['LINK_VACANCY']):?>
 					<?ob_start();?>
-						<?$GLOBALS['arrVacancyFilter'] = array('ID' => $templateData['LINK_VACANCY']);?>
+						<?$GLOBALS['arrVacancyFilter'] = array('ID' => $templateData['LINK_VACANCY']);
+						  $GLOBALS['arrVacancyFilter'] = array_merge($GLOBALS['arrVacancyFilter'], (array)$GLOBALS['arRegionLink']);?>
 						<?$APPLICATION->IncludeComponent(
 							"bitrix:news.list",
 							"vacancy",
@@ -1172,7 +1392,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"PAGER_TEMPLATE" => ".default",
 								"DISPLAY_TOP_PAGER" => "N",
 								"DISPLAY_BOTTOM_PAGER" => "Y",
-								"PAGER_TITLE" => "Новости",
+								"PAGER_TITLE" => "",
 								"PAGER_SHOW_ALWAYS" => "N",
 								"PAGER_DESC_NUMBERING" => "N",
 								"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -1184,6 +1404,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								"AJAX_OPTION_ADDITIONAL" => "",
 								"BORDERED" => "Y",
 								"LINKED_MODE" => "Y",
+								"MOBILE_CAROUSEL" => $arParams["MOBILE_CAROUSEL"],
 							),
 							false, array("HIDE_ICONS" => "Y")
 						);?>
@@ -1196,6 +1417,9 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 							<?=$html;?>
 						</div>
 					<?endif;?>
+				<?//new complect?>
+				<?elseif($code == 'modules'):?>
+					<?include 'epilog_blocks/'.$code.'.php';?>
 				<?//goods?>
 				<?elseif($code == 'goods'):?>
 					<?if($arParams['DETAIL_LINKED_GOODS_TABS'] != 'N'):?>
@@ -1204,8 +1428,8 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 							<?$bNavTabs = false;?>
 							<?if($templateData['ASSOCIATED'] && $templateData['EXPANDABLES']):?>
 								<?
-								$bShowAssociatedTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['ASSOCIATED'], array('REGION'));
-								$bShowExpandablesTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['EXPANDABLES'], array('REGION'));
+								$bShowAssociatedTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['ASSOCIATED'], array('REGION'), $arParams);
+								$bShowExpandablesTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['EXPANDABLES'], array('REGION'), $arParams);
 								?>
 								<?if($bShowAssociatedTab || $bShowExpandablesTab):?>
 									<div class="tabs arrow_scroll bottom-line" data-plugin-options='{"axis": "x", "scrollInertia": 200, "snapAmount": 70, "scrollButtons": {"enable": true}}'>
@@ -1222,10 +1446,9 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 								<?$bNavTabs = true;?>
 								<?endif;?>
 							<?endif;?>
-
 							<?if($templateData['ASSOCIATED']):?>
 								<?
-								$bShowAssociatedTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['ASSOCIATED'], array('REGION'));
+								$bShowAssociatedTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['ASSOCIATED'], array('REGION'), $arParams);
 								?>
 								<?if($bShowAssociatedTab):?>
 									<?if($bNavTabs):?>
@@ -1237,18 +1460,33 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 										<div class="cur">
 									<?endif;?>
 
-										<div class="assoc-block js-load-block loader_circle" data-block="assoc" data-file="<?=$APPLICATION->GetCurPage()?>">
+										<div class="assoc-block js-load-block loader_circle tabs_slider nav-data_block" data-block="assoc" data-file="<?=$APPLICATION->GetCurURI()?>">
 											<div class="stub"></div>
-											<?CMax::checkRestartBuffer(true, 'assoc');?>
+											<?$ajaxNavBlock = isset($_REQUEST['pagen_data_block']) && $_REQUEST['pagen_data_block'] == 'Y' && isset($_REQUEST['data_block']) && $_REQUEST['data_block'] == 'assoc';?>
+											<?if($ajaxNavBlock){
+												$APPLICATION->RestartBuffer();
+												$arParams["FROM_AJAX"] = 'Y';
+											}
+											else{
+												CMax::checkRestartBuffer(true, 'assoc');												
+											}?>
 												<?if(CMax::checkAjaxRequest()):?>
 													<?$APPLICATION->ShowAjaxHead();?>
 													<?
 													$GLOBALS['arrProductsFilter'] = [];
+													$GLOBALS["NavNum"]=0;
 													$GLOBALS['arrProductsFilter'] = $templateData['ASSOCIATED'];
 													?>
+													<?$arParams['USE_BIG_DATA'] = 'N';?>
 													<?include($_SERVER['DOCUMENT_ROOT'].SITE_DIR.'/include/detail.linked_products_block.php');?>
 												<?endif;?>
-											<?CMax::checkRestartBuffer(true, 'assoc');?>
+											<?
+											if($ajaxNavBlock){
+												die();
+											} else{
+												CMax::checkRestartBuffer(true, 'assoc');
+											}
+											?>
 										</div>
 
 									</div>
@@ -1257,7 +1495,7 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 
 							<?if($templateData['EXPANDABLES']):?>
 								<?
-								$bShowExpandablesTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['EXPANDABLES'], array('REGION'));
+								$bShowExpandablesTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['EXPANDABLES'], array('REGION'), $arParams);
 								?>
 								<?if($bShowExpandablesTab):?>
 									<?if($bNavTabs):?>
@@ -1269,17 +1507,32 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 										<div class="cur">
 									<?endif;?>
 
-										<div class="expandables-block js-load-block loader_circle" data-block="expandables" data-file="<?=$APPLICATION->GetCurPage()?>">
+										<div class="expandables-block js-load-block loader_circle tabs_slider nav-data_block" data-block="expandables" data-file="<?=$APPLICATION->GetCurURI()?>">
 											<div class="stub"></div>
-											<?CMax::checkRestartBuffer(true, 'expandables');?>
+											<?$ajaxNavBlock = isset($_REQUEST['pagen_data_block']) && $_REQUEST['pagen_data_block'] == 'Y' && isset($_REQUEST['data_block']) && $_REQUEST['data_block'] == 'expandables';?>
+											<?if($ajaxNavBlock){
+												$APPLICATION->RestartBuffer();
+												$arParams["FROM_AJAX"] = 'Y';
+											}
+											else{
+												CMax::checkRestartBuffer(true, 'expandables');												
+											}?>
 												<?if(CMax::checkAjaxRequest()):?>
 													<?if(!$templateData['ASSOCIATED'])
 														$APPLICATION->ShowAjaxHead();?>
 													<?$GLOBALS['arrProductsFilter'] = [];?>
+													<?$GLOBALS["NavNum"]=0;?>
 													<?$GLOBALS['arrProductsFilter'] = $templateData['EXPANDABLES'];?>
+													<?$arParams['USE_BIG_DATA'] = 'N';?>
 													<?include($_SERVER['DOCUMENT_ROOT'].SITE_DIR.'/include/detail.linked_products_block.php');?>
 												<?endif;?>
-											<?CMax::checkRestartBuffer(true, 'expandables');?>
+											<?
+											if($ajaxNavBlock){
+												die();
+											} else{
+												CMax::checkRestartBuffer(true, 'expandables');
+											}
+											?>
 										</div>
 
 									</div>
@@ -1295,46 +1548,76 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 					<?else:?>
 						<?if($templateData['ASSOCIATED']):?>
 							<?
-							$bShowAssociatedTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['ASSOCIATED'], array('REGION'));
+							$bShowAssociatedTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['ASSOCIATED'], array('REGION'), $arParams);
 							?>
 							<?if($bShowAssociatedTab):?>
 								<div class="ordered-block <?=$code?> cur">
 									<div class="ordered-block__title option-font-bold font_lg">
 										<?=$arParams["DETAIL_ASSOCIATED_TITLE"];?>
 									</div>
-									<div class="assoc-block js-load-block loader_circle" data-block="assoc" data-file="<?=$APPLICATION->GetCurPage()?>">
+									<div class="assoc-block js-load-block loader_circle tabs_slider nav-data_block" data-block="assoc" data-file="<?=$APPLICATION->GetCurURI()?>">
 										<div class="stub"></div>
-										<?CMax::checkRestartBuffer(true, 'assoc');?>
+										<?$ajaxNavBlock = isset($_REQUEST['pagen_data_block']) && $_REQUEST['pagen_data_block'] == 'Y' && isset($_REQUEST['data_block']) && $_REQUEST['data_block'] == 'assoc';?>
+											<?if($ajaxNavBlock){
+												$APPLICATION->RestartBuffer();
+												$arParams["FROM_AJAX"] = 'Y';
+											}
+											else{
+												CMax::checkRestartBuffer(true, 'assoc');												
+											}?>
 											<?if(CMax::checkAjaxRequest()):?>
 												<?$APPLICATION->ShowAjaxHead();?>
 												<?$GLOBALS['arrProductsFilter'] = [];?>
+												<?$GLOBALS["NavNum"]=0;?>
 												<?$GLOBALS['arrProductsFilter'] = $templateData['ASSOCIATED'];?>
+												<?$arParams['USE_BIG_DATA'] = 'N';?>
 												<?include($_SERVER['DOCUMENT_ROOT'].SITE_DIR.'/include/detail.linked_products_block.php');?>
 											<?endif;?>
-										<?CMax::checkRestartBuffer(true, 'assoc');?>
+											<?
+											if($ajaxNavBlock){
+												die();
+											} else{
+												CMax::checkRestartBuffer(true, 'assoc');
+											}
+											?>
 									</div>
 								</div>
 							<?endif;?>
 						<?endif;?>
 						<?if($templateData['EXPANDABLES']):?>
 							<?
-							$bShowExpandablesTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['EXPANDABLES'], array('REGION'));
+							$bShowExpandablesTab = \Aspro\Functions\CAsproMax::checkAvailable($templateData['EXPANDABLES'], array('REGION'), $arParams);
 							?>
 							<?if($bShowExpandablesTab):?>
 								<div class="ordered-block <?=$code?> cur">
 									<div class="ordered-block__title option-font-bold font_lg">
 										<?=$arParams["DETAIL_EXPANDABLES_TITLE"];?>
 									</div>
-									<div class="expandables-block js-load-block loader_circle" data-block="expandables" data-file="<?=$APPLICATION->GetCurPage()?>">
+									<div class="expandables-block js-load-block loader_circle tabs_slider nav-data_block" data-block="expandables" data-file="<?=$APPLICATION->GetCurURI()?>">
 										<div class="stub"></div>
-										<?CMax::checkRestartBuffer(true, 'expandables');?>
+										<?$ajaxNavBlock = isset($_REQUEST['pagen_data_block']) && $_REQUEST['pagen_data_block'] == 'Y' && isset($_REQUEST['data_block']) && $_REQUEST['data_block'] == 'expandables';?>
+										<?if($ajaxNavBlock){
+												$APPLICATION->RestartBuffer();
+												$arParams["FROM_AJAX"] = 'Y';
+											}
+											else{
+												CMax::checkRestartBuffer(true, 'expandables');												
+											}?>
 											<?if(CMax::checkAjaxRequest()):?>
 												<?$APPLICATION->ShowAjaxHead();?>
 												<?$GLOBALS['arrProductsFilter'] = [];?>
+												<?$GLOBALS["NavNum"]=0;?>
 												<?$GLOBALS['arrProductsFilter'] = $templateData['EXPANDABLES'];?>
+												<?$arParams['USE_BIG_DATA'] = 'N';?>
 												<?include($_SERVER['DOCUMENT_ROOT'].SITE_DIR.'include/detail.linked_products_block.php');?>
 											<?endif;?>
-										<?CMax::checkRestartBuffer(true, 'expandables');?>
+											<?
+											if($ajaxNavBlock){
+												die();
+											} else{
+												CMax::checkRestartBuffer(true, 'expandables');
+											}
+											?>
 									</div>
 								</div>
 							<?endif;?>
@@ -1342,19 +1625,31 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 					<?endif;?>
 				<?endif;?>
 			<?endforeach;?>
+			<?if($arParams['USE_BIG_DATA'] == 'Y' && $arParams['BIGDATA_TYPE_VIEW'] === 'BOTTOM'):?>
+				<div class="ordered-block recoms cur" data-code="bigdata">
+					<div class="ordered-block__title option-font-bold font_lg">
+						<?=$arParams["TITLE_SLIDER"];?>
+					</div>
+					<div class="bigdata-wrapper"><?include_once($_SERVER["DOCUMENT_ROOT"].$arParams["BIGDATA_PATH_TEMPLATE"]);?></div>
+				</div>	
+			<?endif; ?>
+			<?CMax::get_banners_position('CONTENT_BOTTOM');
+			global $bannerContentBottom;
+			$bannerContentBottom = true;
+			?>
 		</div>
 		<div class="left_block sticky-sidebar-custom product-side">
 			<?$APPLICATION->ShowViewContent('PRODUCT_SIDE_INFO')?>
 
 			<?//bigdata?>
-			<?if($arParams['USE_BIG_DATA'] == 'Y'):?>
+			<?if($arParams['USE_BIG_DATA'] == 'Y' && $arParams['BIGDATA_TYPE_VIEW'] === 'RIGHT' ):?>
 				<?
-				$GLOBALS['CATALOG_CURRENT_ELEMENT_ID'] = $arResult['ID'];
+				$GLOBALS['CATALOG_CURRENT_ELEMENT_ID'] = $GLOBALS['arrFilterBigData']['!ID'] = $arResult['ID'];
 
 				$GLOBALS['arrFilterBigData']['IBLOCK_ID'] = $arParams['IBLOCK_ID'];
 				CMax::makeElementFilterInRegion($GLOBALS['arrFilterBigData']);
 				?>
-				<div class="bigdata-wrapper"><?include_once($arParams['BIG_DATA_TEMPLATE']);?></div>
+				<div class="bigdata-wrapper"><?include_once($_SERVER["DOCUMENT_ROOT"].$arParams["BIGDATA_PATH_TEMPLATE"]);?></div>
 			<?endif;?>
 
 			<?//feedback?>
@@ -1419,13 +1714,15 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 <?$des = new \Bitrix\Main\Page\FrameStatic('des');$des->startDynamicArea();?>
 <script>
 	insertElementStoreBlock = function(html){
-		if(
-			typeof map === 'object' &&
-			map && typeof map.destroy === 'function'
-		){
-			// there is a map on the page
-			map.destroy();
-		}
+		try{
+			if(
+				typeof map === 'object' &&
+				map && typeof map.destroy === 'function'
+			){
+				// there is a map on the page
+				map.destroy();
+			}
+		}catch(e){}
 
 		html = html.replace('this.parentNode.removeChild(script);', 'try{this.parentNode.removeChild(script);} catch(e){}');
 		html = html.replace('(document.head || document.documentElement).appendChild(script);', '(typeof ymaps === \'undefined\') && (document.head || document.documentElement).appendChild(script);');
@@ -1440,12 +1737,6 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 			$('.stores .stores_tab .stores-title').insertAfter($('.stores .stores_tab').siblings('.ordered-block__title'));
 		}
 
-		$('.block_container .items, .block_container .detail_items').mCustomScrollbar({
-			mouseWheel: {
-				scrollAmount: 150,
-				preventDefault: true
-			}
-		});
 	}
 
 	setElementStore = function(check, oid){
@@ -1489,12 +1780,13 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 						if(typeof setElementStore.mapListner === 'undefined'){
 							setElementStore.wait = false;
 
-							window.addEventListener('message', setElementStore.mapListner = function(event){
+							/*When use ya-maps-api key it does not work*/
+							/*window.addEventListener('message', setElementStore.mapListner = function(event){
 								if(typeof event.data === 'string'){
 									if(
 										event.data.indexOf('ready') !== -1 &&
 										event.origin.indexOf('maps.ya') !== -1
-									){
+									){*/
 										// message ready recieved from yandex maps
 										setTimeout(function(){
 											if(typeof setElementStore.lastHtml !== 'undefined'){
@@ -1506,9 +1798,9 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 												setElementStore.wait = false;
 											}
 										}, 50);
-									}
+									/*}
 								}
-							});
+							});*/
 						}
 
 						if(setElementStore.wait){
@@ -1531,9 +1823,35 @@ if($arTheme['USE_DETAIL_TABS']['VALUE'] != 'Y')
 	}
 	BX.ready(
 		BX.defer(function(){
-			setElementStore('<?=$templateData["STORES"]["OFFERS"];?>');
+			<?if($templateData["OFFERS_INFO"]["CURRENT_OFFER"]):?>
+				setElementStore('', '<?=$templateData["OFFERS_INFO"]["CURRENT_OFFER"];?>');
+			<?else:?>
+				setElementStore('');
+			<?endif;?>
 		})
 	);
 </script>
 <?$des->finishDynamicArea();?>
 <?if($_GET["RID"]){?><script>$(document).ready(function(){$("<div class='rid_item' data-rid='<?=htmlspecialcharsbx($_GET["RID"]);?>'></div>").appendTo($('body'));});</script><?}?>
+<?
+if( $templateData["OFFERS_INFO"]["CURRENT_OFFER"] && $arTheme['CHANGE_TITLE_ITEM_DETAIL']['VALUE'] === "Y" ){
+	global $currentOfferTitle;
+	$currentOfferTitle["CURRENT_OFFER_TITLE"] = $templateData["OFFERS_INFO"]["CURRENT_OFFER_TITLE"];
+	$currentOfferTitle["CURRENT_OFFER_WINDOW_TITLE"] = $templateData["OFFERS_INFO"]["CURRENT_OFFER_WINDOW_TITLE"];
+}
+
+$arScripts = ['swiper', 'swiper_main_styles', 'hash_location', 'tabs_history', 'countdown'];
+if (isset($templateData['OUT_OF_PRODUCTION']) && $templateData['OUT_OF_PRODUCTION']['SHOW_ANALOG']) {
+	$arScripts[] = 'out_of_production';
+}
+if (isset($templateData['CHARACTERISTICS']) && $templateData['CHARACTERISTICS'] && $arTheme["GRUPPER_PROPS"]["VALUE"] == "ASPRO_PROPS_GROUP") {
+	$arScripts[] = 'propertygroups';
+}
+if (isset($templateData['JS_OBJ'])) {
+	$arScripts[] = 'ikSelect';
+}
+if ($bShowAdditionalGallery) {
+	$arScripts[] = 'gallery_small';
+}
+\Aspro\Max\Functions\Extensions::init($arScripts);
+?>

@@ -6,11 +6,6 @@ $arTemplateParameters = array(
 		"DEFAULT" => "Y",
 		"REFRESH" => "Y",
 	),
-	"SHOW_INPUT_FIXED" => array(
-		"NAME" => GetMessage("T_SHOW_INPUT_FIXED"),
-		"TYPE" => "CHECKBOX",
-		"DEFAULT" => "N",
-	),
 	"INPUT_ID" => array(
 		"NAME" => GetMessage("TP_BST_INPUT_ID"),
 		"TYPE" => "STRING",

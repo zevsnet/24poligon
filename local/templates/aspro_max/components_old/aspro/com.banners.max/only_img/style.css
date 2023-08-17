@@ -1,0 +1,55 @@
+.maxwidth-theme:not(.BANNER_IMG_TEXT) .item-views.bottom_banners{padding-top: 10px;}
+
+body .wrapper1:not(.with_left_block) .wrapper_inner.front .middle .drag-block.container.BOTTOM_BANNERS .maxwidth-theme.wide,
+body .wrapper1:not(.with_left_block) .wrapper_inner.front .middle .drag-block.container.BOTTOM_BANNERS .maxwidth-theme.wide .item-views.bottom_banners{padding-top: 0px;}
+
+.maxwidth-theme:not(.wide) .item-views.bottom_banners{padding-bottom: 28px;}
+
+.wrapper1:not(.with_left_block) .wrapper_inner.front .drag-block.container .maxwidth-theme:not(.wide) .item-views.bottom_banners{padding-bottom: 38px;}
+
+.maxwidth-theme:not(.wide) .item-views.bottom_banners .item{padding-bottom: 32px;}
+.maxwidth-theme:not(.wide) .item-views.bottom_banners .row.margin0{padding-bottom: 32px;}
+.maxwidth-theme:not(.wide) .item-views.bottom_banners .row.margin0 .item{padding-bottom: 0px;}
+.item-views.bottom_banners .item{margin-bottom:0px;}
+.item-views.bottom_banners .img_inner span{display:block;background-repeat:no-repeat;}
+.item-views.bottom_banners .row > div:not(.col-md-12) .img_inner span{background-size:cover;}
+
+.BANNER_IMG_TEXT.maxwidth-theme .item-views.bottom_banners{padding-bottom: 17px;}
+.BANNER_IMG_TEXT .bottom_banners.item-views .item .previewtext {line-height: 1.6435em;}
+
+.wrapper1:not(.with_left_block) .wrapper_inner.front .drag-block.container .BANNER_IMG_TEXT.maxwidth-theme .item-views.bottom_banners{padding-bottom: 27px;}
+
+.BANNER_IMG_TEXT .item-views.bottom_banners .img{width:110px;height:110px;}
+.BANNER_IMG_TEXT .item-views.bottom_banners .item .img .img_inner, .BANNER_IMG_TEXT .item-views.bottom_banners .item .img .img_inner span{height:100%;padding:0px;}
+.BANNER_IMG_TEXT .item-views.bottom_banners .img.pull-left + .inner-text{padding-left: 140px;}
+.BANNER_IMG_TEXT .item-views.bottom_banners .img.pull-right + .inner-text{padding-right: 140px;}
+.BANNER_IMG_TEXT .item-views.bottom_banners .inner-text{padding-top: 24px;}
+
+@media (min-width: 992px){
+	.item-views.bottom_banners .col-md-12 .img_inner span{height:180px;}
+	.maxwidth-theme.wide .item-views.bottom_banners .row > div:not(.col-md-12) .img_inner span{padding-top: 29%;}
+	.maxwidth-theme:not(.wide) .item-views.bottom_banners .row > div:not(.col-md-12) .img_inner span{padding-top: 42%;}
+}
+@media (max-width: 991px){
+	.BANNER_IMG_WIDE .item-views.bottom_banners .img_inner span{padding-bottom:19%;background-size:cover;}
+	.maxwidth-theme:not(.BANNER_IMG_WIDE) .item-views.bottom_banners .img_inner span{padding-bottom:40%;}
+}
+@media (max-width: 600px){
+	body#main .wrapper1 .wrapper_inner.front .middle .drag-block.container.BOTTOM_BANNERS .maxwidth-theme.wide, 
+	body#main .wrapper1 .wrapper_inner.front .middle .drag-block.container.BOTTOM_BANNERS .maxwidth-theme.wide .item-views.bottom_banners{padding-top: 0px;}
+
+
+	.BANNER_IMG_TEXT .item-views.bottom_banners .img {width: 90px;height: 90px;margin-left: 14px;}
+	.BANNER_IMG_TEXT .item-views.bottom_banners .img.pull-left + .inner-text {padding-left: 124px;padding-right: 13px;min-height: 90px;}
+	.BANNER_IMG_TEXT .item-views.bottom_banners .inner-text {padding-top: 6px;}
+	.BANNER_IMG_TEXT .bottom_banners.item-views .item .previewtext{line-height: 1.500em;margin-top: 7px;margin-bottom: 0;}
+	.BANNER_IMG_TEXT.maxwidth-theme .item-views.bottom_banners{padding-top: 15px;}
+	.BANNER_IMG_TEXT.maxwidth-theme .item-views.bottom_banners .item{padding-bottom: 30px;}
+	.wrapper1:not(.with_left_block) .wrapper_inner.front .drag-block.container .BANNER_IMG_TEXT.maxwidth-theme .item-views.bottom_banners,
+	.wrapper1.with_left_block .wrapper_inner.front .drag-block.container .BANNER_IMG_TEXT.maxwidth-theme .item-views.bottom_banners{padding-bottom: 17px;}
+
+	.BANNER_IMG_TYPE2.maxwidth-theme .item-views.bottom_banners .item{padding-bottom: 16px;}
+	.BANNER_IMG_TYPE2.maxwidth-theme .item-views.bottom_banners{padding-top: 15px;}
+	.wrapper1:not(.with_left_block) .wrapper_inner.front .drag-block.container .BANNER_IMG_TYPE2.maxwidth-theme .item-views.bottom_banners,
+	.wrapper1.with_left_block .wrapper_inner.front .drag-block.container .BANNER_IMG_TYPE2.maxwidth-theme .item-views.bottom_banners{padding-bottom: 29px;}
+}

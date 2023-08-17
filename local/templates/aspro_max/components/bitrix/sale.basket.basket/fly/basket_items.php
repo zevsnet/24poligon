@@ -2,11 +2,43 @@
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 //echo ShowError($arResult["ERROR_MESSAGE"]);
 
+global $arRegion;
+
 $bDelayColumn  = false;
 $bDeleteColumn = false;
 $bWeightColumn = false;
 $bPropsColumn  = false;
 $rowCols = 0;
+
+$servicesIblockId = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_IBLOCK_ID", CMaxCache::$arIBlocks[SITE_ID]["aspro_max_content"]["aspro_max_services"][0]);
+$catalogIblockId = \Bitrix\Main\Config\Option::get("aspro.max", "CATALOG_IBLOCK_ID", CMaxCache::$arIBlocks[SITE_ID]["aspro_max_catalog"]["aspro_max_catalog"][0]);
+$bCache = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_CACHE", 'N') === 'Y';
+$cacheTime = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_CACHE_TIME", '36000');
+$showOldPrice = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_SHOW_OLD_PRICE", 'Y');
+$countInAnnounce = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_COUNT_IN_ANNOUNCE", '2');
+$priceType = explode(",", \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_PRICE_TYPE", 'BASE'));
+$cacheGroups = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_CACHE_GROUPS", 'N');
+$convertCurrency = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_CURRENCY", 'N');
+$priceVat = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_PRICE_VAT_INCLUDE", 'Y');
+$bConvertCurrency = $convertCurrency === 'N';
+$bServicesRegionality = \Bitrix\Main\Config\Option::get("aspro.max", "SERVICES_REGIONALITY", 'N') === 'Y' 
+						&& \Bitrix\Main\Config\Option::get("aspro.max", "USE_REGIONALITY", 'N') === 'Y'
+						&& \Bitrix\Main\Config\Option::get("aspro.max", "REGIONALITY_FILTER_ITEM", 'N') === 'Y';
+
+$arBonus = [];
+if(\CMax::GetFrontParametrValue("BONUS_SYSTEM") === 'LOGICTIM' && \CModule::IncludeModule('logictim.balls') && $arResult["ITEMS"]["AnDelCanBuy"]){
+	$arBonus = cHelperCalc::CartBonus($arResult["ITEMS"]["AnDelCanBuy"]);
+}
+				
+if($arRegion)
+{
+	if($arRegion['LIST_PRICES'])
+	{
+		if(reset($arRegion['LIST_PRICES']) != 'component'){
+			$priceType = array_keys($arRegion['LIST_PRICES']);
+		}
+	}
+}
 
 if ($normalCount > 0):
 	global $arBasketItems;?>
@@ -29,16 +61,26 @@ if ($normalCount > 0):
 	<?endforeach;?>
 
 	<div class="basket_wrap">
-		<div class="items_wrap srollbar-custom">
+		<div class="items_wrap scrollblock">
 			<?if(isset($arResult["ITEMS_IBLOCK_ID"])){?>
 				<div class="iblockid" data-iblockid="<?=$arResult["ITEMS_IBLOCK_ID"];?>"></div>
 			<?}?>
 			<div class="items">
 				<?foreach ($arResult["GRID"]["ROWS"] as $k => $arItem):
+
+					$isServices = false;
+					$linkServices = $arParamsForServ = $itemForServ = array();
+					
+					if($arItem["PROPS"]){
+						$arPropsByCode = array_column($arItem["PROPS"], NULL , "CODE");
+						$isServices = isset($arPropsByCode["ASPRO_BUY_PRODUCT_ID"]) && $arPropsByCode["ASPRO_BUY_PRODUCT_ID"]["VALUE"]>0;
+						$idParentProduct = $arPropsByCode["ASPRO_BUY_PRODUCT_ID"]["VALUE"];
+					}
+
 					$currency = $arItem["CURRENCY"];
 					if ($arItem["DELAY"] == "N" && $arItem["CAN_BUY"] == "Y"):
 						$arBasketItems[]=$arItem["PRODUCT_ID"];?>
-						<div class="item" data-id="<?=$arItem["ID"]?>" product-id="<?=$arItem["PRODUCT_ID"]?>" data-iblockid="<?=$arItem["IBLOCK_ID"]?>" <?if($arItem["QUANTITY"]>$arItem["AVAILABLE_QUANTITY"]):?>data-error="no_amounth"<?endif;?>>
+						<div class="item <?=($isServices ? 'hidden' : '')?>" data-id="<?=$arItem["ID"]?>" product-id="<?=$arItem["PRODUCT_ID"]?>" data-iblockid="<?=$arItem["IBLOCK_ID"]?>" <?if($arItem["QUANTITY"]>$arItem["AVAILABLE_QUANTITY"]):?>data-error="no_amounth"<?endif;?> <?if($isServices):?>data-parent_product_id="<?=$idParentProduct?>"<?endif;?>>
 							<div class="wrap clearfix">
 								<div class="image">
 									<?if( strlen($arItem["PREVIEW_PICTURE"]["SRC"])>0 ){?>
@@ -112,7 +154,7 @@ if ($normalCount > 0):
 																			$selected = "";
 																			foreach ($arItem["PROPS"] as $arItemProp) {
 																				if ($arItemProp["CODE"] == $arItem["SKU_DATA"][$propId]["CODE"])
-																				{ if ($arItemProp["VALUE"] == $arSkuValue["NAME"]) $selected = "class=\"bx_active\""; }
+																				{ if ($arItemProp["VALUE"] == $arSkuValue["NAME"] || $arItemProp["VALUE"] == $arSkuValue["XML_ID"]) $selected = "class=\"bx_active\""; }
 																			}?>
 																			<li <?=$selected?>><span><?=$arSkuValue["NAME"]?></span></li>
 																		<?}?>
@@ -204,6 +246,9 @@ if ($normalCount > 0):
 										</div>
 										<div class="summ">
 											<div class="cost prices"><div class="price"><?=$arItem["SUMM_FORMATED"];?></div></div>
+											<? //bonus for item
+											\Aspro\Functions\CAsproMax::showBonusBlockCart($arBonus, $arItem);
+											?>
 										</div>
 										<?if($bDelayColumn):?>
 											<div class="delay-cell delay">
@@ -211,6 +256,65 @@ if ($normalCount > 0):
 													<span class="icon" title="<?=GetMessage("SALE_DELAY");?>"><?=CMax::showIconSvg("wish colored_theme_hover_text", SITE_TEMPLATE_PATH.'/images/svg/chosen_small.svg', '', '', true, false);?></span>
 												</a>
 											</div>
+										<?endif;?>
+									</div>
+									<div class="services_in_basket buy_services_wrap" data-parent_product="<?=$arItem["PRODUCT_ID"]?>">
+										<?/*services*/							
+										
+										$productId = CCatalogSku::GetProductInfo($arItem["PRODUCT_ID"]);
+										$productId = is_array($productId) ? $productId['ID'] : $arItem["PRODUCT_ID"];
+										$arElementFilter = array("ID" => $productId, "IBLOCK_ID" => $catalogIblockId);
+										
+										$arElement = CMaxCache::CIBLockElement_GetList(array('CACHE' => array("MULTI" =>"N", "TAG" => CMaxCache::GetIBlockCacheTag($catalogIblockId))), $arElementFilter, false, false, array("ID", "IBLOCK_ID", "PROPERTY_SERVICES"));
+										
+										if($arElement["PROPERTY_SERVICES_VALUE"]){		
+											if(is_array($arElement["PROPERTY_SERVICES_VALUE"])){
+												$arServicesFromProp = $arElement["PROPERTY_SERVICES_VALUE"];
+											} else {
+												$arServicesFromProp = array($arElement["PROPERTY_SERVICES_VALUE"]);
+											}
+											$itemForServ["DISPLAY_PROPERTIES"]['SERVICES']["VALUE"] = $arServicesFromProp;		
+										}
+										$arParamsForServ["IBLOCK_SERVICES_ID"] = $servicesIblockId;
+										$arParamsForServ["IBLOCK_ID"] = $catalogIblockId;
+										$itemForServ["ID"]= $arElement["ID"];
+										$linkServices = \Aspro\Functions\CAsproMax::getLinkedItems($itemForServ, "SERVICES", $arParamsForServ);								
+										?>
+										<?if($linkServices):?>
+											<?
+											$GLOBALS['arBuyServicesFilterBasket']['ID'] = $linkServices;
+											$GLOBALS['arBuyServicesFilterBasket']['PROPERTY_ALLOW_BUY_VALUE'] = 'Y';
+											if($bServicesRegionality && isset($arRegion['ID'])){
+												$GLOBALS['arBuyServicesFilterBasket'][] = array( "PROPERTY_LINK_REGION" => $arRegion['ID'] );
+											}										
+											?>									
+											<?$APPLICATION->IncludeComponent(
+												"bitrix:catalog.section",
+												"services_list",
+												[
+													'IBLOCK_ID' => $servicesIblockId,
+													'PRICE_CODE' => $priceType,
+													'FILTER_NAME' => 'arBuyServicesFilterBasket',
+													'PROPERTIES' => [],
+													"SHOW_OLD_PRICE" => $showOldPrice,
+													'CACHE_TYPE' => $bCache && empty($arItem["LINK_SERVICES"]) ? 'A' : 'N',
+													'CACHE_TIME' => $cacheTime,
+													'CACHE_GROUPS' => $cacheGroups,
+													"CACHE_FILTER" => 'Y',
+													'SHOW_ALL_WO_SECTION' => 'Y',
+													"CONVERT_CURRENCY" => $convertCurrency === 'N' ? 'N' : 'Y',
+													"CURRENCY_ID" => $convertCurrency === 'N' ? 'RUB' : $convertCurrency,
+													"PRICE_VAT_INCLUDE" => $priceVat,
+													"PAGE_ELEMENT_COUNT" => '100',
+													"COUNT_SERVICES_IN_ANNOUNCE" => $countInAnnounce,
+													"COMPACT_MODE" => 'Y',
+													"SHOW_ALL_IN_SLIDE" => 'Y',
+													"SERVICES_IN_BASKET" => is_array($arItem["LINK_SERVICES"]) ? $arItem["LINK_SERVICES"] : array(),
+													"PLACE_ID" => 'fly_basket',
+													"COMPATIBLE_MODE" => "Y",
+												],
+												false, array("HIDE_ICONS"=>"Y")
+											);?>
 										<?endif;?>
 									</div>
 									<?if($bDeleteColumn):?>
@@ -289,6 +393,9 @@ if ($normalCount > 0):
 							<?endif;?>
 						<?endif;?>
 					<?endforeach;?>
+					<?//all basket bonus
+					\Aspro\Functions\CAsproMax::showBonusBlockCartTotal($arBonus);
+					?>
 				</div>
 			</div>
 		</div>

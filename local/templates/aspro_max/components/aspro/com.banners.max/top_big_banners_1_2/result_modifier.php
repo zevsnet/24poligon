@@ -3,7 +3,7 @@
 if($arResult['ITEMS'])
 {
 	/*stores product*/
-	$arStores=CMaxCache::CCatalogStore_GetList(array(), array("ACTIVE" => "Y"), false, false, array());
+	$arStores=CMax::CCatalogStore_GetList(array(), array("ACTIVE" => "Y"), false, false, array());
 	$arResult["STORES_COUNT"] = count($arStores);
 	
 	$arTmpItems = array();

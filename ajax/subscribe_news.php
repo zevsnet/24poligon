@@ -39,11 +39,18 @@ $showLicence = \CMax::GetFrontParametrValue('SHOW_LICENCE');
 						</label>
 					</div>
 				<?endif;?>
-				<div class="buttons clearfix">
-					<button class="btn btn-default btn-lg pull-left" type="submit" value="<?=GetMessage('SUBSCRIBE_PAGE');?>" name="web_form_submit">
-						<?=GetMessage('SUBSCRIBE_PAGE');?>
-					</button>
-					<a class="settings font_upper pull-right dark-color" href="<?=$subscribePage;?>"><?=CMax::showIconSvg("", SITE_TEMPLATE_PATH.'/images/svg/gear.svg');?><?=GetMessage('SETTINGS');?></a>
+				<div class="line-block line-block--column line-block--align-flex-start line-block--24-vertical">
+					<div class="line-block__item">
+						<?$APPLICATION->IncludeFile(SITE_DIR."include/required_message.php", Array(), Array("MODE" => "html"));?>
+					</div>
+					<div class="line-block__item width100">
+						<div class="buttons clearfix">
+							<button class="btn btn-default btn-lg pull-left" type="submit" value="<?=GetMessage('SUBSCRIBE_PAGE');?>" name="web_form_submit">
+								<?=GetMessage('SUBSCRIBE_PAGE');?>
+							</button>
+							<a class="settings font_upper pull-right dark-color" href="<?=$subscribePage;?>"><?=CMax::showIconSvg("", SITE_TEMPLATE_PATH.'/images/svg/gear.svg');?><?=GetMessage('SETTINGS');?></a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</form>
@@ -65,14 +72,15 @@ $(document).ready(function(){
 				$(form).find('button[type="submit"]').attr('disabled', 'disabled');
 
 				var data = $(form).serialize();
-
+				
 				$.ajax({
 					url: arMaxOptions['SITE_DIR'] + 'ajax/subscribe_user.php',
 					data: {'data': data},
 					type: 'POST',
-				}).success(function(html){
-					$('.form .js_form').html(html);
-				});
+					success: function(html){
+						$('.form .js_form').html(html);
+					}
+				})
 			}
 		},
 		errorPlacement: function( error, element ){

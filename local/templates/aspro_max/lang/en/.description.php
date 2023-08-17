@@ -1,4 +1,3 @@
-<?
-$MESS["SITE_NAME"] = "Аспро: Максимум - интернет-магазин";
-$MESS["SITE_DESCRIPTION"] = "Аспро: Максимум - интернет магазин с поддержкой современных технологий: BigData, композитный сайт, фасетный поиск, адаптивная верстка";
-?>
+<?php
+$MESS["SITE_DESCRIPTION"] = "Aspro: Max - online store with the support of modern technologies: BigData	composite site	faceted search	adaptive layout								";
+$MESS["SITE_NAME"] = "Aspro: Max - online store";

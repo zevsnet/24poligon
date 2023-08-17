@@ -71,6 +71,13 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Бонусы", 
+		"/personal/bonus/", 
+		Array(), 
+		Array(), 
+		"\\Aspro\\Functions\\CAsproMax::isBonusSystemOn()" 
+	),
+	Array(
 		"Выйти", 
 		"?logout=yes&login=yes", 
 		Array(), 

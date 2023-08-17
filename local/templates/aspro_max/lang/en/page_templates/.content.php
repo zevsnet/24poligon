@@ -1,6 +1,5 @@
-<?
-$MESS['standart'] = "Стандартная страница";
-$MESS['page_includes'] = "Включаемая область в контенте страницы";
-$MESS['page_inc'] = "Включаемая область для страницы";
-$MESS['sect_inc'] = "Включаемая область для раздела";
-?>
+<?php
+$MESS["page_inc"] = "Include area for the page";
+$MESS["page_includes"] = "Include area in page content";
+$MESS["sect_inc"] = "Include area for section";
+$MESS["standart"] = "Standard Page";

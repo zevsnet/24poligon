@@ -4,10 +4,6 @@
 	"bitrix:news.detail", 
 	"front_company", 
 	array(
-		"DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
-		"DISPLAY_NAME" => $arParams["DISPLAY_NAME"],
-		"DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
-		"DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
 		"IBLOCK_TYPE" => "aspro_max_content",
 		"IBLOCK_ID" => "166",
 		"FIELD_CODE" => array(

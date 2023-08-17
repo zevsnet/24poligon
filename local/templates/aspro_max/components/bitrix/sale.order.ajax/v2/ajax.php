@@ -39,7 +39,7 @@ if (empty($action) && !$arProps) {
 }
 
 function getPropsByFilter($array, $field, $value){
-    return array_filter($array, function($item){
+    return array_filter($array, function($item) use ($field, $value){
         return $item[$field] === $value;
     });
 }

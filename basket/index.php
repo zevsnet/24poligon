@@ -1,11 +1,14 @@
 <?
+use SB\Site\Catalog\SBCatlog;
+use SB\Site\General;
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/sb_site/init.php");
 $APPLICATION->SetTitle("Корзина");
 ?>
 <script>window.basketJSParams = window.basketJSParams || [];</script>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket", 
-	"main", 
+	"v2", 
 	array(
 		"COLUMNS_LIST" => array(
 			0 => "NAME",
@@ -19,8 +22,6 @@ $APPLICATION->SetTitle("Корзина");
 			8 => "SUM",
 		),
 		"OFFERS_PROPS" => array(
-			0 => "SIZES",
-			1 => "COLOR_REF",
 		),
 		"PATH_TO_ORDER" => SITE_DIR."order/",
 		"HIDE_COUPON" => "N",
@@ -34,7 +35,7 @@ $APPLICATION->SetTitle("Корзина");
 		"PICTURE_HEIGHT" => "100",
 		"SHOW_FULL_ORDER_BUTTON" => "Y",
 		"SHOW_FAST_ORDER_BUTTON" => "Y",
-		"COMPONENT_TEMPLATE" => "main",
+		"COMPONENT_TEMPLATE" => "v2",
 		"QUANTITY_FLOAT" => "N",
 		"ACTION_VARIABLE" => "action",
 		"TEMPLATE_THEME" => "blue",
@@ -58,7 +59,7 @@ $APPLICATION->SetTitle("Корзина");
 		"GIFTS_CONVERT_CURRENCY" => "N",
 		"GIFTS_HIDE_NOT_AVAILABLE" => "N",
 		"EMPTY_BASKET_HINT_PATH" => SITE_DIR."catalog/",
-		"DEFERRED_REFRESH" => "N",
+		"DEFERRED_REFRESH" => "Y",
 		"USE_DYNAMIC_SCROLL" => "Y",
 		"SHOW_FILTER" => "Y",
 		"SHOW_RESTORE" => "Y",
@@ -78,9 +79,9 @@ $APPLICATION->SetTitle("Корзина");
 			4 => "SUM",
 		),
 		"TOTAL_BLOCK_DISPLAY" => array(
-            0 => "top",
-            1 => "bottom",
-        ),
+			0 => "top",
+			1 => "bottom",
+		),
 		"DISPLAY_MODE" => "extended",
 		"PRICE_DISPLAY_MODE" => "Y",
 		"SHOW_DISCOUNT_PERCENT" => "Y",

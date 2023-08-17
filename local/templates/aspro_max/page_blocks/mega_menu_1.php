@@ -7,7 +7,7 @@ $bCabinet = isset($arTheme['CABINET']) ? ($arTheme["CABINET"]["VALUE"]=='Y' ? tr
 $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
 ?>
 
-<div class="mega_fixed_menu">
+<div class="mega_fixed_menu scrollblock">
 	<div class="maxwidth-theme">
 		<svg class="svg svg-close" width="14" height="14" viewBox="0 0 14 14">
 		  <path data-name="Rounded Rectangle 568 copy 16" d="M1009.4,953l5.32,5.315a0.987,0.987,0,0,1,0,1.4,1,1,0,0,1-1.41,0L1008,954.4l-5.32,5.315a0.991,0.991,0,0,1-1.4-1.4L1006.6,953l-5.32-5.315a0.991,0.991,0,0,1,1.4-1.4l5.32,5.315,5.31-5.315a1,1,0,0,1,1.41,0,0.987,0.987,0,0,1,0,1.4Z" transform="translate(-1001 -946)"></path>
@@ -35,55 +35,14 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
 						<div class="search_wrap">
 							<div class="search-block">
 								<?$APPLICATION->IncludeComponent(
-									"bitrix:search.title",
-									"mega_menu",
-									array(
-										"CATEGORY_0" => array(
-											0 => "iblock_aspro_max_catalog",
-										),
-										"CATEGORY_0_TITLE" => "ALL",
-										"CATEGORY_0_iblock_aspro_max_catalog" => array(
-											0 => "135",
-											1 => "136",
-											2 => "158",
-											3 => "159",
-											4 => "160",
-											5 => "164",
-											6 => "169",
-										),
-										"CATEGORY_0_iblock_aspro_max_content" => array(
-											0 => "all",
-										),
-										"CATEGORY_OTHERS_TITLE" => "OTHER",
-										"CHECK_DATES" => "Y",
-										"COMPOSITE_FRAME_MODE" => "A",
-										"COMPOSITE_FRAME_TYPE" => "AUTO",
-										"CONTAINER_ID" => "title-search_mega_menu",
-										"CONVERT_CURRENCY" => "N",
-										"INPUT_ID" => "title-search-input_mega_menu",
-										"NUM_CATEGORIES" => "1",
-										"ORDER" => "date",
-										"PAGE" => CMax::GetFrontParametrValue("CATALOG_PAGE_URL"),
-										"PREVIEW_HEIGHT" => "38",
-										"PREVIEW_TRUNCATE_LEN" => "50",
-										"PREVIEW_WIDTH" => "38",
-										"PRICE_CODE" => array(
-											0 => "BASE",
-										),
-										"PRICE_VAT_INCLUDE" => "Y",
-										"SHOW_ANOUNCE" => "N",
-										"SHOW_INPUT" => "Y",
-										"SHOW_INPUT_FIXED" => "Y",
-										"SHOW_OTHERS" => "Y",
-										"SHOW_PREVIEW" => "Y",
-										"TOP_COUNT" => "10",
-										"USE_LANGUAGE_GUESS" => "Y",
-										"COMPONENT_TEMPLATE" => "mega_menu"
+									"bitrix:main.include",
+									"",
+									Array(
+										"AREA_FILE_SHOW" => "file",
+										"PATH" => SITE_DIR."include/top_page/search.title.megamenu.php",
+										"EDIT_TEMPLATE" => "include_area.php",					
 									),
-									false,
-									array(
-										"ACTIVE_COMPONENT" => "Y"
-									)
+									false, array("HIDE_ICONS" => "Y")
 								);?>
 							</div>
 						</div>

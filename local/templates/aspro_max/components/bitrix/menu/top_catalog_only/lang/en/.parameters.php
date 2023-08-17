@@ -1,3 +1,2 @@
-<?
-$MESS ['COUNT_ITEM'] = "Сколько пунктов выводить";
-?>
+<?php
+$MESS["COUNT_ITEM"] = "How many points to display";

@@ -1,4 +1,3 @@
-<?
-$MESS['S_MORE_ITEMS'] = "+ &nbsp;ЕЩЕ";
-$MESS['CT_BST_SEARCH_BUTTON'] = "Найти";
-?>
+<?php
+$MESS["CT_BST_SEARCH_BUTTON"] = "Search";
+$MESS["S_MORE_ITEMS"] = "+ &nbspMORE";

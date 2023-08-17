@@ -4,7 +4,7 @@ $arSearchPageParams = array(
 	"NO_WORD_LOGIC" => $arParams["NO_WORD_LOGIC"],
 	"USE_LANGUAGE_GUESS" => $arParams["USE_LANGUAGE_GUESS"],
 	"CHECK_DATES" => $arParams["CHECK_DATES"],
-	"USE_TITLE_RANK" => "N",
+	"USE_TITLE_RANK" => ($arParams['SHOW_SORT_RANK_BUTTON'] === 'Y' ? 'Y' : 'N'),
 	"DEFAULT_SORT" => "rank",
 	"FILTER_NAME" => "",
 	"SHOW_WHERE" => "N",
@@ -21,4 +21,19 @@ $arSearchPageParams = array(
 
 $arSearchPageParams = array_merge($arSearchPageParams, $arSearchPageFilter);
 
-$arElements = $APPLICATION->IncludeComponent("bitrix:search.page", "", $arSearchPageParams, $component);
+
+
+if($_REQUEST['q']=="rasprodazha"){
+	$res = AllProductDiscount::getFull(
+		array("ACTIVE" => "Y", "SITE_ID" => SITE_ID),
+		array()
+	);
+	foreach($res['IDS'] as $ID) {
+		$sale_id[] = $ID;
+	}
+	//$GLOBALS['arrFilter'] = array("ID"=>$sale_id);
+	$arElements = $sale_id;
+} else {
+	$arElements = $APPLICATION->IncludeComponent("bitrix:search.page", "", $arSearchPageParams, $component);
+}
+

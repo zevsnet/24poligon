@@ -215,5 +215,14 @@
 			<?endif;?>
 		<?endif;?>
 
+		<?//VK?>
+		<?if($optionCode === "VK"):?>
+			<?global $bShowVK, $bVKIndexClass;?>
+			<?if($bShowVK):?>
+				<div class="drag-block container <?=$optionCode?> <?=$bVKIndexClass;?> js-load-block loader_circle" data-class="<?=$subtype?>_drag" data-order="<?=++$key;?>" data-file="<?=SITE_DIR;?>include/mainpage/components/<?=$subtype;?>/<?=$strTemplateName;?>.php">
+					<?=CMax::ShowPageType('mainpage', $subtype, $strTemplateName);?>
+				</div>
+			<?endif;?>
+		<?endif;?>
 	<?endforeach;?>
 <?endif;?>

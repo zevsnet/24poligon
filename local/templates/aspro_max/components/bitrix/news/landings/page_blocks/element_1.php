@@ -16,9 +16,13 @@
 			$arParams["FILTER_NAME"] = "arrFilter";
 		}*/
 
-		$arParams["FILTER_NAME"] = "arRegionLink";
+		if(CMax::GetFrontParametrValue('REGIONALITY_FILTER_ITEM') == 'Y' && CMax::GetFrontParametrValue('REGIONALITY_FILTER_CATALOG') == 'Y'){
+			$arParams["FILTER_NAME"] = "arRegionLink";
+		} else {
+			$arParams["FILTER_NAME"] = "arLandingProducts";
+		}
 
-		if(!in_array($arParams["LIST_OFFERS_FIELD_CODE"], "DETAIL_PAGE_URL")){
+		if(!in_array("DETAIL_PAGE_URL", $arParams["LIST_OFFERS_FIELD_CODE"])){
 			$arParams["LIST_OFFERS_FIELD_CODE"][] = "DETAIL_PAGE_URL";
 		}
 
@@ -190,7 +194,7 @@
 
 
 
-			<div class="main-catalog-wrapper catalog_in_content">
+			<div class="main-catalog-wrapper catalog_in_content<?=($arTheme["LAZYLOAD_BLOCK_CATALOG"]["VALUE"] === "Y" ? ' with-load-block' : '')?>">
 				<div class="section-content-wrapper <?=(!$bHideLeftBlock ? 'with-leftblock' : '');?> js-load-wrapper">
 
 		<?$html=ob_get_clean();?>
@@ -358,6 +362,7 @@
 										"IBINHERIT_TEMPLATES" => $arElement ? $arIBInheritTemplates : array(),
 									);?>
 									<?//var_dump($GLOBALS[$arParams["FILTER_NAME"]])?>
+									<?\Aspro\Functions\CAsproMax::replacePropsParams($arParams);?>
 									<div class=" <?=$display;?> js_wrapper_items" data-params='<?=str_replace('\'', '"', CUtil::PhpToJSObject($arTransferParams, false))?>'>
 										<?$APPLICATION->IncludeComponent(
 											"bitrix:catalog.section",
@@ -430,6 +435,7 @@
 												"HIDE_NOT_AVAILABLE" => $arParams["HIDE_NOT_AVAILABLE"],
 												'HIDE_NOT_AVAILABLE_OFFERS' => $arParams["HIDE_NOT_AVAILABLE_OFFERS"],
 												"SET_TITLE" => "N",
+												"SET_SKU_TITLE" => (($arTheme["TYPE_SKU"]["VALUE"] == "TYPE_1" && $arTheme["CHANGE_TITLE_ITEM_LIST"]["VALUE"] == "Y") ? "Y" : ""),
 												"SET_STATUS_404" => "N",
 												"SHOW_404" => "N",
 												"MESSAGE_404" => "",
@@ -491,8 +497,11 @@
 												"ADD_DETAIL_TO_SLIDER" => $arParams["ADD_DETAIL_TO_SLIDER"],
 												"SHOW_BIG_BLOCK" => 'N',
 												'MAX_SCU_COUNT_VIEW' => $arTheme['MAX_SCU_COUNT_VIEW']['VALUE'],
-												"SET_SKU_TITLE" => "Y",
+												//"SET_SKU_TITLE" => "Y",
 												"IBINHERIT_TEMPLATES" => $arElement ? $arIBInheritTemplates : array(),
+												"SHOW_PROPS_TABLE" => strtolower(CMax::GetFrontParametrValue('SHOW_TABLE_PROPS')),
+												"SHOW_OFFER_TREE_IN_TABLE" => CMax::GetFrontParametrValue('SHOW_OFFER_TREE_IN_TABLE'),
+												"COMPATIBLE_MODE" => "Y",
 											), $component, array("HIDE_ICONS" => $isAjax)
 										);?>
 									</div>
@@ -537,3 +546,10 @@ $langing_seo_title = ($arElement["IPROPERTY_VALUES"]["ELEMENT_META_TITLE"] != ""
 $APPLICATION->SetTitle($langing_seo_h1);
 $APPLICATION->SetPageProperty("title", $langing_seo_title);
 ?>
+
+
+<?$tablePropsView = strtolower(CMax::GetFrontParametrValue('SHOW_TABLE_PROPS'));?>
+<?if ( $tablePropsView === "cols" ):?>
+    <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/tableScroller.js');?>
+	<?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/blocks/scroller.css');?>
+<?endif;?>

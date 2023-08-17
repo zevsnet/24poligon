@@ -11,8 +11,15 @@ if($bAjaxMode)
 <?if((isset($arParams["IBLOCK_ID"]) && $arParams["IBLOCK_ID"]) || $bAjaxMode):?>
 	<?
 	$arIncludeParams = ($bAjaxMode ? $_POST["AJAX_PARAMS"] : $arParamsTmp);
-	$arGlobalFilter = ($bAjaxMode ? unserialize(urldecode($_POST["GLOBAL_FILTER"])) : ($_GET['GLOBAL_FILTER'] ? unserialize(urldecode($_GET['GLOBAL_FILTER'])) : array()));
-	$arComponentParams = unserialize(urldecode($arIncludeParams));
+	$arGlobalFilter = ($bAjaxMode ? $_POST["GLOBAL_FILTER"] : ($_GET['GLOBAL_FILTER'] ?? '' ));
+	$signer = new \Bitrix\Main\Component\ParameterSigner();
+	try {
+		$componentName = CMax::partnerName . ':tabs.' . CMax::solutionName;
+		$arComponentParams = $signer->unsignParameters($componentName, $arIncludeParams);
+		$arGlobalFilter = strlen($arGlobalFilter) ? $signer->unsignParameters($componentName, $arGlobalFilter) : [];
+	} catch (\Bitrix\Main\Security\Sign\BadSignatureException $e) {
+		die($e->getMessage());
+	}
 
 	$_SERVER['REQUEST_URI'] = SITE_DIR;
 
@@ -37,8 +44,8 @@ if($bAjaxMode)
 	if(is_array($arGlobalFilter) && $arGlobalFilter)
 		$GLOBALS[$arComponentParams["FILTER_NAME"]] = $arGlobalFilter;
 
-	if($bAjaxMode && $_POST["FILTER_HIT_PROP"])
-		$arComponentParams["FILTER_HIT_PROP"] = $_POST["FILTER_HIT_PROP"];
+	if(/*$bAjaxMode &&*/ $_REQUEST["FILTER_HIT_PROP"])
+		$arComponentParams["FILTER_HIT_PROP"] = $_REQUEST["FILTER_HIT_PROP"];
 
 	/* hide compare link from module options */
 	if(CMax::GetFrontParametrValue('CATALOG_COMPARE') == 'N')
@@ -49,6 +56,7 @@ if($bAjaxMode)
 	{
 		$arComponentParams['AJAX_REQUEST'] = 'Y';
 	}
+
 	?>
 	
 	<?$APPLICATION->IncludeComponent(

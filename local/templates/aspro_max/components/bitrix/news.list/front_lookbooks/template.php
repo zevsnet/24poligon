@@ -75,7 +75,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-xxs-12">
-                                                            <div class="scrollbars scroll-deferred to-text lookbook--mh-600">
+                                                            <div class="scrollbars scrollblock to-text lookbook--mh-600 scrollblock--ob-auto">
                                                                 <div class="lookbook__info lookbook--pl-49 lookbook--pt-49 lookbook--pb-49 lookbook--pr-49">
                                                                     <div class="lookbook__info-wrapper">
                                                                         <?if ($arSection['SECTION_PATH']):?>
@@ -125,7 +125,7 @@
                                                 </div>
                                                 <?if ($arItem['PROPERTIES']['LINK_GOODS']['VALUE'] && $arItem['PROPERTIES']['LINK_GOODS']['LINK_IBLOCK_ID']):?>
                                                     <div class="col-md-3 col-xs-5 lookbook--bl-1 col-xxs-12">
-                                                        <div class="scrollbars scroll-deferred lookbook--mh-600">
+                                                        <div class="scrollbars scrollblock lookbook--mh-600 scrollblock--ob-auto">
                                                             <div class="lookbook__items">
                                                                 <?$GLOBALS[$arParams['FILTER_NAME']]['ID'] = $arItem['PROPERTIES']['LINK_GOODS']['VALUE']?>
                                                                 <?$APPLICATION->IncludeComponent(
@@ -142,6 +142,8 @@
                                                                         'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
                                                                         'FILTER_ELEMENT' => $arItem['ID'],
                                                                         'SHOW_ALL_WO_SECTION' => 'Y',
+                                                                        'USE_PRICE_COUNT' => 'Y',
+                                                                        'COMPATIBLE_MODE' => 'Y',
                                                                     ],
                                                                     false, array("HIDE_ICONS"=>"Y")
                                                                 );?>

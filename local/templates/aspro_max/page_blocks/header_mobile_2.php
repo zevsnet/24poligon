@@ -28,4 +28,5 @@
 			</div>
 		</div>
 	</div>
+	<?=\Aspro\Functions\CAsproMax::showProgressBarBlock();?>
 </div>

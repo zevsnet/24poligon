@@ -1,5 +1,7 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
 <?
+use CMax as Solution;
+
 global $USER;
 $bSuccessConfigSave = false;
 
@@ -121,16 +123,19 @@ if($USER->IsAdmin() && (isset($_POST['SAVE_OPTIONS']) && $_POST['SAVE_OPTIONS'] 
 									}
 									elseif(strpos($key2, 'SORT_ORDER_') !== false)
 										unset($arSubParams[$key2]);
-									elseif(strpos($key2, 'fon') !== false)
-									{
-										\Bitrix\Main\Config\Option::set('aspro.max', $key2, $value, SITE_ID);
-									}
+									elseif(strpos($key, 'fon') !== false)
+										\Bitrix\Main\Config\Option::set('aspro.max', $key."_".$key2, $value, SITE_ID);
 								}
 							}
 
-							if($arOption['LIST'][$key] && $arOption['SUB_PARAMS'][$key])
-							{
-								\Bitrix\Main\Config\Option::set('aspro.max', "NESTED_OPTIONS_".$optionCode."_".$key, serialize($arSubParams), SITE_ID);
+							if($arSubParams) {
+								$nestedOptionValue = $arSubParams;
+								if (is_array($arSubParams)) {
+									$arNestedParams = Solution::unserialize(\Bitrix\Main\Config\Option::get('aspro.max', "NESTED_OPTIONS_".$optionCode."_".$key, serialize([]), SITE_ID));
+									$nestedOptionValue = serialize(array_merge($arNestedParams, $arSubParams));
+								}
+								
+								\Bitrix\Main\Config\Option::set('aspro.max', "NESTED_OPTIONS_".$optionCode."_".$key, $nestedOptionValue, SITE_ID);
 							}
 
 							//save teplate index
@@ -141,9 +146,13 @@ if($USER->IsAdmin() && (isset($_POST['SAVE_OPTIONS']) && $_POST['SAVE_OPTIONS'] 
 									\Bitrix\Main\Config\Option::set('aspro.max', $key."_".$key2, $value, SITE_ID);
 								}
 							}
+
 							//sort order prop for main page
 							$param = 'SORT_ORDER_'.$optionCode.'_'.$key;
-							\Bitrix\Main\Config\Option::set('aspro.max', $param, $_SESSION['THEME'][SITE_ID][$param], SITE_ID);
+							$optionValue = \Bitrix\Main\Config\Option::get('aspro.max', $param, '', SITE_ID);
+							$sessionValue = $_SESSION['THEME'][SITE_ID][$param];
+
+							\Bitrix\Main\Config\Option::set('aspro.max', $param, ($sessionValue ?: $optionValue), SITE_ID);
 						}
 					}
 				}

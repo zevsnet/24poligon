@@ -1,0 +1,19 @@
+/* 15px/24px Montserrat (Default) */
+html{font-size: 15px;}
+body,body div.bx-yandex-map, body .ymaps-map .ymaps-b-balloon, .fancybox-title{ font: 15px/25px "Montserrat", Arial, sans-serif; }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6,.popup-window{font-family:"Montserrat", Arial, sans-serif;}
+body .breadcrumb > li:after{margin-top:-3px;}
+
+body .item-views.type_2_within.within.services-items .item .toogle>span:before{top:3px;}
+
+/*.basket_order .items>.head .btn{padding-top:7px;}
+.item-views .item .btn.btn-xs{padding-top:8px;}*/
+
+body .contacts_list .contacts-stores .item .show_on_map>span svg,
+body .contacts-stores .item .top-wrap .show_on_map>span svg{top:1px;}
+
+/*basket*/
+body .basket-coupon-block-field-description, body .basket-item-info-name, body .basket-item-info-name-link, body .basket-coupon-block-total-price-current,
+body #basket-root *, #content #bx-soa-order-form *, .sale_order_full_table .sale-paysystem-wrapper *{font-family: "Montserrat", Arial, sans-serif !important;}
+
+.viewed_product_block .viewed-wrapper .block-item__title {height: 53px;}

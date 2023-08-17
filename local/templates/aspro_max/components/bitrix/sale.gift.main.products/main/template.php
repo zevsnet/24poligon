@@ -15,7 +15,7 @@ $signedParameters = $signer->sign(
 $signedTemplate = $signer->sign($arResult['RCM_TEMPLATE'], 'bx.sale.gift.main.products');
 
 ?>
-<div class="ordered-block gifts 22">
+<div class="ordered-block gifts ">
 	<div class="bx_item_list_you_looked_horizontal detail">
 		<div id="<?= $injectId ?>" class="bx_sale_gift_main_products common_product wrapper_block">
 			<?
@@ -128,6 +128,8 @@ $signedTemplate = $signer->sign($arResult['RCM_TEMPLATE'], 'bx.sale.gift.main.pr
 						"SHOW_ALL_WO_SECTION" => "Y",
 						"PAGER_BASE_LINK" => "/bitrix/components/bitrix/sale.gift.main.products/ajax.php",
 						"SHOW_BIG_BLOCK" => 'N',
+						"SHOW_GALLERY" => $arParams["SHOW_GALLERY"],
+						"COMPATIBLE_MODE" => "Y",
 					),
 					$component,
 					array('HIDE_ICONS' => 'Y')

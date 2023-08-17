@@ -19,6 +19,8 @@ class Events
         // зарегистрируем функцию как обработчик двух событий
         AddEventHandler('form', 'onAfterResultAdd', [__CLASS__, 'my_onAfterResultAddUpdate']);
         AddEventHandler('form', 'onAfterResultUpdate', [__CLASS__, 'my_onAfterResultAddUpdate']);
+        AddEventHandler('main', 'OnEpilog', Array(__CLASS__, "OnEpilog"));
+
     }
 
     function my_onAfterResultAddUpdate($WEB_FORM_ID, $RESULT_ID)
@@ -85,4 +87,25 @@ class Events
         }
     }
 
+    public function OnEpilog()
+    {
+        global $APPLICATION;
+        
+        if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'http' || empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            if (strpos($_SERVER['REQUEST_URI'], '/bitrix/admin/1c_exchange') !== false) {
+                //Ненужно делать редиректа для 1с
+            } else {
+
+                header("HTTP/1.1 301 Moved Permanently");
+                header('Location: https://' . str_replace([':80', ':8080'], '',$_SERVER['HTTP_HOST']) . $_SERVER['REQUEST_URI']);
+                exit();
+            }
+
+        }
+        if(strpos($_SERVER['SERVER_NAME'],'www.')!==false){
+            header("HTTP/1.1 301 Moved Permanently");
+            header('Location: https://' . str_replace(['www.', ':80',':8080'], '',$_SERVER['HTTP_HOST']) . $_SERVER['REQUEST_URI']);
+            exit();
+        }
+    }
 }

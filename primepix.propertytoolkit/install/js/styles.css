@@ -1,0 +1,205 @@
+.list-container {
+	position: relative;
+}
+.select-form {
+	position: relative;
+	margin-bottom: 20px;
+	height: 240px;
+}
+.select-form table {
+	width: 100%;
+}
+.select-form table tr td {
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.table-wrap {
+	padding-bottom: 75px;
+}
+.props-table tbody tr:nth-child(even) {
+	background: #ffffff;
+}
+.props-table tbody tr:nth-child(odd) {
+	background: #f5f9f9;
+}
+.props-table tbody tr td {
+	padding: 10px 5px 10px 5px;
+}
+.props-table tbody tr .products .product {
+	display: inline-block;
+}
+.props-table tbody tr .products textarea {
+	width: 200px;
+	height: 75px;
+}
+
+.create-prop-form input.name, .create-prop-form input.code {
+	border-radius: 3px;
+	border: 1px solid grey;
+	height: 20px;
+}
+
+
+.create-prop-form .form-message {
+	color: red;
+}
+
+.props-table tbody tr .products textarea.error,.create-prop-form input.name.error, .create-prop-form input.code.error {
+	border: 1px solid red;
+}
+.props-table .selected {
+	background: lightblue !important;
+}
+.props-table .edit-td,
+.props-table .radio-td,
+.props-table .check-td,
+.props-table input[type="radio"],
+.props-table input[type="checkbox"] {
+	cursor: pointer;
+}
+.props-table .radio-td,
+.props-table .check-td {
+	width: 20px;
+}
+.props-table thead tr td {
+	background-image: none !important;
+}
+.props-table thead tr td.sort-header {
+	background-image: url(bg.gif) !important;
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+	padding-right: 20px;
+}
+.props-table thead tr td.sort-up {
+	background-image: url(asc.gif) !important;
+}
+.props-table thead tr td.sort-down {
+	background-image: url(desc.gif) !important;
+}
+.props-table thead tr td.check-header .adm-list-table-cell-inner {
+	padding: 0 !important;
+}
+.props-table thead tr td.check-header .adm-list-table-cell-inner input {
+	margin-left: 8px;
+}
+.props-table .edit-input {
+	border-radius: 3px;
+	border: 1px solid grey;
+	height: 23px;
+	display: none;
+	width: 90%;
+}
+.props-table .edit-input.error {
+	border: 1px solid red;
+}
+.props-table .convert {
+	min-width: 100px;
+}
+.props-table .convert .convert-link {
+	margin-top: 7px;
+	margin-bottom: 7px;
+	display: block;
+}
+.props-table .hint, .footer-panel .hint {
+	display: none;
+}
+
+.footer-panel {
+	position: absolute;
+	overflow-y: hidden; 
+	padding-bottom: 10px;
+	padding-top: 10px;
+	width: 100%;
+	background: #e1eaeb;
+}
+.footer-panel .controls-wrap {
+	width: 95%;
+}
+.footer-panel .loader-wrap .page-loader {
+	width: 5%
+}
+.footer-panel .controls-wrap {
+	float:left;
+}
+.footer-panel .loader-wrap .page-loader {
+	float: right;
+}
+.footer-panel .controls-wrap .error {
+	border: 1px solid red !important;
+}
+.footer-panel .controls-wrap .disabled {
+	opacity: 0.7;
+	pointer-events: none;
+}
+.footer-panel .controls-wrap button,
+.footer-panel .controls-wrap input[type="text"] {
+	margin-left: 10px !important;
+	margin-bottom: 10px !important;
+	font-size: 12px !important;
+	outline: none;
+}
+.footer-panel .controls-wrap input[type="text"] {
+	height: 28px !important;
+}
+.footer-panel .controls-wrap .cancel-action {
+	display: none;
+}
+.footer-panel .loader-wrap .page-loader, .cpf-loader {
+	display: none;
+	float: right;
+	margin-left: 10px;
+	margin-top: -2px;
+	width: 40px;
+	height: 40px;
+	background: url(ajax-loader.gif) 0 0 no-repeat;
+}
+.cpf-loader {
+	float: right;
+}
+
+.message-box {
+	position: fixed;
+	display: none;
+	bottom: 100px;
+	right: 30px;
+	background: #ffffff;
+	padding: 20px;
+	border: 1px solid grey;
+	border-radius: 3px;
+	font-size: 13px;
+	text-align: left;
+	z-index: 999;
+}
+.hint-container {
+	display: none;
+	position: absolute;
+	width: 300px;
+	border: 1px solid grey;
+	border-radius: 3px;
+	padding: 10px;
+	background: #fff;
+	z-index: 999;
+}
+.merge-link {
+	display: none;
+	position: absolute;
+	font-size: 12px;
+	background: #fff;
+	border: 1px solid grey;
+	border-radius: 3px;
+	padding: 10px;
+}
+
+.create-prop-form input[type="text"] {
+	margin-left: 10px;
+}
+
+.bx-core-adm-dialog-buttons {
+	height: 35px;
+}
+
+.bx-core-adm-dialog-buttons input {
+	float: right;
+}

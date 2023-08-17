@@ -47,16 +47,16 @@ global $arTheme;
 							</div>
 						</div>
 						<div class="social-block col-md-6">
-							<?$APPLICATION->IncludeComponent(
-								"aspro:social.info.max",
-								".default",
+							<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 								array(
-									"CACHE_TYPE" => "A",
-									"CACHE_TIME" => "3600000",
-									"CACHE_GROUPS" => "N",
-									"COMPONENT_TEMPLATE" => ".default"
+									"COMPONENT_TEMPLATE" => ".default",
+									"PATH" => SITE_DIR."include/footer/social.info.php",
+									"AREA_FILE_SHOW" => "file",
+									"AREA_FILE_SUFFIX" => "",
+									"AREA_FILE_RECURSIVE" => "Y",
+									"EDIT_TEMPLATE" => "include_area.php"
 								),
-								false
+								false, array("HIDE_ICONS" => "Y")
 							);?>
 							<div class="pays">
 								<?$APPLICATION->IncludeFile(SITE_DIR."include/footer/copy/pay_system_icons.php", Array(), Array(
@@ -93,7 +93,10 @@ global $arTheme;
 								);?>
 							</div>
 						</div>
-						<div id="bx-composite-banner"></div>
+						<div class="bx-composite-banner-wrap">
+							<div id="bx-composite-banner"></div>
+						</div>
+						<?=\Aspro\Functions\CAsproMax::showDeveloperBlock();?>
 					</div>
 				</div>
 			</div>

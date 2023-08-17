@@ -6,8 +6,12 @@ if(isset($_GET['iblock_id']) && $_GET['iblock_id'])
 	global $APPLICATION, $arRegion, $arTheme;
 	$arRegion = CMaxRegionality::getCurrentRegion();
 	$arTheme = CMax::GetFrontParametrsValues(SITE_ID);
-	$url = htmlspecialcharsbx(urldecode($_GET['item_href']));
+	
+	$context = \Bitrix\Main\Application::getInstance()->getContext();
+	$request = $context->getRequest();
 
+	$href = $request['item_href'] ?? $result['DETAIL_PAGE_URL']; // from fastViewNav.php
+	$url = str_replace('&amp;', '&', $href );
 
 	\Bitrix\Main\Loader::includeModule('sale');
 	\Bitrix\Main\Loader::includeModule('currency');
@@ -23,7 +27,7 @@ if(isset($_GET['iblock_id']) && $_GET['iblock_id'])
 		}
 		$('.fast_view_frame').addClass('loading_block');
 		BX.ajax({
-			url: '<?=$url;?>'+add_url,
+			url: decodeURIComponent('<?=$url?>') + add_url,
 			method: 'POST',
 			data: BX.ajax.prepareData({'FAST_VIEW':'Y'}),
 			dataType: 'html',
@@ -47,16 +51,20 @@ if(isset($_GET['iblock_id']) && $_GET['iblock_id'])
 
 				$('.fast_view_frame').removeClass('loading_block');
 
-				initCountdown();
 				setBasketStatusBtn();
-				// InitFlexSlider();
 				InitZoomPict($('#fast_view_item .zoom_picture'));
 
 				InitLazyLoad();
-				// InitOwlSlider();
-				InitFancyBox();
-				InitFancyBoxVideo();
+				BX.loadScript(arAsproOptions.SITE_TEMPLATE_PATH + '/js/jquery.fancybox.min.js', function(event){
+					BX.loadCSS(arAsproOptions.SITE_TEMPLATE_PATH + '/css/jquery.fancybox.min.css');
+					InitFancyBox();
+					InitFancyBoxVideo();
+				})
 
+				if (typeof showOutOfProductionBlock !== 'undefined') {
+					showOutOfProductionBlock();
+				}
+				
 				// init calculate delivery with preview
 				if($('#fast_view_item .fastview-product.noffer').length){
 					initCalculatePreview();
@@ -66,8 +74,6 @@ if(isset($_GET['iblock_id']) && $_GET['iblock_id'])
 					showTotalSummItem('Y');
 				}, 100);
 
-				InitScrollBar($('.fastview-product__info'));
-
 				$('.popup .animate-load').click(function(){
 					if(!jQuery.browser.mobile)
 						$(this).parent().addClass('loadings');
@@ -76,8 +82,6 @@ if(isset($_GET['iblock_id']) && $_GET['iblock_id'])
 				$('#fast_view_item .counter_block input[type=text]').numeric({allow:"."});
 
 				$('.navigation-wrapper-fast-view .fast-view-nav').removeClass('noAjax');
-
-				$(window).scroll();
 			}
 		})
 		$(document).on('click', '.jqmClose', function(e){

@@ -1,0 +1,11 @@
+<table class="adm-list-table props-table">
+	<thead>
+		<tr class="adm-list-table-header">
+			<?foreach ($viewData as $arHeader):?>
+				<td class="adm-list-table-cell <?=$arHeader['NO_SORT']?> <?=$arHeader['DEFAULT']?>">
+					<div class="adm-list-table-cell-inner"><?=$arHeader['NAME']?></div>
+				</td>
+			<?endforeach?>
+		</tr>
+	</thead>
+

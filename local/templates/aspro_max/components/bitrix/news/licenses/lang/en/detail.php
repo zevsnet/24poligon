@@ -1,4 +1,3 @@
-<?
-$MESS['ELEMENT_NOTFOUND'] = 'Элемент не найден';
-$MESS['BACK_LINK'] = 'Список партнеров';
-?>
+<?php
+$MESS["BACK_LINK"] = 'List of licenses';
+$MESS["ELEMENT_NOTFOUND"] = 'Element not found';

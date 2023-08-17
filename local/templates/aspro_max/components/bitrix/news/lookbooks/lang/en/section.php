@@ -1,4 +1,3 @@
-<?
-$MESS['SECTION_EMPTY'] = "Нет коллекций";
-$MESS['SECTION_NOTFOUND'] = "Раздел не найден";
-?>
+<?php
+$MESS["SECTION_EMPTY"] = "No collections";
+$MESS["SECTION_NOTFOUND"] = "Section not found";

@@ -1,0 +1,65 @@
+body .iti {
+    display: block;
+}
+.iti .iti__country-list {
+    background: var(--card_bg_black);
+    border-color:var(--stroke_black);
+    color: var(--white_text_black);
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    z-index: 101;
+    max-height: 180px;
+    font-size: 0.9333rem;
+}
+.iti .iti__country-list::-webkit-scrollbar {
+    width: 8px;
+}
+.iti .iti__country-list::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #999;
+    border: 2px solid #fff;
+    border-color: var(--card_bg_black);
+}
+.iti .iti__country-list::-webkit-scrollbar-track {
+    border-radius: 8px;
+}
+.iti__country-list .iti__country {
+    margin: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.iti__country.iti__highlight {
+    background-color: var(--line_bg_black);
+}
+.iti__country-list .iti__divider {
+    margin-top: 0px;
+    margin-left: 0px;
+    border-bottom-color:var(--stroke_black);
+}
+.iti__country-list .iti__country:before,
+.iti__country-list .iti__divider:before {
+    display: none;
+}
+
+.iti.iti--allow-dropdown .iti__flag-container ~ input[type="tel"],
+.iti.iti--allow-dropdown .iti__flag-container ~ input[type="text"] {
+    padding-left: 60px;
+}
+.iti:not(.iti--allow-dropdown) .iti__flag-container ~ input[type="tel"],
+.iti:not(.iti--allow-dropdown) .iti__flag-container ~ input[type="text"] {
+    padding-right: 40px;
+}
+.iti .iti__selected-flag {
+    padding: 0 10px 0 14px;
+    background: var(--darkerblack_bg_black);
+}
+.iti.iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    background-color: var(--card_bg_black);
+}
+.iti .iti__arrow {
+    border-top-color: var(--white_text_black);
+    border-bottom-color: var(--white_text_black);
+}
+.iti label.error {
+    top: -20px;
+}

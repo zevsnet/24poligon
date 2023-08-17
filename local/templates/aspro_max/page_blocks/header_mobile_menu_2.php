@@ -28,6 +28,24 @@
 		<?
 		// show regions
 		CMax::ShowMobileRegions();
-		?>
+		
+		// show sites
+		$arShowSites = \Aspro\Functions\CAsproMax::getShowSites();
+		$countSites = count($arShowSites);
+		if ($countSites > 1) : ?>
+			<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+				array(
+					"COMPONENT_TEMPLATE" => ".default",
+					"PATH" => SITE_DIR."/include/header_include/site.selector.php",
+					"AREA_FILE_SHOW" => "file",
+					"AREA_FILE_SUFFIX" => "",
+					"AREA_FILE_RECURSIVE" => "Y",
+					"EDIT_TEMPLATE" => "include_area.php",
+					"TEMPLATE_SITE_SELECTOR" => "mobile",
+					"SITE_LIST" => $arShowSites,
+				),
+				false, array("HIDE_ICONS" => "Y")
+			);?>
+		<?endif;?>
 	</div>
 </div>

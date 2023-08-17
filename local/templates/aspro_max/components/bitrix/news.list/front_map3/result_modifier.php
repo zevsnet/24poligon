@@ -7,21 +7,25 @@ if($arResult['ITEMS'])
 		$arResult['ITEMS'][$key]['URL'] = $arItem['DETAIL_PAGE_URL'];
 		$arResult['ITEMS'][$key]['ADDRESS'] = $arItem['NAME'].($arItem['DISPLAY_PROPERTIES']['ADDRESS']['VALUE'] ? ', '.$arItem['DISPLAY_PROPERTIES']['ADDRESS']['VALUE'] : '');
 		$arResult['ITEMS'][$key]['EMAIL'] = $arItem['DISPLAY_PROPERTIES']['EMAIL']['VALUE'];
-		$arResult['ITEMS'][$key]['PHONE'] = $arItem['DISPLAY_PROPERTIES']['PHONE']['VALUE'];
-		$arResult['ITEMS'][$key]['METRO'] = $arItem['DISPLAY_PROPERTIES']['METRO']['VALUE'];
+		$arResult['ITEMS'][$key]['PHONE'] = $arItem['DISPLAY_PROPERTIES']['PHONE']['VALUE'] ?? [];
+		$arResult['ITEMS'][$key]['METRO'] = $arItem['DISPLAY_PROPERTIES']['METRO']['VALUE'] ?? [];
 		if($arItem['DISPLAY_PROPERTIES']['METRO']['VALUE'])
 		{
 			if(!is_array($arItem['DISPLAY_PROPERTIES']['METRO']['VALUE']))
 				$arItem['DISPLAY_PROPERTIES']['METRO']['VALUE'] = array($arItem['DISPLAY_PROPERTIES']['METRO']['VALUE']);
 			
+			$arResult['ITEMS'][$key]['METRO_PLACEMARK_HTML'] = '';
 			foreach($arItem['DISPLAY_PROPERTIES']['METRO']['VALUE'] as $metro){
 				$arResult['ITEMS'][$key]['METRO_PLACEMARK_HTML'] .= '<div class="metro"><i></i>'.$metro.'</div>';
 			}
 		}
-		if($arItem['DISPLAY_PROPERTIES']['SCHEDULE']['VALUE']['TYPE'] == 'html')
+		if(
+			isset($arItem['DISPLAY_PROPERTIES']['SCHEDULE']['VALUE']['TYPE']) &&
+			$arItem['DISPLAY_PROPERTIES']['SCHEDULE']['VALUE']['TYPE'] == 'html'
+		)
 			$arResult['ITEMS'][$key]['SCHEDULE'] = htmlspecialchars_decode($arItem['DISPLAY_PROPERTIES']['SCHEDULE']['~VALUE']['TEXT']);
 		else
-			$arResult['ITEMS'][$key]['SCHEDULE'] = nl2br($arItem['DISPLAY_PROPERTIES']['SCHEDULE']['~VALUE']['TEXT']);
+			$arResult['ITEMS'][$key]['SCHEDULE'] = nl2br($arItem['DISPLAY_PROPERTIES']['SCHEDULE']['~VALUE']['TEXT'] ?? '');
 
 
 

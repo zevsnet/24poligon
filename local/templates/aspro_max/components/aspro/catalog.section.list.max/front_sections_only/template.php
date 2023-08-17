@@ -58,7 +58,7 @@
 							<?if(!$bShowSubsections):?>
 							<div class="<?=(!$arParams['INCLUDE_FILE'] && $arParams['SCROLL_SUBSECTIONS'] != 'Y' ? 'col-m-20 ' : '');?>col-md-3 col-sm-4 col-xs-6">
 							<?else:?>
-							<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+							<div class="item_block col-lg-4 col-md-6 col-sm-6 col-xs-12">
 							<?endif;?>
 								<div class="item bg-white box-shadow <?=($bFilled ? 'bg-fill-grey2' : 'bordered');?><?=($bShowSubsections ? ' section_item' : '');?>" id="<?=$this->GetEditAreaId($arSection['ID']);?>">
 									<?if($bShowSubsections):?>
@@ -66,10 +66,12 @@
 									<?endif;?>
 										<div class="img shine">
 											<?if($bIcons && $arSection["UF_CATALOG_ICON"]):?>
-												<?$img = CFile::ResizeImageGet($arSection["UF_CATALOG_ICON"], array( "width" => 90, "height" => 90 ), BX_RESIZE_IMAGE_EXACT, true );?>
-												<a href="<?=$arSection["SECTION_PAGE_URL"]?>" class="thumb">
-													<?if(strpos($img["src"], ".svg") !== false):?>
-														<?=file_get_contents($_SERVER["DOCUMENT_ROOT"].$img["src"]);?>
+												<?$img = CFile::ResizeImageGet($arSection["UF_CATALOG_ICON"], array( "width" => 40, "height" => 40 ), BX_RESIZE_IMAGE_EXACT, true );?>
+												<a href="<?=$arSection["SECTION_PAGE_URL"]?>" class="thumb 22">
+													<?if(strpos($img["src"], ".svg") !== false && \CMax::GetFrontParametrValue('COLORED_CATALOG_ICON') === 'Y'):?>
+														<?=\Aspro\Functions\CAsproMax::showSVG([
+															'PATH' => $img["src"]
+														]);?>
 													<?else:?>
 														<img class="lazy" data-src="<?=$img["src"]?>" src="<?=\Aspro\Functions\CAsproMax::showBlankImg($img["src"]);?>" alt="<?=($arSection["PICTURE"]["ALT"] ? $arSection["PICTURE"]["ALT"] : $arSection["NAME"])?>" title="<?=($arSection["PICTURE"]["TITLE"] ? $arSection["PICTURE"]["TITLE"] : $arSection["NAME"])?>" />
 													<?endif;?>
@@ -94,7 +96,7 @@
 									<?if($arParams['SHOW_SUBSECTIONS'] == 'Y'):?>
 										<?if($arParams['SCROLL_SUBSECTIONS'] == 'Y'):?>
 											<div class="section_info onhover">
-												<div class="section_info_inner">
+												<div class="section_info_inner scrollblock">
 													<ul>
 														<li class="name">
 															<a href="<?=$arSection['SECTION_PAGE_URL']?>" class="dark_link"><span><?=$arSection['NAME']?></span></a>
@@ -118,7 +120,8 @@
 														$iCountChilds = count($arSection['ITEMS']);
 														foreach($arSection['ITEMS'] as $key => $arItem):?>
 															<?$sectionName = ($arParams['SECTION_TYPE_TEXT'] == 'SEO' && $arItem['IPROPERTY_VALUES']['SECTION_PAGE_TITLE'] ? $arItem['IPROPERTY_VALUES']['SECTION_PAGE_TITLE'] : $arItem['NAME'])?>
-															<li class="sect <?=(++$key > $iVisibleItemsMenu ? 'collapsed' : '');?> font_xs"><a href="<?=$arItem['SECTION_PAGE_URL']?>" class=""><?=$sectionName?><? echo $arItem['ELEMENT_CNT']?'&nbsp;<span>'.$arItem['ELEMENT_CNT'].'</span>':'';?><?if($key < $iCountChilds):?><span class="separator">&mdash;</span><?endif;?></a></li>
+															<li class="sect <?=(++$key > $iVisibleItemsMenu ? 'collapsed' : '');?> font_xs"><a href="<?=$arItem['SECTION_PAGE_URL']?>" class=""><?=$sectionName?><? echo $arItem['ELEMENT_CNT']?'&nbsp;<span>'.$arItem['ELEMENT_CNT'].'</span>':'';?>
+															</a></li>
 														<?endforeach;?>
 														<?if($iCountChilds > $iVisibleItemsMenu):?>
 															<li class="sect font_xs more_items"><span class="colored with_dropdown"><?=\Bitrix\Main\Localization\Loc::getMessage('S_MORE_ITEMS');?></span></li>

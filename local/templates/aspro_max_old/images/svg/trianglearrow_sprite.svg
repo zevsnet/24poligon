@@ -1,0 +1,8 @@
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 5" id="trianglearrow_right">
+    <path id="Rectangle_4_copy" d="M203,84V79l3,2.5Z" transform="translate(-203 -79)"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3" id="trianglearrow_down">
+    <path d="M250,80h5l-2.5,3Z" transform="translate(-250 -80)"></path>
+  </symbol>
+</svg>

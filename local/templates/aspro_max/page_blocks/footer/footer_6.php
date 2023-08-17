@@ -10,33 +10,29 @@ global $arTheme;
 				<div class="row">
 					<div class="wrapper col-md-5">
 						<div class="first_bottom_menu">
-							<?$APPLICATION->IncludeComponent("bitrix:menu", "bottom2", array(
-								"ROOT_MENU_TYPE" => "top",
-								"MENU_CACHE_TYPE" => "A",
-								"MENU_CACHE_TIME" => "3600000",
-								"MENU_CACHE_USE_GROUPS" => "N",
-								"MENU_CACHE_GET_VARS" => array(
+							<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+								array(
+									"COMPONENT_TEMPLATE" => ".default",
+									"PATH" => SITE_DIR."include/footer/menu/menu_bottom5.php",
+									"AREA_FILE_SHOW" => "file",
+									"AREA_FILE_SUFFIX" => "",
+									"AREA_FILE_RECURSIVE" => "Y",
+									"EDIT_TEMPLATE" => "include_area.php"
 								),
-								"MAX_LEVEL" => "1",
-								"CHILD_MENU_TYPE" => "left",
-								"USE_EXT" => "Y",
-								"DELAY" => "N",
-								"ALLOW_MULTI_SELECT" => "Y"
-								),
-								false
+								false, array("HIDE_ICONS" => "Y")
 							);?>
 						</div>
 						<div class="social-block">
-							<?$APPLICATION->IncludeComponent(
-								"aspro:social.info.max",
-								".default",
+							<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 								array(
-									"CACHE_TYPE" => "A",
-									"CACHE_TIME" => "3600000",
-									"CACHE_GROUPS" => "N",
-									"COMPONENT_TEMPLATE" => ".default"
+									"COMPONENT_TEMPLATE" => ".default",
+									"PATH" => SITE_DIR."include/footer/social.info.php",
+									"AREA_FILE_SHOW" => "file",
+									"AREA_FILE_SUFFIX" => "",
+									"AREA_FILE_RECURSIVE" => "Y",
+									"EDIT_TEMPLATE" => "include_area.php"
 								),
-								false
+								false, array("HIDE_ICONS" => "Y")
 							);?>
 						</div>
 					</div>
@@ -91,37 +87,25 @@ global $arTheme;
 		</div>
 		<div class="footer_bottom">
 			<div class="maxwidth-theme">
-				<div class="wrapper">
-					<div class="row">
-						<div class="link-block col-md-8 col-sm-8 pull-right">
-							<div class="pull-right">
-								<div class="pays">
-									<?$APPLICATION->IncludeFile(SITE_DIR."include/footer/copy/pay_system_icons.php", Array(), Array(
-											"MODE" => "php",
-											"NAME" => "onfidentiality",
-											"TEMPLATE" => "include_area.php",
-										)
-									);?>
-								</div>
-							</div>
-							<div id="bx-composite-banner" class="pull-right"></div>
-							<div class="pull-right">
-								<?=CMax::ShowPrintLink();?>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4">
-							<div class="copy-block">
-								<div class="copy font_xs">
-									<?$APPLICATION->IncludeFile(SITE_DIR."include/footer/copy/copyright.php", Array(), Array(
-											"MODE" => "php",
-											"NAME" => "Copyright",
-											"TEMPLATE" => "include_area.php",
-										)
-									);?>
-								</div>
-							</div>
-						</div>
+				<div class="footer-bottom__items-wrapper">
+					<div class="footer-bottom__item copy font_xs">
+						<?$APPLICATION->IncludeFile(SITE_DIR."include/footer/copy/copyright.php", Array(), Array(
+								"MODE" => "php",
+								"NAME" => "Copyright",
+								"TEMPLATE" => "include_area.php",
+							)
+						);?>
 					</div>
+					<div id="bx-composite-banner"></div>
+					<div class="footer-bottom__item pays">
+						<?$APPLICATION->IncludeFile(SITE_DIR."include/footer/copy/pay_system_icons.php", Array(), Array(
+								"MODE" => "php",
+								"NAME" => "onfidentiality",
+								"TEMPLATE" => "include_area.php",
+							)
+						);?>
+					</div>
+					<?=\Aspro\Functions\CAsproMax::showDeveloperBlock('light');?>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Иконки");
+CJSCore::Init('aspro_font_awesome');
 ?>
 <div class="row">
 	<div class="col-md-6">

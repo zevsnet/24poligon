@@ -1,0 +1,11 @@
+
+.item.dark_link.shown{
+    font-weight: bold;
+}
+
+.mCustomScrollbar {
+    margin-left: 20px;
+}
+ .popup_regions .items .cities .mCustomScrollbar  .item.current span{
+     color: #c52c4a;
+}

@@ -1,17 +1,14 @@
-<?
-$MESS['ELEMENT_NOTFOUND'] = 'Элемент не найден';
-$MESS['SHARE_TEXT'] = 'Поделиться';
-$MESS['BACK_LINK'] = 'Назад к списку';
-$MESS["MAX_LINK"] = "Следующий";
-$MESS['T_DOCS'] = 'Документы';
-$MESS['T_GALLERY'] = 'Фотогалерея';
-$MESS['T_PROJECTS'] = 'Проекты';
-$MESS['T_REVIEWS'] = 'Отзывы';
-$MESS['T_STAFF1'] = 'Сотрудник';
-$MESS['T_STAFF2'] = 'Сотрудники';
-$MESS['T_GOODS'] = 'Товары';
-$MESS['T_SERVICES'] = 'Услуги';
-$MESS['T_CHARACTERISTICS'] = 'Характеристики';
-
-
-?>
+<?php
+$MESS["BACK_LINK"] = 'Back to list';
+$MESS["ELEMENT_NOTFOUND"] = 'Element not found';
+$MESS["MAX_LINK"] = "Next";
+$MESS["SHARE_TEXT"] = 'Share';
+$MESS["T_CHARACTERISTICS"] = 'Characteristics';
+$MESS["T_DOCS"] = 'Documents';
+$MESS["T_GALLERY"] = 'Photo gallery';
+$MESS["T_GOODS"] = 'Products';
+$MESS["T_PROJECTS"] = 'Projects';
+$MESS["T_REVIEWS"] = 'Reviews';
+$MESS["T_SERVICES"] = 'Services';
+$MESS["T_STAFF1"] = 'Employee';
+$MESS["T_STAFF2"] = 'Employees';

@@ -1,4 +1,3 @@
-<?
-$MESS['ELEMENT_NOTFOUND'] = 'Элемент не найден';
-$MESS['BACK_LINK'] = 'Вернуться к списку';
-?>
+<?php
+$MESS["BACK_LINK"] = 'Back to list';
+$MESS["ELEMENT_NOTFOUND"] = 'Element not found';

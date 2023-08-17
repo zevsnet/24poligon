@@ -26,4 +26,5 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
 			</div>
 		</div>
 	</div>
+	<?=\Aspro\Functions\CAsproMax::showProgressBarBlock();?>
 </div>

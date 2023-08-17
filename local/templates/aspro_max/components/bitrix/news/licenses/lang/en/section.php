@@ -1,4 +1,3 @@
-<?
-$MESS['SECTION_EMPTY'] = "Нет партнеров";
-$MESS['SECTION_NOTFOUND'] = "Раздел не найден";
-?>
+<?php
+$MESS["SECTION_EMPTY"] = "No partners";
+$MESS["SECTION_NOTFOUND"] = "Section not found";

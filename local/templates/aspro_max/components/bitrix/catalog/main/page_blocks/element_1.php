@@ -1,10 +1,12 @@
 <?$APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y")?>
 <?$APPLICATION->SetPageProperty("WITH_LEFT_BLOCK", "")?>
+
 <div class="product-view product-view--side-left">
 	<?$ElementID = $APPLICATION->IncludeComponent(
 		"bitrix:catalog.element",
 		"main",
 		Array(
+			"DISPLAY_NAME" => "Y",
 			"USE_REGION" => ($arRegion ? "Y" : "N"),
 			"USE_PREDICTION" => $arParams['USE_DETAIL_PREDICTION'],
 			"SECTION_TIZERS"=>$arSection["UF_SECTION_TIZERS"],
@@ -96,6 +98,7 @@
 			"MIN_AMOUNT" => $arParams["MIN_AMOUNT"],
 			"STORE_PATH" => $arParams["STORE_PATH"],
 			"MAIN_TITLE" => $arParams["MAIN_TITLE"],
+			"CATALOG_DETAIL_SHOW_AMOUNT_STORES" => CMax::GetFrontParametrValue('CATALOG_DETAIL_SHOW_AMOUNT_STORES'),
 			"USE_PRODUCT_QUANTITY" => $arParams["USE_PRODUCT_QUANTITY"],
 			"PRODUCT_QUANTITY_VARIABLE" => $arParams["PRODUCT_QUANTITY_VARIABLE"],
 			"BLOG_URL" => $arParams["BLOG_URL"],
@@ -116,6 +119,7 @@
 			"CURRENCY_ID" => $arParams["CURRENCY_ID"],
 			'HIDE_NOT_AVAILABLE' => $arParams["HIDE_NOT_AVAILABLE"],
 			'HIDE_NOT_AVAILABLE_OFFERS' => $arParams["HIDE_NOT_AVAILABLE_OFFERS"],
+			'HIDE_NOT_AVAILABLE_LINKED' => $arParams['HIDE_NOT_AVAILABLE'],
 			'SHOW_DEACTIVATED' => $arParams['SHOW_DEACTIVATED'],
 			"USE_ELEMENT_COUNTER" => $arParams["USE_ELEMENT_COUNTER"],
 			"STAFF_VIEW_TYPE" => ($arParams["STAFF_VIEW_TYPE"] ? $arParams["STAFF_VIEW_TYPE"] : "staff_block"),
@@ -130,6 +134,9 @@
 			"USE_RATING" => $arParams["USE_RATING"],
 			"USE_REVIEW" => $arParams["USE_REVIEW"],
 			"REVIEWS_VIEW" => $arTheme["REVIEWS_VIEW"]["VALUE"],
+			"REVIEW_COMMENT_REQUIRED" => $arParams["REVIEW_COMMENT_REQUIRED"],
+			"REVIEW_FILTER_BUTTONS" => $arParams["REVIEW_FILTER_BUTTONS"],
+			"REAL_CUSTOMER_TEXT" => $arParams["REAL_CUSTOMER_TEXT"],
 			"FORUM_ID" => $arParams["FORUM_ID"],
 			"MESSAGES_PER_PAGE" => $arParams["MESSAGES_PER_PAGE"],
 			"MAX_AMOUNT" => $arParams["MAX_AMOUNT"],
@@ -147,6 +154,7 @@
 			"OFFER_HIDE_NAME_PROPS" => $arParams["OFFER_HIDE_NAME_PROPS"],
 			"SHOW_KIT_PARTS" => $arParams["SHOW_KIT_PARTS"],
 			"SHOW_KIT_PARTS_PRICES" => $arParams["SHOW_KIT_PARTS_PRICES"],
+			"SHOW_KIT_ALL" => $arParams['SHOW_KIT_ALL'],
 			"SHOW_DISCOUNT_PERCENT_NUMBER" => $arParams["SHOW_DISCOUNT_PERCENT_NUMBER"],
 			"SHOW_DISCOUNT_PERCENT" => $arParams["SHOW_DISCOUNT_PERCENT"],
 			"SHOW_OLD_PRICE" => $arParams["SHOW_OLD_PRICE"],
@@ -210,6 +218,7 @@
 
 			"TAB_OFFERS_NAME" => ($arParams["TAB_OFFERS_NAME"] ? $arParams["TAB_OFFERS_NAME"] : GetMessage("OFFER_PRICES")),
 			"TAB_VIDEO_NAME" => ($arParams["TAB_VIDEO_NAME"] ? $arParams["TAB_VIDEO_NAME"] : GetMessage("VIDEO_TAB")),
+			"TAB_BUY_SERVICES_NAME" => ($arParams["TAB_BUY_SERVICES_NAME"] ? $arParams["TAB_BUY_SERVICES_NAME"] : GetMessage("BUY_SERVICES_TAB")),
 			"TAB_REVIEW_NAME" => ($arParams["TAB_REVIEW_NAME"] ? $arParams["TAB_REVIEW_NAME"] : GetMessage("REVIEW_TAB")),
 			"TAB_FAQ_NAME" => $arParams["TAB_FAQ_NAME"],
 			"TAB_STOCK_NAME" => ($arParams["TAB_STOCK_NAME"] ? $arParams["TAB_STOCK_NAME"] : GetMessage("STORES_TAB")),
@@ -255,24 +264,44 @@
 			"EXPRESSION_FOR_CALCULATE_DELIVERY" => $arTheme["EXPRESSION_FOR_CALCULATE_DELIVERY"]["VALUE"],
 
 			"DETAIL_BLOCKS_ORDER" => ($arParams["DETAIL_BLOCKS_ORDER"] ? $arParams["DETAIL_BLOCKS_ORDER"] : 'complect,nabor,offers,tabs,services,news,blog,staff,vacancy,goods'),
-			"DETAIL_BLOCKS_TAB_ORDER" => ($arParams["DETAIL_BLOCKS_TAB_ORDER"] ? $arParams["DETAIL_BLOCKS_TAB_ORDER"] : 'desc,char,buy,payment,delivery,video,stores,reviews,custom_tab'),
-			"DETAIL_BLOCKS_ALL_ORDER" => ($arParams["DETAIL_BLOCKS_ALL_ORDER"] ? $arParams["DETAIL_BLOCKS_ALL_ORDER"] : 'complect,nabor,offers,desc,char,buy,payment,delivery,video,stores,custom_tab,services,news,reviews,blog,staff,vacancy,goods'),
+			"DETAIL_BLOCKS_TAB_ORDER" => ($arParams["DETAIL_BLOCKS_TAB_ORDER"] ? $arParams["DETAIL_BLOCKS_TAB_ORDER"] : 'desc,char,buy,payment,delivery,video,stores,reviews,custom_tab,buy_services'),
+			"DETAIL_BLOCKS_ALL_ORDER" => ($arParams["DETAIL_BLOCKS_ALL_ORDER"] ? $arParams["DETAIL_BLOCKS_ALL_ORDER"] : 'complect,nabor,offers,desc,char,buy,payment,delivery,video,stores,custom_tab,services,news,reviews,blog,staff,vacancy,goods,buy_services'),
+			"COUNT_SERVICES_IN_ANNOUNCE" => (isset($arParams["COUNT_SERVICES_IN_ANNOUNCE"]) ? $arParams["COUNT_SERVICES_IN_ANNOUNCE"] : '2') ,
+			"SHOW_ALL_SERVICES_IN_SLIDE" => (isset($arParams["SHOW_ALL_SERVICES_IN_SLIDE"]) ? $arParams["SHOW_ALL_SERVICES_IN_SLIDE"] : 'N') ,
+			"FILTER_NAME" => $arParams["FILTER_NAME"],
+			"DISPLAY_LINKED_PAGER" => ($arParams["DETAIL_LINKED_GOODS_SLIDER"] == "Y") ? "N" : $arParams["DISPLAY_LINKED_PAGER"],
+			"DETAIL_SET_PRODUCT_TITLE" => ($arParams["DETAIL_SET_PRODUCT_TITLE"] ? $arParams["DETAIL_SET_PRODUCT_TITLE"] : GetMessage("DETAIL_SET_PRODUCT")),
+			"LIST_OFFERS_FIELD_CODE" => $arParams["LIST_OFFERS_FIELD_CODE"],
+			"LIST_OFFERS_PROPERTY_CODE" => $arParams["LIST_OFFERS_PROPERTY_CODE"],
+			"LIST_OFFERS_LIMIT" => $arParams["LIST_OFFERS_LIMIT"],
+			"MODULES_ELEMENT_COUNT" => $arParams["MODULES_ELEMENT_COUNT"],
+			"OID" => $arParams["OID"],
+			"SHOW_SKU_DESCRIPTION" => $arParams["SHOW_SKU_DESCRIPTION"],
+			"VISIBLE_PROP_WITH_OFFER" => $arParams["VISIBLE_PROP_WITH_OFFER"],
+			"MOBILE_CAROUSEL" => "Y",
+			"SECTION_ID_FOR_BIG_DATA" => $arSection['ID'], 
+			"BIGDATA_PATH_TEMPLATE" => $this->__folder.'/page_blocks/'.$sViewBigDataExtTemplate.'.php',
+			"BIGDATA_TYPE_VIEW" => $arParams['BIGDATA_TYPE_VIEW'],
+			"BIGDATA_SHOW_FROM_SECTION" => $arParams['BIGDATA_SHOW_FROM_SECTION'],
+			"BIGDATA_COUNT_BOTTOM" => $arParams["BIGDATA_COUNT_BOTTOM"],
+			"BIGDATA_SET_COUNT_BOTTOM" =>  $arParams["BIGDATA_SET_COUNT_BOTTOM"],
+			"BIGDATA_COUNT" => $arParams["BIGDATA_COUNT"],
+			"BIG_DATA_FILTER_IDS" => $arParams['BIG_DATA_FILTER_IDS'],
 		),
 		$component
 	);?>
 </div>
-<div class="left_block sticky-sidebar-custom product-side main_item_wrapper js-offers-calc <?=($arParams["SHOW_UNABLE_SKU_PROPS"] != "N" ? "show_un_props" : "unshow_un_props");?>">
+<div class="left_block sticky-sidebar-custom product-side main_item_wrapper product-main js-offers-calc <?=($arParams["SHOW_UNABLE_SKU_PROPS"] != "N" ? "show_un_props" : "unshow_un_props");?>">
 	<?$APPLICATION->ShowViewContent('PRODUCT_SIDE_INFO')?>
-
 	<?//bigdata?>
-	<?if($arParams['USE_BIG_DATA'] == 'Y'):?>
+	<?if($arParams['USE_BIG_DATA'] == 'Y' && $arParams['BIGDATA_TYPE_VIEW'] === 'RIGHT' ):?>
 		<?
 		$GLOBALS['CATALOG_CURRENT_ELEMENT_ID'] = $ElementID;
-
+		
 		$GLOBALS['arrFilterBigData']['IBLOCK_ID'] = $arParams['IBLOCK_ID'];
 		CMax::makeElementFilterInRegion($GLOBALS['arrFilterBigData']);
 		?>
-		<div class="bigdata-wrapper"><?include_once($_SERVER["DOCUMENT_ROOT"].$this->__folder.'/page_blocks/'.$sViewBigDataExtTemplate.'.php');?></div>
+		<div class="bigdata-wrapper bigdata_recommended_products_items"><?include_once($_SERVER["DOCUMENT_ROOT"].$this->__folder.'/page_blocks/'.$sViewBigDataExtTemplate.'.php');?></div>
 	<?endif;?>
 
 	<?//feedback?>

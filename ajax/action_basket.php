@@ -1,13 +1,21 @@
-<?define("STATISTIC_SKIP_ACTIVITY_CHECK", "true");?>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
-<?\Bitrix\Main\Loader::includeModule('aspro.max');?>
-<?if($_POST["CLEAR_ALL"]=="Y"){
+<?
+use Bitrix\Main\Loader;
+
+include_once('const.php');
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+
+Loader::includeModule('aspro.max');
+
+$context = \Bitrix\Main\Application::getInstance()->getContext();
+$request = $context->getRequest();
+
+if ($request["CLEAR_ALL"] === "Y") {
 	Bitrix\Main\Page\Frame::getInstance()->startDynamicWithID("basket-allitems-block");
-	\Bitrix\Main\Loader::includeModule('sale');
+	Loader::includeModule('sale');
 	
-	$type="BASKET";
-	if(isset($_POST["TYPE"]) && $_POST["TYPE"]){
-		switch ($_POST["TYPE"]) {
+	$type = "BASKET";
+	if ($request["TYPE"]) {
+		switch ($request["TYPE"]) {
 			case 2:
 				$type="DELAY";
 				break;
@@ -22,27 +30,38 @@
 				break;
 		}
 	}
-	$arItems=CMax::getBasketItems($iblockID, "ID");
-	if($_POST["TYPE"] == "all" || $_POST["CLEAR_ALL"] == "Y")
+
+	$arItems = CMax::getBasketItems($iblockID, "ID");
+	if ($request["TYPE"] == "all" || $request["CLEAR_ALL"] == "Y")
 	{
-		foreach($arItems as $key => $arItem)
+		foreach ($arItems as $key => $arItem)
 		{
-			foreach($arItem as $id)
-				CSaleBasket::Delete($id);
+			
+			foreach ($arItem as $id){
+				if ($key === 'SERVICES') {
+					CSaleBasket::Delete($id["item_id"]);
+				}
+				else {
+					CSaleBasket::Delete($id);
+				}
+			}
 		}
 	}
 	else
 	{
-		foreach($arItems[$type] as $id)
+		foreach ($arItems[$type] as $id)
 		{
 			CSaleBasket::Delete($id);
 		}
 	}
 
 	Bitrix\Main\Page\Frame::getInstance()->finishDynamicWithID("basket-allitems-block", "");
-}elseif($_POST["delete_top_item"]=="Y"){
-	\Bitrix\Main\Loader::includeModule('sale');
-	CSaleBasket::Delete($_POST["delete_top_item_id"]);
-}?>
-<?CMaxCache::ClearCacheByTag('sale_basket');
-CMax::clearBasketCounters();?>
+}
+elseif ($request["delete_top_item"]=="Y") {
+	Loader::includeModule('sale');
+	CSaleBasket::Delete($request["delete_top_item_id"]);
+}
+
+CMaxCache::ClearCacheByTag('sale_basket');
+CMax::clearBasketCounters();
+

@@ -5,12 +5,15 @@
 }?>
 <?$APPLICATION->IncludeComponent(
 	"aspro:wrapper.block.max", 
-	"front_sections_only2", 
+	"front_sections_only", 
 	array(
+		"SHAPE_PICTURES" => "FROM_THEME",
+		"SLIDER_ELEMENTS_COUNT" => "FROM_THEME",
+		"LAST_LINK_IN_SLIDER" => "FROM_THEME",
 		"IBLOCK_TYPE" => "aspro_max_catalog",
 		"IBLOCK_ID" => "180",
 		"FILTER_NAME" => "arrPopularSections",
-		"COMPONENT_TEMPLATE" => "front_sections_only2",
+		"COMPONENT_TEMPLATE" => "front_sections_only",
 		"SECTION_ID" => "",
 		"SECTION_CODE" => "",
 		"CACHE_TYPE" => "A",
@@ -26,7 +29,11 @@
 		"NO_MARGIN" => "N",
 		"FILLED" => "N",
 		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO"
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"TOP_DEPTH" => "2",
+		"SHOW_SUBSECTIONS" => "N",
+		"SCROLL_SUBSECTIONS" => "N",
+		"INCLUDE_FILE" => ""
 	),
 	false
 );?>

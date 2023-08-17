@@ -1,6 +1,13 @@
 <?
 $aMenuLinks = Array(
 	Array(
+		"Распродажа", 
+		"/catalog/?q=rasprodazha", 
+		Array(), 
+		Array("CLASS" => "rounded2 rasprod", "ICON"=> "icon_discount"),
+		"" 
+	),
+	Array(
 		"Каталог", 
 		"/catalog/", 
 		Array(), 
@@ -8,25 +15,25 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"КОЛЛЕКЦИЯ ЗИМА 2022",
-		"/catalog/kollektsiya_zima_2020/", 
+		"ЗАКАЗАТЬ НАШИВКИ", 
+		"/chevron/", 
+		Array(), 
+		Array("ICON"=>"icon_discount"), 
+		"" 
+	),
+	Array(
+		"Доставка", 
+		"/help/delivery/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"РОСГВАРДИЯ", 
-		"/catalog/rosgvardiya/", 
+		"Оплата", 
+		"/help/payment/", 
 		Array(), 
-		Array("ICON"=>"icon_discount"), 
+		Array(), 
 		"" 
-	),
-    Array(
-		"ЗАКАЗАТЬ НАШИВКИ",
-		"/chevron/",
-		Array(),
-		Array("ICON"=>"icon_discount"),
-		""
 	)
 );
 ?>

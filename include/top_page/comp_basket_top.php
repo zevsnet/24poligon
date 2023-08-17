@@ -11,7 +11,7 @@
 				<div title="<?=$arBasketPrices['BASKET_SUMM_TITLE']?>" data-type="AnDelCanBuy" class="colored_theme_hover_text basket_count small clicked empty">
 					<a href="<?=(is_array($arCounters['READY']['HREF']) ? $arCounters['READY']['HREF']['VALUE'] : $arCounters['READY']['HREF']);?>"></a>
 					<div class="wraps_icon_block basket">
-						<?=CMax::showIconSvg("down", SITE_TEMPLATE_PATH.'/images/svg/basket.svg', '', '', true, false);?>
+						<?=CMax::showSpriteIconSvg(SITE_TEMPLATE_PATH."/images/svg/header_icons_srite.svg#basket", "down ", ['WIDTH' => 20,'HEIGHT' => 16]);?>
 						<div class="count <?=($arCounters['READY']['COUNT'] ? '' : 'empty_items');?>">
 							<span class="colored_theme_bg">
 								<span class="items">
@@ -24,7 +24,7 @@
 				<div title="<?=$arBasketPrices['DELAY_SUMM_TITLE']?>" data-type="DelDelCanBuy" class="colored_theme_hover_text wish_count small clicked empty">
 					<a href="<?=(is_array($arCounters['DELAY']['HREF']) ? $arCounters['DELAY']['HREF']['VALUE']."#delayed" : $arCounters['DELAY']['HREF']);?>"></a>
 					<div class="wraps_icon_block delay">
-						<?=CMax::showIconSvg("down", SITE_TEMPLATE_PATH.'/images/svg/chosen.svg', '', '', true, false);?>
+						<?=CMax::showSpriteIconSvg(SITE_TEMPLATE_PATH."/images/svg/header_icons_srite.svg#chosen", "down ", ['WIDTH' => 20,'HEIGHT' => 16]);?>
 						<div class="count <?=($arCounters['DELAY']['COUNT'] ? '' : 'empty_items');?>">
 							<span  class="colored_theme_bg">
 								<span class="items">
@@ -38,7 +38,7 @@
 					<div title="<?=$arCounters['COMPARE']['TITLE']?>" class="colored_theme_hover_text compare_count small">
 						<a href="<?=(is_array($arCounters['COMPARE']['HREF']) ? $arCounters['COMPARE']['HREF']['VALUE'] : $arCounters['COMPARE']['HREF']);?>"></a>
 						<div id="compare_fly" class="wraps_icon_block compare <?=($arCounters['COMPARE']['COUNT'] ? '' : 'empty_block');?>">
-							<?=CMax::showIconSvg("down", SITE_TEMPLATE_PATH.'/images/svg/compare.svg', '', '', true, false);?>
+							<?=CMax::showSpriteIconSvg(SITE_TEMPLATE_PATH."/images/svg/header_icons_srite.svg#compare", "down ", ['WIDTH' => 18,'HEIGHT' => 17]);?>
 							<div class="count <?=($arCounters['COMPARE']['COUNT'] ? '' : 'empty_items');?>">
 								<span class="colored_theme_bg">
 									<span class="items">

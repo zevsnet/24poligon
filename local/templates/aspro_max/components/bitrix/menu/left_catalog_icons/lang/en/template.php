@@ -1,5 +1,4 @@
-<?
-$MESS["MENU_NAME"] = "Меню";
-$MESS["CATALOG_VIEW_MORE"] = "... Показать все";
-$MESS["CATALOG_VIEW_LESS"] = "... Свернуть";
-?>
+<?php
+$MESS["CATALOG_VIEW_LESS"] = "... Collapse";
+$MESS["CATALOG_VIEW_MORE"] = "... Show all";
+$MESS["MENU_NAME"] = "Menu";

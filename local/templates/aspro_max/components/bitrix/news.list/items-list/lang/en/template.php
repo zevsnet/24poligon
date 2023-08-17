@@ -1,4 +1,3 @@
-<?
-$MESS["CT_BNL_ELEMENT_DELETE_CONFIRM"] = "Будет удалена вся информация, связанная с этой записью. Продолжить?";
-$MESS["TO_ALL"] = 'Подробнее';
-?>
+<?php
+$MESS["CT_BNL_ELEMENT_DELETE_CONFIRM"] = "All information associated with this entry will be deleted. Proceed?												";
+$MESS["TO_ALL"] = 'More';

@@ -1,5 +1,4 @@
-<?
-$MESS['SEARCH_LABEL'] = "Поиск:";
-$MESS['SECTION_EMPTY'] = "Список элементов пуст";
-$MESS['S_ASK_QUESTION'] = "Задать вопрос";
-?>
+<?php
+$MESS["SEARCH_LABEL"] = "Search:";
+$MESS["SECTION_EMPTY"] = "List of elements is empty";
+$MESS["S_ASK_QUESTION"] = "Ask a question";

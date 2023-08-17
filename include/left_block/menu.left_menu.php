@@ -20,6 +20,7 @@
 		<?endif;?>
 	<?else:?>
 		<?$APPLICATION->IncludeComponent("bitrix:menu", "left_menu", array(
+			"CACHE_SELECTED_ITEMS" => "Y",
 			"ROOT_MENU_TYPE" => (CMax::IsPersonalPage() ? "cabinet" : "left"),
 			"MENU_CACHE_TYPE" => "A",
 			"MENU_CACHE_TIME" => "3600000",

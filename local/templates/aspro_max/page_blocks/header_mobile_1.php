@@ -36,27 +36,5 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
 			</div>
 		</div>
 	</div>
-</div>
-<div class="menu-row middle-block bg<?=strtolower($arTheme["MENU_COLOR"]["VALUE"]);?>">
-    <div class="maxwidth-theme">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="menu-only">
-                    <nav class="mega-menu sliced">
-                        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
-                            array(
-                                "COMPONENT_TEMPLATE" => ".default",
-                                "PATH" => SITE_DIR."include/menu/menu.".($arTheme["HEADER_TYPE"]["LIST"][$arTheme["HEADER_TYPE"]["VALUE"]]["ADDITIONAL_OPTIONS"]["MENU_HEADER_TYPE"]["VALUE"] == "Y" ? "top_catalog_wide" : "top")."_mobile.php",
-                                "AREA_FILE_SHOW" => "file",
-                                "AREA_FILE_SUFFIX" => "",
-                                "AREA_FILE_RECURSIVE" => "Y",
-                                "EDIT_TEMPLATE" => "include_area.php"
-                            ),
-                            false, array("HIDE_ICONS" => "Y")
-                        );?>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
+	<?=\Aspro\Functions\CAsproMax::showProgressBarBlock();?>
 </div>

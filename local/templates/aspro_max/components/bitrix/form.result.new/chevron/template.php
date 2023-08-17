@@ -6,6 +6,7 @@ use Bitrix\Main\Page\Asset;
 use SB\Site\SB_CMax;
 Asset::getInstance()->addJs("https://cdn.bootcss.com/dom-to-image/2.6.0/dom-to-image.min.js");
 Asset::getInstance()->addJs("https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.min.js");
+require_once($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/sb_site/init.php");
 
 ?>
 

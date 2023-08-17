@@ -4,6 +4,9 @@ if($arResult['ITEMS'])
 {
 	$arParams["POPUP_POSITION"] = (isset($arParams["POPUP_POSITION"]) && in_array($arParams["POPUP_POSITION"], array("left", "right"))) ? $arParams["POPUP_POSITION"] : "left";
 
+	// need to correct display prop stores_filter
+	Aspro\Max\Stores\Property::filterSmartProp($arResult['ITEMS'], $arParams);
+
 	foreach($arResult["ITEMS"] as $key => $arItem)
 	{
 		/*unset empty values*/
@@ -17,17 +20,30 @@ if($arResult['ITEMS'])
 			unset($arResult["ITEMS"][$key]);
 		/**/
 
-		if($arItem["CODE"]=="IN_STOCK")
-		{
-			sort($arResult["ITEMS"][$key]["VALUES"]);
-			if($arResult["ITEMS"][$key]["VALUES"])
-				$arResult["ITEMS"][$key]["VALUES"][0]["VALUE"]=$arItem["NAME"];
+		$arResult['ITEMS'][$key]['IS_PROP_INLINE'] = false;
+		
+		if( $arItem['PROPERTY_TYPE'] === 'L' ){
+			$iPropValuesCount = CIBlockPropertyEnum::GetList([], [
+				'PROPERTY_ID' => $arItem['ID'],
+				'IBLOCK_ID' => $arItem['IBLOCK_ID']
+			])->SelectedRowsCount();
+			if($iPropValuesCount === 1){
+				if(is_array($arResult["ITEMS"][$key]["VALUES"]))
+					sort($arResult["ITEMS"][$key]["VALUES"]);
+	
+				if($arResult["ITEMS"][$key]["VALUES"])
+					$arResult["ITEMS"][$key]["VALUES"][0]["VALUE"] = $arItem["NAME"];
+				
+				$arResult['ITEMS'][$key]['IS_PROP_INLINE'] = true;
+			}
 		}
 
 		if(isset($arItem['PRICE']) && $arItem['PRICE'])
 		{
-			if(isset($arItem['VALUES']['MIN']['HTML_VALUE']) || $arItem['VALUES']['MAX']['HTML_VALUE'])
-			{
+			if (
+				(isset($arItem['VALUES']['MIN']['HTML_VALUE']) && $arItem['VALUES']['MIN']['HTML_VALUE'])
+				&& (isset($arItem['VALUES']['MAX']['HTML_VALUE']) && $arItem['VALUES']['MAX']['HTML_VALUE'])
+			) {
 				$arResult['PRICE_SET'] = 'Y';
 				break;
 			}

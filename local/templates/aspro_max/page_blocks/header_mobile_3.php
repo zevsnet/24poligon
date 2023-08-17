@@ -16,8 +16,10 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
 					"AREA_FILE_SHOW" => "file",
 					"PATH" => SITE_DIR."include/top_page/search.title.mobile.php",
 					"EDIT_TEMPLATE" => "include_area.php",					
-				)
+				),
+				false, array("HIDE_ICONS" => "Y")
 			);?>
 		</div>
 	</div>
+	<?=\Aspro\Functions\CAsproMax::showProgressBarBlock();?>
 </div>

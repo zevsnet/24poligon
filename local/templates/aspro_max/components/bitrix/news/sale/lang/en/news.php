@@ -1,6 +1,5 @@
-<?
-$MESS['SEARCH_LABEL'] = "Поиск:";
-$MESS['SECTION_EMPTY'] = "Список элементов пуст";
-$MESS['ALL_TIME'] = "За все время";
-$MESS['S_ASK_QUESTION'] = "Задать вопрос";
-?>
+<?php
+$MESS["ALL_TIME"] = "During all this time";
+$MESS["SEARCH_LABEL"] = "Search:";
+$MESS["SECTION_EMPTY"] = "List of elements is empty";
+$MESS["S_ASK_QUESTION"] = "Ask a question";

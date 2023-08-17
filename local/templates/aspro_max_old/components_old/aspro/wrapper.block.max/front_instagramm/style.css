@@ -1,0 +1,87 @@
+.instagram_wrapper .top_block a, .instagram_wrapper .top_block > span{top:7px;}
+.instagram_wrapper .top_block .svg{margin-right: 10px;}
+
+body .wrapper1 .wrapper_inner.front .drag-block.container.INSTAGRAMM .maxwidth-theme.wide{padding: 0px;}
+body .wrapper1 .wrapper_inner.front .INSTAGRAMM .maxwidth-theme.wide .instagram_wrapper .instagram .items.margin0{padding: 0px;margin-bottom: -1px;}
+
+.INSTAGRAMM .maxwidth-theme .instagram_wrapper .instagram .row{padding-bottom: 28px;}
+.INSTAGRAMM .maxwidth-theme .instagram_wrapper .instagram .row.margin0{padding-bottom: 60px;}
+
+.wrapper1:not(.with_left_block) .drag-block.container.INSTAGRAMM .maxwidth-theme .instagram_wrapper .instagram .row{padding-bottom: 38px;}
+.wrapper1:not(.with_left_block) .drag-block.container.INSTAGRAMM .maxwidth-theme .instagram_wrapper .instagram .row.margin0{padding-bottom: 70px;}
+
+.instagram_wrapper .instagram .row.margin0 .item{margin: 0px;overflow: hidden;}
+.instagram_wrapper .instagram .row:not(.margin0) .item{padding-bottom: 32px;}
+
+.instagram_wrapper .instagram .custom .item{height: auto;min-height: auto;}
+.instagram_wrapper .instagram .margin0 .custom .item{padding: 0px;}
+
+.instagram_wrapper .instagram .row .item .item-wrapper{position:relative;}
+.instagram_wrapper .instagram .item .image{position: relative;padding: 100% 0 0;}
+.instagram_wrapper .instagram .item .image:not(.rounded3){border-radius: 0px;}
+.instagram_wrapper .instagram .row .item .wrap{opacity: 0;position: absolute;top: 0px;right: 0px;bottom: 0px;left: 0px;text-align: left;line-height: 1.5384em;z-index: 1;transition: opacity .3s ease;-moz-transition: opacity .3s ease;-ms-transition: opacity .3s ease;-o-transition: opacity .3s ease;-webkit-transition: opacity .3s ease;padding: 0px;background: white;border: 1px solid #EBEBEF;}
+.instagram_wrapper .instagram .row .item:hover .wrap{opacity: 1;}
+.instagram_wrapper .instagram .row .item .wrap .wrapper{display:block;margin: 30px;}
+
+.instagram_wrapper .instagram .row .item .wrap .date{margin-bottom: 15px;display:block;}
+.instagram_wrapper .instagram .row .item .wrap .text{display: block;text-overflow: ellipsis;overflow: hidden;}
+
+@media (min-width: 1200px) and (max-width: 1500px){
+	.content_wrapper_block.small .instagram_wrapper .instagram .row .item {width: 25%;}
+}
+@media (min-width: 992px) and (max-width: 1199px){
+	.instagram_wrapper .instagram .custom .item{width: 33.3333%;}
+}
+@media (min-width: 992px){
+	.instagram_wrapper .instagram .custom{width: 60%;}
+	.instagram_wrapper .instagram .custom:first-of-type{width: 40%;}
+	.instagram_wrapper .instagram .row:not(.margin0) .custom:first-of-type{padding-right: 16px;}
+	.instagram_wrapper .instagram .custom .item._adaptive{display: none;}
+}
+@media (max-width: 991px){
+	.instagram_wrapper .instagram .custom{width: 100%;}
+	.instagram_wrapper .instagram .custom.item{display: none;}
+	.instagram_wrapper .instagram .custom .item._adaptive{display: block;}
+}
+@media (max-width: 600px){
+	.instagram_wrapper .instagram .row:not(.margin0) .item {padding-bottom: 16px;}
+	.instagram_wrapper .instagram .row:not(.margin0):not(.mobile-slider) .item:nth-child(2n+1){padding-right:8px;}
+	.instagram_wrapper .instagram .row:not(.margin0):not(.mobile-slider) .item:nth-child(2n){padding-left:8px;}
+
+	
+	.instagram_wrapper .mobile-margin-16.mobile-slider:not(.margin0) .item {padding: 0px 16px 16px 0px;}
+	.instagram_wrapper .mobile-margin-16.mobile-slider {padding: 0px 0px 0px 16px;}
+	.mobile-slider.mobile-margin-16.margin0{margin-left: -16px!important;margin-right: -16px!important;}
+	.mobile-slider.margin0 .item-width-261{width: 281px;}
+	.mobile-slider.margin0 .item-width-261:last-of-type{width: 297px; padding-right: 16px;}
+	.instagram_wrapper .instagram .row.mobile-slider.margin0 .custom .item {padding-bottom: 16px;}
+	.mobile-slider.margin0 .custom .item-width-261:last-of-type{padding-right: 16px;}
+	.mobile-slider.margin0 .mobile-margin-16{margin-left: -16px!important;margin-right: -16px!important;}
+	.instagram_wrapper .instagram .mobile-slider .custom{width: auto;padding: 0px 0px 0px 16px;margin-bottom: -16px;}
+
+	body .wrapper1 .wrapper_inner.front .drag-block.container.INSTAGRAMM .maxwidth-theme.wide .instagram_wrapper .mobile-margin-16.mobile-slider {padding: 0px 0px 16px 16px;}
+	body .wrapper1 .wrapper_inner.front .drag-block.container.INSTAGRAMM .maxwidth-theme.wide .instagram_wrapper .mobile-slider.mobile-margin-16.margin0 {margin-left: 0!important; margin-right: 0!important;}
+	body .wrapper1 .wrapper_inner.front .drag-block.container.INSTAGRAMM .maxwidth-theme.wide .instagram_wrapper .item-views.blocks{padding-bottom: 30px;padding-top: 15px;}
+	body .wrapper1 .wrapper_inner.front .INSTAGRAMM .maxwidth-theme.wide .instagram_wrapper .instagram .items.margin0:not(.mobile-slider){padding: 0px 16px 16px 16px;}
+
+
+	.wrapper1:not(.with_left_block) .drag-block.container.INSTAGRAMM .maxwidth-theme .instagram_wrapper .instagram .row,
+	.wrapper1.with_left_block .drag-block.container.INSTAGRAMM .maxwidth-theme .instagram_wrapper .instagram .row{padding-bottom: 29px;}
+
+	.wrapper1:not(.with_left_block) .drag-block.container.INSTAGRAMM .maxwidth-theme .instagram_wrapper .instagram .row.margin0,
+	.wrapper1.with_left_block .drag-block.container.INSTAGRAMM .maxwidth-theme .instagram_wrapper .instagram .row.margin0{padding-bottom: 45px;}
+
+	.instagram_wrapper .item-views.blocks .top_block{margin-bottom: 28px;}
+	.instagram_wrapper .item-views.blocks{padding-top: 2px;}
+	.instagram_wrapper .text_before_items {line-height: 1.54em;}
+	.instagram_wrapper .with-text-block-wrapper > .row > div:first-of-type{padding-bottom: 35px;}
+	.instagram_wrapper .with-text-block-wrapper .btn{margin-top: 6px;}
+	.instagram_wrapper .with-text-block-wrapper{padding-top: 6px;}
+	#main .instagram_wrapper  .mobile-slider:before, #main .instagram_wrapper  .mobile-slider:after {display: block;}
+}
+@media (max-width: 550px){
+	.instagram_wrapper .top_block .svg{display: none;}
+	body .instagram_wrapper .instagram .row .item:hover .wrap,
+	body .instagram_wrapper .instagram .row .item .wrap{opacity: 0;}
+	body .instagram_wrapper .instagram .row .item .mCustomScrollBox{display: none;}
+}

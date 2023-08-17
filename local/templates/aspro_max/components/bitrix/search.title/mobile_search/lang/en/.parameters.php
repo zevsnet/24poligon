@@ -1,6 +1,5 @@
-<?
-$MESS["TP_BST_SHOW_INPUT"] = "Показывать форму ввода поискового запроса";
-$MESS["TP_BST_INPUT_ID"] = "ID строки ввода поискового запроса";
-$MESS["TP_BST_CONTAINER_ID"] = "ID контейнера, по ширине которого будут выводиться результаты";
-$MESS["T_SHOW_INPUT_FIXED"] = "Фиксированное меню";
-?>
+<?php
+$MESS["TP_BST_CONTAINER_ID"] = "ID of the container by the width of which the results will be displayed";
+$MESS["TP_BST_INPUT_ID"] = "Search input string ID";
+$MESS["TP_BST_SHOW_INPUT"] = "Show search query input form";
+$MESS["T_SHOW_INPUT_FIXED"] = "Fixed menu";

@@ -1,13 +1,11 @@
-<?
-$MESS ['T_IBLOCK_DESC_NEWS_DATE'] = "Выводить дату элемента";
-$MESS ['T_IBLOCK_DESC_NEWS_NAME'] = "Выводить название элемента";
-$MESS ['T_IBLOCK_DESC_NEWS_PICTURE'] = "Выводить изображение для анонса";
-$MESS ['T_IBLOCK_DESC_NEWS_TEXT'] = "Выводить текст анонса";
-
-$MESS ['TITLE_BLOCK_NAME'] = "Заголовок блока";
-$MESS ['TITLE_BLOCK_ALL_NAME'] = "Заголовок на все новости";
-$MESS ['BLOCK_NAME'] = "Новости";
-$MESS ['BLOCK_ALL_NAME'] = "Все новости";
-$MESS ['ALL_URL_NAME'] = "Ссылка на все новости";
-$MESS ['DISPLAY_DATE'] = "Отображать дату";
-?>
+<?php
+$MESS["ALL_URL_NAME"] = "Link to all news";
+$MESS["BLOCK_ALL_NAME"] = "All news";
+$MESS["BLOCK_NAME"] = "News";
+$MESS["DISPLAY_DATE"] = "Display date";
+$MESS["TITLE_BLOCK_ALL_NAME"] = "All news title";
+$MESS["TITLE_BLOCK_NAME"] = "Block title";
+$MESS["T_IBLOCK_DESC_NEWS_DATE"] = "Display element date";
+$MESS["T_IBLOCK_DESC_NEWS_NAME"] = "Display element name";
+$MESS["T_IBLOCK_DESC_NEWS_PICTURE"] = "Display announcement image";
+$MESS["T_IBLOCK_DESC_NEWS_TEXT"] = "Display announcement text";

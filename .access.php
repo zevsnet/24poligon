@@ -1,4 +1,5 @@
 <?
+$PERM["basket"]["*"]="R";
 $PERM["desktop_app"]["*"]="D";
 $PERM["online"]["*"]="R";
 $PERM["personal"]["8"]="W";

@@ -32,9 +32,13 @@ $APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");?>
 		/*if($arParams["FILTER_NAME"] == '' || !preg_match("/^[A-Za-z_][A-Za-z01-9_]*$/", $arParams["FILTER_NAME"])){
 			$arParams["FILTER_NAME"] = "arrFilter";
 		}*/
-		$arParams["FILTER_NAME"] = "arRegionLink";
-
-		if(!in_array($arParams["LIST_OFFERS_FIELD_CODE"], "DETAIL_PAGE_URL")){
+		if(CMax::GetFrontParametrValue('REGIONALITY_FILTER_ITEM') == 'Y' && CMax::GetFrontParametrValue('REGIONALITY_FILTER_CATALOG') == 'Y'){
+			$arParams["FILTER_NAME"] = "arRegionLink";
+		} else {
+			$arParams["FILTER_NAME"] = "arPartnerProducts";
+		}
+		
+		if(!in_array("DETAIL_PAGE_URL", $arParams["LIST_OFFERS_FIELD_CODE"])){
 			$arParams["LIST_OFFERS_FIELD_CODE"][] = "DETAIL_PAGE_URL";
 		}
 
@@ -312,7 +316,7 @@ $APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");?>
 
 
 			<?//$bHideLeftBlock = ($arTheme['LEFT_BLOCK_CATALOG_SECTIONS']['VALUE'] == 'N' || ($arTheme['HEADER_TYPE']['VALUE'] == 28 || $arTheme['HEADER_TYPE']['VALUE'] == 29));?>
-			<div class="main-catalog-wrapper catalog_in_content">
+			<div class="main-catalog-wrapper catalog_in_content<?=($arTheme["LAZYLOAD_BLOCK_CATALOG"]["VALUE"] === "Y" ? ' with-load-block' : '')?>">
 				<div class="section-content-wrapper <?=(!$bHideLeftBlock ? 'with-leftblock' : '');?> js-load-wrapper">
 
 		<?$html=ob_get_clean();?>
@@ -483,8 +487,8 @@ $APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");?>
 										"ADD_PICT_PROP" => $arParams["ADD_PICT_PROP"],
 										"ADD_DETAIL_TO_SLIDER" => $arParams["ADD_DETAIL_TO_SLIDER"],
 									);?>
-
 									<div class=" <?=$display;?> js_wrapper_items" data-params='<?=str_replace('\'', '"', CUtil::PhpToJSObject($arTransferParams, false))?>'>
+										<?\Aspro\Functions\CAsproMax::replacePropsParams($arParams);?>
 										<?$APPLICATION->IncludeComponent(
 											"bitrix:catalog.section",
 											$listElementsTemplate,
@@ -556,6 +560,7 @@ $APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");?>
 												"HIDE_NOT_AVAILABLE" => $arParams["HIDE_NOT_AVAILABLE"],
 												'HIDE_NOT_AVAILABLE_OFFERS' => $arParams["HIDE_NOT_AVAILABLE_OFFERS"],
 												"SET_TITLE" => "N",
+												"SET_SKU_TITLE" => (($arTheme["TYPE_SKU"]["VALUE"] == "TYPE_1" && $arTheme["CHANGE_TITLE_ITEM_LIST"]["VALUE"] == "Y") ? "Y" : ""),
 												"SET_STATUS_404" => "N",
 												"SHOW_404" => "N",
 												"MESSAGE_404" => "",
@@ -617,6 +622,10 @@ $APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");?>
 												"ADD_DETAIL_TO_SLIDER" => $arParams["ADD_DETAIL_TO_SLIDER"],
 												"SHOW_BIG_BLOCK" => 'N',
 												"MAX_SCU_COUNT_VIEW" => $arTheme['MAX_SCU_COUNT_VIEW']['VALUE'],
+												"REVIEWS_VIEW" => (isset($arTheme['REVIEWS_VIEW']['VALUE']) && $arTheme['REVIEWS_VIEW']['VALUE'] == 'EXTENDED') || (!isset($arTheme['REVIEWS_VIEW']['VALUE']) && isset($arTheme['REVIEWS_VIEW']) && $arTheme['REVIEWS_VIEW'] ==  'EXTENDED'),
+												"SHOW_PROPS_TABLE" => strtolower(CMax::GetFrontParametrValue('SHOW_TABLE_PROPS')),
+												"SHOW_OFFER_TREE_IN_TABLE" => CMax::GetFrontParametrValue('SHOW_OFFER_TREE_IN_TABLE'),
+												"COMPATIBLE_MODE" => "Y",
 											), $component, array("HIDE_ICONS" => $isAjax)
 										);?>
 									</div>
@@ -692,3 +701,8 @@ $APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");?>
 <?endif;?>
 
 
+<?$tablePropsView = strtolower(CMax::GetFrontParametrValue('SHOW_TABLE_PROPS'));?>
+<?if ( $tablePropsView === "cols" ):?>
+    <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/tableScroller.js');?>
+	<?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/blocks/scroller.css');?>
+<?endif;?>

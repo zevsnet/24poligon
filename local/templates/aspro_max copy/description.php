@@ -1,7 +1,7 @@
 <?
 $arTemplate = array (
-  'NAME' => GetMessage("TEMPLATE_NAME"),
-  'DESCRIPTION' => GetMessage("TEMPLATE_DESCRIPTION"),
+  'NAME' => 'Аспро: Максимум - интернет-магазин копия',
+  'DESCRIPTION' => 'Цветовые параметры и расположение блоков в шаблоне настраиваются в параметрах модуля Аспро: Максимум.',
   'SORT' => '',
   'TYPE' => '',
 );

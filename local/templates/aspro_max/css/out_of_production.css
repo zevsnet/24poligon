@@ -1,0 +1,72 @@
+/** item analog card **/
+.js-animate-appearance {
+  /* height: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease; */
+  display: none;
+}
+.js-animate-appearance.active {
+  opacity: 1;
+  height: auto;
+}
+.catalog-item-analog {
+  margin-bottom: 34px;
+  padding: 20px;
+}
+.catalog-item-analog.bordered {
+  border-color: #5FA800;
+}
+.catalog-item-analog__note {
+  display: flex;
+  color: #999;
+}
+.catalog-item-analog__note .svg-info-big {
+  margin-right: 9px;
+  margin-top: 4px;
+}
+.catalog-item-analog__title {
+  margin-bottom: 16px;
+  line-height: calc(1em + 7px);
+}
+.catalog-item-analog__note {
+  margin-top: 18px;
+}
+.catalog-item-analog__image a {
+  display: block;
+  max-width: 96px;
+  min-width: 96px;
+  padding-top: 4px;
+  text-align: center;
+}
+.catalog-item-analog__inner {
+  gap: 16px 0;
+}
+.catalog-item-analog__info {
+  min-width: 190px
+}
+.catalog-item-analog__info-price {
+  margin-top: 7px;
+}
+.catalog-item-analog__info-price .price_matrix_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+}
+.catalog-item-analog__info-buttons {
+  margin-top: 15px;
+  gap: 12px 0;
+}
+.catalog-item-analog__info-buttons .svg {
+  top: auto;
+}
+.catalog-item-analog__buy {
+  margin-right: 12px;
+}
+.catalog-item-analog__info-buttons.sm .catalog-item-analog__actions span.btn {
+  height: 36px;
+}
+.catalog-item-analog__info-buttons .btn:not(.in-cart) .svg-inline-fw,
+.catalog-item-analog__info-buttons .more_text {
+  display: none !important;
+}
+/****/

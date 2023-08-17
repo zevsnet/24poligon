@@ -94,14 +94,8 @@
 			0 => "ID",
 			1 => "",
 		),
-		"OFFERS_PROPERTY_CODE" => array(
-			0 => "SIZES",
-			1 => "ARTICLE",
-			2 => "AGE",
-		),
-		"OFFER_TREE_PROPS" => array(
-			0 => "SIZES",
-		),
+		
+		
 		"OFFERS_SORT_FIELD" => "sort",
 		"OFFERS_SORT_ORDER" => "asc",
 		"OFFERS_SORT_FIELD2" => "id",
