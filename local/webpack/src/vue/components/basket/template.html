@@ -1,196 +1,108 @@
-<div id="basket-root" class="bx-basket bx-blue bx-step-opacity">
-    <form class="order-form">
-        <div class="row" id="bx-soa-order">
-            <div class="col-xs-12 col-md-3 col-lg-3">
-                <div class="row" data-entity="basket-store-block">
-                    <ul class="cart-stock-source-selector">
-                        <template v-for="arStore in getStores">
-                            <li :class="[{'selected':arStore.TID == getStoreSelected},arStore.CLASS_MAIN_BLOCK_STORE]"
-                                v-on:click="selectedStore(arStore.TID)"
-                            >
-                                <div>
-                                    <span class="stock-source-status">{{arStore.STOCK_SOURCE_STATUS}}</span>
-                                    <template v-if="arStore.def_delivery">
-                                        <span style="word-break: break-all" class="formatted-address">Склад</span>
-                                        <span class="stock-source-type">ДОСТАВКА НА АДРЕС</span>
-                                    </template>
-                                    <template v-else>
-                                        <span style="word-break: break-all" class="formatted-address">{{ arStore.ADDRESS }}</span>
-                                        <span class="stock-source-type">САМОВЫВОЗ</span>
-                                    </template>
-                                </div>
-                            </li>
-                        </template>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-9 col-lg-9">
-                <div class="row">
-                    <div class="col-xs-12 pr-0">
-                        <div class="basket-items-list-wrapper basket-items-list-wrapper-height-fixed basket-items-list-wrapper-light basket-items-list-wrapper-compact">
-                            <div class="basket-items-list-container">
-                                <div class="basket-items-list-overlay" v-if="false"></div>
-                                <div class="basket-items-list">
-                                    <table class="basket-items-list-table">
-                                        <tbody>
-                                        <template v-for="arElement in getBasketItems">
-                                            <tr
-                                                    :class="[{'not-available':arElement.DELAY === 'Y'},'basket-items-list-item-container']"
+<div id="basket-root" class="bx-basket bx-step-opacity" >
+<div class="flexbox flexbox--row basket-items-list">
+    <div class="basket-items-list-outer">
+
+        <div class="basket-items-list-wrapper basket-items-list-wrapper-height-fixed" id="basket-items-list-wrapper">
+            <div class="basket-items-list-container" id="basket-items-list-container">
+                <div class="basket-items-list">
+                    <table class="basket-items-list-table" id="basket-item-table">
+                        <tbody>
+                        <template v-for="arElement in getBasketItems">
+                            <tr class="basket-items-list-item-wrapper">
+                                <td class="basket-items-list-item-picture">
+                                    <div class="basket-item-block-image">
+                                        <a :href="arElement.DETAIL_PAGE_URL" class="basket-item-image-link">
+                                            <img
+                                                    data-lazyload=""
+                                                    class="basket-item-image lazyloaded"
+                                                    v-if="arElement.DETAIL_PICTURE_SRC !=''"
+                                                    :alt="arElement.NAME"
+                                                    :src="arElement.DETAIL_PICTURE_SRC"
+                                                    :data-src="arElement.DETAIL_PICTURE_SRC"
                                             >
-                                                <td class="basket-items-list-item-descriptions">
-                                                    <div class="basket-items-list-item-descriptions-inner">
-                                                        <div class="basket-item-block-image">
-                                                            <a :href="arElement.DETAIL_PAGE_URL"
-                                                               class="basket-item-image-link">
-                                                                <img class="basket-item-image"
-                                                                     v-if="arElement.DETAIL_PICTURE_SRC !=''"
-                                                                     :alt="arElement.NAME"
-                                                                     :src="arElement.DETAIL_PICTURE_SRC">
-                                                                <img class="basket-item-image"
-                                                                     v-else
-                                                                     :alt="arElement.NAME"
-                                                                     src="/images/no_photo.png">
-                                                            </a>
-                                                        </div>
-                                                        <div class="basket-item-block-info">
-                                                            <span class="basket-item-actions-remove visible-xs"></span>
-                                                            <h2 class="basket-item-info-name">
-                                                                <a :href="arElement.DETAIL_PAGE_URL"
-                                                                   class="basket-item-info-name-link">
-                                                                    <span>{{arElement.NAME}}</span>
-                                                                </a>
-                                                            </h2>
-                                                            <div class="basket-item-block-properties">
-                                                                <div class="basket-item-property-custom basket-item-property-custom-text">
-                                                                    <div class="basket-item-property-custom-name">Тип цены</div>
-                                                                    <div class="basket-item-property-custom-value">Розничная</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="basket-items-list-item-warning-container" v-if="arElement.DELAY==='Y'">
-                                                                <div class="alert alert-warning text-center">Товара <b>нет в наличии</b> на выбранном пункте.</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="basket-items-list-item-price basket-items-list-item-price-for-one hidden-xs">
-                                                    <div class="basket-item-block-price">
-                                                        <div class="basket-item-price-current"><span class="basket-item-price-current-text">{{arElement.FULL_PRICE_FORMATED}}</span></div>
-                                                        <div class="basket-item-price-title">цена за {{arElement.MEASURE_RATIO}} {{arElement.MEASURE_TEXT}}</div>
-                                                    </div>
-                                                </td>
-                                                <td class="basket-items-list-item-amount">
-                                                    <div class="basket-item-block-amount">
-                                                        <span class="basket-item-amount-btn-minus" v-on:click="setQuantityElement(arElement.ID,'minus')"></span>
-                                                        <div class="basket-item-amount-filed-block">
-                                                            <input type="text" class="basket-item-amount-filed"
-                                                                   :value="arElement.QUANTITY"
-                                                                   disabled>
-                                                        </div>
-                                                        <span class="basket-item-amount-btn-plus" v-on:click="setQuantityElement(arElement.ID,'plus')"></span>
-                                                        <div class="basket-item-amount-field-description">
-                                                            {{arElement.MEASURE_NAME}}
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="basket-items-list-item-price">
-                                                    <div class="basket-item-block-price">
-                                                        <div class="basket-item-price-old" v-if="arElement.SHOW_DISCOUNT_PRICE"><span class="basket-item-price-old-text">{{arElement.SUM_FULL_PRICE_FORMATED}}</span></div>
-                                                        <div class="basket-item-price-current"><span class="basket-item-price-current-text">{{arElement.SUM_PRICE_FORMATED}}</span></div>
-                                                        <div class="basket-item-price-difference" v-if="arElement.SHOW_DISCOUNT_PRICE">Экономия <span style="white-space: nowrap;">{{arElement.SUM_DISCOUNT_PRICE_FORMATED}}</span></div>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="basket-items-list-item-descriptions-inner" >
+                                    <div class="basket-item-block-info">
+                                        <span class="basket-item-actions-remove" v-on:click="setQuantityElement(arElement.ID,'del')"></span>
+                                        <div class="stickers-basket stickers "></div>
+                                        <h2 class="basket-item-info-name">
+                                            <a  :href="arElement.DETAIL_PAGE_URL" class="basket-item-info-name-link">
+                                                <span>{{arElement.NAME}}</span>
+                                            </a>
+                                        </h2>
+                                        <div class="basket-items-list-item-warning-container" v-if="arElement.DELAY==='Y'">
+                                            <div class="alert alert-warning text-center">Товара <b>нет в наличии</b> на выбранном пункте.</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="basket-items-list-item-amount-outer">
+                                    <div class="basket-item-amount">
+                                        <span class="basket-item-btn-minus"  v-on:click="setQuantityElement(arElement.ID,'minus')" ></span>
+                                        <div class="basket-item-amount-filed-block">
+                                            <input type="text" class="basket-item-amount-filed":value="arElement.QUANTITY" >
+                                        </div>
+                                        <span class="basket-item-btn-plus" v-on:click="setQuantityElement(arElement.ID,'plus')"></span>
 
+                                    </div>
+                                    <div class="basket-items-list-item-price basket-items-list-item-price-for-one hidden-xs1">
+                                        <div class="basket-item-price">
+                                            <div class="basket-item-price-current">
+                                                <span class="basket-item-price-current-text">
+                                                    {{arElement.FULL_PRICE_FORMATED}}/<div class="basket-item-amount-field-description">{{arElement.MEASURE_NAME}}</div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="basket-items-list-item-price">
+                                    <div class="basket-item-price"><div class="basket-item-price-current"><div class="basket-item-price-current-value">{{arElement.SUM_FULL_PRICE_FORMATED}}</div></div></div>
+                                    <div class="basket-items-list-item-removes">
+                                        <div class="basket-item-block-actions">
+                                            <span class="basket-item-actions-remove" v-on:click="setQuantityElement(arElement.ID,'del')"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="basket-services-list-item-container hidden" id="basket-services-item-44884" data-entity="basket-services-item" data-id="44884">
+                                <td class="col_with_services" colspan="4">
+                                    <div class="services_in_basket_page buy_services_wrap w_picture" data-parent_product="157597">
 
-                                                    </div>
-                                                </td>
-                                                <td class="basket-items-list-item-remove hidden-xs">
-                                                    <div class="basket-item-block-actions"><span class="basket-item-actions-remove" v-on:click="setQuantityElement(arElement.ID,'del')"></span></div>
-                                                </td>
-                                            </tr>
-                                        </template>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </template>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 px-0">
-                <div class="basket-checkout-container visible">
-                    <div class="basket-coupon-section">
-                        <div class="basket-coupon-block-field">
-                            <div class="basket-coupon-block-field-description">
-                                Введите код купона для скидки:
-                            </div>
-                            <div class="form">
-                                <div class="form-group" style="position: relative;">
-                                    <basket-input :property="'COUPON'"></basket-input>
-                                    <span class="basket-coupon-block-coupon-btn"></span>
-                                </div>
-                            </div>
+    </div>
 
-                            <template v-for="couponItem in this.getBasket.COUPON_LIST">
-                                <div :class="{'basket-coupon-alert':true,'text-danger':couponItem.JS_STATUS =='BAD'}" v-on:click="setQuantityElement(couponItem.COUPON,'del_coupon')">
-                                    <span class="basket-coupon-text">
-                                        <strong>{{couponItem.COUPON}}</strong> - {{couponItem.JS_CHECK_CODE}}
-                                        {{couponItem.DISCOUNT_NAME}}
-                                    </span>
-                                    <span class="close-link">x</span>
-                                </div>
-                            </template>
-                        </div>
-
-                        <div class="basket-coupon-block-field">
-                            <div class="basket-coupon-block-field-description">
-                                Введите номер бонусной/подарочной карты "Посуда Центр":
-                            </div>
-                            <div class="form">
-                                <div class="form-group" style="position: relative;">
-                                    <basket-input :property="'PAN'"></basket-input>
-                                    <span class="basket-coupon-block-coupon-btn"></span>
-                                </div>
-                            </div>
-                            <template v-for="panItem in this.getBasket.PAN_LIST">
-                                <div :class="{'basket-coupon-alert':true,'text-danger':panItem.JS_STATUS =='BAD','text-muted':panItem.JS_STATUS =='APPLYED'}" v-on:click="setQuantityElement(panItem.PAN,'del_coupon')">
-                                    <span class="basket-coupon-text">
-                                        <strong>{{panItem.PAN}}</strong>
-                                    </span>
-                                    <span class="close-link">x</span>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="basket-checkout-section">
-                        <div class="basket-checkout-section-inner">
-                            <div class="basket-checkout-block basket-checkout-block-total">
+    <div class="basket-total-outer">
+        <div class="basket-total-block sticky_top">
+            <div class="basket-checkout-container visible">
+                <div class="basket-checkout-section">
+                    <div class="basket-checkout-section-inner">
+                        <div class="basket-checkout-section-left">
+                            <div class="basket-checkout-block basket-checkout-total">
                                 <div class="basket-checkout-block-total-inner">
-                                    <div class="basket-checkout-block-total-title">Итого:</div>
-                                    <div class="basket-checkout-block-total-description">
-                                        <template v-if="sumBasket.WEIGHT_FORMATED">Вес:{{sumBasket.WEIGHT_FORMATED}}</template>
-                                        <template v-if="sumBasket.VAT_SUM_FORMATED">НДС:{{sumBasket.VAT_SUM_FORMATED}}</template>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="basket-checkout-block basket-checkout-block-total-price">
-                                <div class="basket-checkout-block-total-price-inner">
+                                    <div class="basket-checkout-total-title">Итого:</div>
                                     <div class="basket-coupon-block-total-price-current">{{sumBasket.PRICE_FORMATED}}</div>
-                                    <div class="basket-coupon-block-total-price-difference" v-if="sumBasket.DISCOUNT_PRICE_FORMATED > 0">
-                                        Экономия: <span style="white-space: nowrap;">{{sumBasket.DISCOUNT_PRICE_FORMATED}}</span>
-                                    </div>
-                                    <div class="basket-coupon-block-total-price-difference" v-if="sumBasket.BONUS_PRICE_FORMATED">
-                                        Можно списать бонусов: <span style="white-space: nowrap;">{{sumBasket.BONUS_PRICE_FORMATED}}</span>
-                                    </div>
                                 </div>
                             </div>
-
-                            <div class="basket-checkout-block basket-checkout-block-btn">
-                                <div :class="{'btn btn-lg btn-default basket-btn-checkout white':true,'disabled':sumBasket.PRICE_FORMATED === 0}" @click="nextStep2Order">Оформить заказ</div>
+                        </div>
+                        <div class="basket-checkout-section-right">
+                            <div class="basket-checkout-block basket-checkout-btn checkout-order">
+                                <div :class="{'btn btn-lg btn-default basket-btn-checkout':true,'disabled':sumBasket.PRICE_FORMATED === 0}" @click="nextStep2Order">Перейти к оформлению</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+</div>
 </div>

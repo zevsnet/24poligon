@@ -3,6 +3,7 @@ import _ from 'lodash'
 export default {
     //Корзина
     getBasketItems: state => {
+        debugger
         if (!_.isEmpty(state.basketItems)) {
             return state.basketItems
         }

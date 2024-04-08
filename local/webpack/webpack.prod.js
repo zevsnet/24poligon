@@ -4,19 +4,19 @@ const common = require('./webpack.common.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-/** НУЖНО УКАЗАТЬ ПУТЬ ДО ПАПКИ dist ИЗ КОРНЯ САЙТА (например '/local/webpack/dist/') */
-const publicPath = '/local/webpack/dist/'
+/** НУЖНО УКАЗАТЬ ПУТЬ ДО ПАПКИ build ИЗ КОРНЯ САЙТА (например '/local/webpack/build/') */
+const publicPath = '/local/webpack/build/'
 
 module.exports = merge.smart(common, {
   mode: 'production',
   output: {
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     publicPath: publicPath
   },
   plugins: [
-    new CleanWebpackPlugin('dist', {}),
+    new CleanWebpackPlugin('build', {}),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css',

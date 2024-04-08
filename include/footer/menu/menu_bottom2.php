@@ -6,10 +6,9 @@
     "MENU_CACHE_GET_VARS" => array(
     ),
     "MAX_LEVEL" => "2",
-    "CHILD_MENU_TYPE" => "left",
     "USE_EXT" => "N",
     "DELAY" => "N",
-    "ALLOW_MULTI_SELECT" => "Y"
+    "ALLOW_MULTI_SELECT" => "N"
     ),
     false
 );?>

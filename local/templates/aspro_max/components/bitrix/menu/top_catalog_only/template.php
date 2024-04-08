@@ -400,6 +400,7 @@ $bManyItemsMenu = ($MENU_TYPE == '4');
 																			<?
 																			$bHasPicture = ( (isset($arSubItem2['PARAMS']['PICTURE']) && $arSubItem2['PARAMS']['PICTURE'] || (isset($arSubItem2['PARAMS']['SECTION_ICON'])) ) && $arTheme['SHOW_CATALOG_SECTIONS_ICONS']['VALUE'] == 'Y');
 																			$bIcon = (isset($arSubItem2['PARAMS']['SECTION_ICON'])) && $arSubItem2['PARAMS']['SECTION_ICON'];
+																			
 																			?>
 																			<li class="<?=($arSubItem2["CHILD"] && $bShowChilds ? "dropdown-submenu" : "")?> <?=$bIcon ? 'icon' : ''?> <?=($arSubItem2["SELECTED"] ? "active" : "")?> <?=($bHasPicture ? "has_img" : "")?>">
 																				<?=showSubItemss([

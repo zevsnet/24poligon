@@ -5,8 +5,8 @@ $APPLICATION->SetTitle("Магазины");
 <?global $arTheme;?>
 <?if($arTheme["STORES_SOURCE"]["VALUE"] != 'IBLOCK'):?>
 	<?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.store", 
-	"main", 
+	"bitrix:catalog.store",
+	"main",
 	array(
 		"SEF_MODE" => "Y",
 		"SEF_FOLDER" => "/contacts/stores/",
@@ -25,15 +25,15 @@ $APPLICATION->SetTitle("Магазины");
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"SEF_URL_TEMPLATES" => array(
 			"liststores" => "",
-			"element" => "#store_id#/",
+			"element" => "#ELEMENT_ID#/",
 		)
 	),
 	false
 );?>
 <?else:?>
 	<?$APPLICATION->IncludeComponent(
-	"bitrix:news", 
-	"shops", 
+	"bitrix:news",
+	"shops",
 	array(
 		"IBLOCK_TYPE" => "aspro_max_content",
 		"IBLOCK_ID" => "165",
@@ -143,7 +143,7 @@ $APPLICATION->SetTitle("Магазины");
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "",
-			"detail" => "#ELEMENT_ID#/",
+			"detail" => "#ELEMENT_CODE#/",
 		)
 	),
 	false

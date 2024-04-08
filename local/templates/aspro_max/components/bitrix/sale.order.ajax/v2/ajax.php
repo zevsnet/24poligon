@@ -14,6 +14,8 @@ if (!empty($siteId) && is_string($siteId)) {
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
 
+use CMax as Solution;
+
 $request = Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 $request->addFilter(new \Bitrix\Main\Web\PostDecodeFilter);
 
@@ -25,7 +27,7 @@ $signer = new \Bitrix\Main\Security\Sign\Signer;
 try {
 	$signedParamsString = $request->get('signedParamsString') ?: '';
 	$params = $signer->unsign($signedParamsString, 'sale.order.ajax');
-	$params = unserialize(base64_decode($params), ['allowed_classes' => false]);
+	$params = Solution::unserialize(base64_decode($params));
 } catch (\Bitrix\Main\Security\Sign\BadSignatureException $e) {
 	die();
 }

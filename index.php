@@ -1,7 +1,8 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("title", "Магазин Военторг. Каталог товаров");
 $APPLICATION->SetPageProperty("viewed_show", "Y");
 $APPLICATION->SetTitle("Военторг Полигон в #REGION_NAME_DECLINE_PP#");
-$APPLICATION->SetPageProperty("description",  "Продажа военных товаров в интернет-магазине «Полигон» в #REGION_NAME_DECLINE_PP# по выгодным ценам – оптом и в розницу. Широкий ассортимент армейских товаров, высокое качество"); 
+$APPLICATION->SetPageProperty("description",  "Продажа военной одежды, формы и армейских товаров. Большой выбор перчаток, ботинок, футболок и формы оптом и в розницу. Доставка по России. Выгодные цены."); 
 ?>
 
     <style>

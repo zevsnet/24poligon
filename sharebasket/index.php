@@ -42,6 +42,7 @@ $APPLICATION->SetTitle("Поделиться корзиной");
 			"TWITTER"
 		),
 		"NEW_SHOW_SHARE_SOCIALS" => "Y",
+		"NEW_SHOW_QRCODE" => "Y",
 		"NEW_SITE_ID" => "",
 		"NEW_USER_ID" => "",
 		"NEW_USE_CUSTOM_MESSAGES" => "N",

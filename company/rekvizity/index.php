@@ -1,6 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Реквизиты");
+$APPLICATION->SetPageProperty("description", "Реквизиты юридического лица магазинов Полигон для составления документов с контрагентами.");
+$APPLICATION->SetPageProperty("title", "Реквизиты компании Полигон ");
+$APPLICATION->SetTitle("Реквизиты Военторга Полигон");
 ?><b>Карточка предприятия<br>
  </b>
 <table border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">

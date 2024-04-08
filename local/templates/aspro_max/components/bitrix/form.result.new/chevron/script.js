@@ -61,8 +61,6 @@ $(document).ready(function () {
     });
     $('body').on('click', '#sb_submit', function (e) {
         debugger
-
-
     });
 
 });

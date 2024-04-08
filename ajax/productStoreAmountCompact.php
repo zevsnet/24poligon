@@ -46,7 +46,7 @@ define('PUBLIC_AJAX_MODE', true);?>
 					//"CACHE_TYPE" => "A", bug fix clear cache
 					"CACHE_TYPE" => "N",
 					"STORES" => $arRegionStores,
-					"STORE_PATH" => "/contacts/stores/#store_id#/",
+					"STORE_PATH" => "/contacts/stores/#CODE#/",
 					"STORES_FILTER_ORDER" => $arTheme['STORES_FILTER_ORDER'],
 					"STORES_FILTER" => $arTheme['STORES_FILTER'],
 					"SHOW_EMPTY_STORE" => $arTheme['SHOW_EMPTY_STORE'],

@@ -184,9 +184,9 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/sb_site/init.php");
                         case 'SUMBOL':
                         case 'TEXT':
                         case "SURNAME":
-                        case "NAME":
+//                        case "NAME":
                         case "OTCHESTVO":
-                        case 'PHONE':
+//                        case 'PHONE':
                         case 'EMAIL':
                         case 'TYPE':
                             break;

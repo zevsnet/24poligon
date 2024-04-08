@@ -1,7 +1,10 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Акции в магазине военной одежды и обмундирования. Скидки до 7% на армейские товары участникам боевых действий и студентам в розничных магазинах Военторга");
+$APPLICATION->SetPageProperty("title", "Действующие акции Военторга Полигон");
 $APPLICATION->SetTitle("Акции");
 ?>
+
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
 	"sale", 

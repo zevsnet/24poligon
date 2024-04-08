@@ -12,7 +12,7 @@ global $arTheme, $APPLICATION;
 $APPLICATION->ShowAjaxHead();
 
 Extensions::register();
-Extensions::init('skeleton');
+Extensions::init(['skeleton', 'set_cookie_on_domains']);
 ?>
 <a href="#" class="close jqmClose"><?=Solution::showIconSvg('', SITE_TEMPLATE_PATH.'/images/svg/Close.svg')?></a>
 <div class="form">
@@ -87,24 +87,14 @@ Extensions::init('skeleton');
 					if (regionId) {
 						$(this).closest('.form').addClass('sending');
 
-						$.cookie('current_region', regionId, {
-							path: '/',
-							domain: arAsproOptions['SITE_ADDRESS'],
-						});
+						setCookieOnDomains('current_region', regionId);
 
 						let locationId = ui.item.LOCATION_ID;
 						if (locationId) {
-							$.cookie('current_location', locationId, {
-								path: '/',
-								domain: arAsproOptions['SITE_ADDRESS'],
-							});
+							setCookieOnDomains('current_location', locationId);
 						}
 						else {
-							$.cookie('current_location', '', {
-								expires: -1,
-								path: '/',
-								domain: arAsproOptions['SITE_ADDRESS'],
-							});
+							setCookieOnDomains('current_location', '', {expires: -1});
 						}
 
 						let href = ui.item.URL;
@@ -253,24 +243,14 @@ Extensions::init('skeleton');
 			if (regionId) {
 				$(this).closest('.form').addClass('sending');
 
-				$.cookie('current_region', regionId, {
-					path: '/',
-					domain: arAsproOptions['SITE_ADDRESS'],
-				});
+				setCookieOnDomains('current_region', regionId);
 
 				let locationId = $this.data('locid');
 				if (locationId) {
-					$.cookie('current_location', locationId, {
-						path: '/',
-						domain: arAsproOptions['SITE_ADDRESS'],
-					});
+					setCookieOnDomains('current_location', locationId);
 				}
 				else {
-					$.cookie('current_location', '', {
-						expires: -1,
-						path: '/',
-						domain: arAsproOptions['SITE_ADDRESS'],
-					});
+					setCookieOnDomains('current_location', '', {expires: -1});
 				}
 				
 				let href = $this.attr('href');

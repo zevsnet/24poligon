@@ -6,6 +6,8 @@ $APPLICATION->SetTitle("Проекты");
 	"bitrix:news", 
 	"projects", 
 	array(
+		'SHOW_PROJECTS_MAP' => 'Y',
+		'SHOW_PROJECTS_MAP_DETAIL' => 'Y',
 		"IBLOCK_TYPE" => "aspro_max_content",
 		"IBLOCK_ID" => "169",
 		"NEWS_COUNT" => "20",
@@ -201,7 +203,7 @@ $APPLICATION->SetTitle("Проекты");
 		"BLOCK_BLOG_NAME" => "Статьи",
 		"BLOCK_LANDINGS_NAME" => "Коллекции",
 		"STAFF_TYPE_DETAIL" => "list",
-		"DETAIL_BLOCKS_ALL_ORDER" => "tizers,desc,char,docs,services,goods,reviews,news,vacancy,blog,form_order,projects,staff,brands,gallery,landings,partners,comments",
+		"DETAIL_BLOCKS_ALL_ORDER" => "tizers,desc,map,char,docs,services,goods,reviews,news,vacancy,blog,form_order,projects,staff,brands,gallery,landings,partners,comments",
 		"DETAIL_USE_COMMENTS" => "N",
 		"DETAIL_BLOG_USE" => "N",
 		"DETAIL_VK_USE" => "N",

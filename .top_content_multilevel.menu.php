@@ -1,8 +1,8 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Распродажа", 
-		"/catalog/?q=rasprodazha", 
+		"Товары для СВО", 
+		"/landings/svo/", 
 		Array(), 
 		Array("CLASS" => "rounded2 rasprod", "ICON"=> "icon_discount"),
 		"" 

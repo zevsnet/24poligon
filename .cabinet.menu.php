@@ -2,84 +2,91 @@
 $aMenuLinks = Array(
 	Array(
 		"Мой кабинет", 
-		"/personal/index.php", 
+		SITE_DIR."/personal/index.php", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Текущие заказы", 
-		"/personal/orders/", 
+		SITE_DIR."/personal/orders/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Личный счет", 
-		"/personal/account/", 
+		SITE_DIR."/personal/account/", 
 		Array(), 
 		Array(), 
 		"CBXFeatures::IsFeatureEnabled('SaleAccounts')" 
 	),
 	Array(
 		"Личные данные", 
-		"/personal/private/", 
+		SITE_DIR."/personal/private/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Сменить пароль", 
-		"/personal/change-password/", 
+		SITE_DIR."/personal/change-password/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"История заказов", 
-		"/personal/orders/?filter_history=Y", 
+		SITE_DIR."/personal/orders/?filter_history=Y", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Профили заказов", 
-		"/personal/profiles/", 
+		SITE_DIR."/personal/profiles/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Корзина", 
-		"/basket/", 
+		SITE_DIR."/basket/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Подписки", 
-		"/personal/subscribe/", 
+		SITE_DIR."/personal/subscribe/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Контакты", 
-		"/contacts/", 
+		SITE_DIR."/contacts/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Бонусы", 
-		"/personal/bonus/", 
+		SITE_DIR."/personal/bonus/", 
 		Array(), 
 		Array(), 
 		"\\Aspro\\Functions\\CAsproMax::isBonusSystemOn()" 
 	),
 	Array(
+		"Избранные товары", 
+		SITE_DIR."/personal/favorite/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
 		"Выйти", 
-		"?logout=yes&login=yes", 
+		SITE_DIR."?logout=yes&login=yes", 
 		Array(), 
 		Array("class"=>"exit", "BLOCK"=>"<i class='icons'><svg id='Exit.svg' xmlns='http://www.w3.org/2000/svg' width='12' height='9' viewBox='0 0 12 9'><path class='cls-1' d='M501.849,868.853l-2.011,1.993a0.485,0.485,0,0,1-.694,0,0.506,0.506,0,0,1,0-.707L500.293,869H494.5a0.5,0.5,0,0,1,0-1h5.826l-1.182-1.175a0.5,0.5,0,0,1,0-.7,0.487,0.487,0,0,1,.694,0l2.011,2a0.486,0.486,0,0,1,.138.365A0.492,0.492,0,0,1,501.849,868.853Zm-5.349-3.322a0.486,0.486,0,0,1-.269-0.089l-0.016.024a3.5,3.5,0,1,0,0,6.07l0,0a0.484,0.484,0,0,1,.287-0.1,0.5,0.5,0,0,1,.5.5,0.492,0.492,0,0,1-.242.418l0.008,0.012c-0.022.013-.049,0.018-0.071,0.031h0a4.434,4.434,0,0,1-2.194.6,4.5,4.5,0,1,1,0-9,4.4,4.4,0,0,1,2.057.542A0.5,0.5,0,0,1,496.5,865.531Z' transform='translate(-490 -864)'/></svg></i>"), 
 		"\$GLOBALS['USER']->IsAuthorized()" 

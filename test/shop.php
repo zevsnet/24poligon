@@ -1,7 +1,9 @@
 <?
 // подключение служебной части пролога
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
-
+global $USER;
+//$USER->Authorize(1);
+return;
 //Получаем список магазинов из инфоблока
 //$obElementsShops = CIBlockElement::GetList([],[
 //    'IBLOCK_ID'=>165,

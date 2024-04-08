@@ -1,1 +1,1 @@
-connect@24poligon.ru
+hr@24poligon.ru

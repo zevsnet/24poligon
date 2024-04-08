@@ -12,7 +12,7 @@ if($arRegion)
 			$arParams['STORES'] = $arRegion['LIST_STORES'];
 	}
 
-	if($catalogID = \Bitrix\Main\Config\Option::get("aspro.max", "CATALOG_IBLOCK_ID", \Bitrix\Main\Config\Option::get("aspro.max", "CATALOG_IBLOCK_ID", '180')))
+	if($catalogID = \Bitrix\Main\Config\Option::get("aspro.max", "CATALOG_IBLOCK_ID", \Bitrix\Main\Config\Option::get("aspro.max", "CATALOG_IBLOCK_ID", "#IBLOCK_CATALOG_ID#")))
 	{
 		$GLOBALS['arrProductsFilter']['IBLOCK_ID'] = $catalogID;
 		if(($arParams["FILTER_NAME"] == 'arRegionLink' || CMax::GetFrontParametrValue('REGIONALITY_FILTER_CATALOG') == 'Y') && CMax::GetFrontParametrValue('REGIONALITY_FILTER_ITEM') == 'Y'){
@@ -30,7 +30,7 @@ if($arRegion)
 	array(
 		"COMPATIBLE_MODE" => "Y",
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-		"IBLOCK_ID" => \Bitrix\Main\Config\Option::get("aspro.max", "CATALOG_IBLOCK_ID", '180'),
+		"IBLOCK_ID" => \Bitrix\Main\Config\Option::get("aspro.max", "CATALOG_IBLOCK_ID", "#IBLOCK_CATALOG_ID#"),
 		"PAGE_ELEMENT_COUNT" =>(isset($arParams["DISPLAY_ELEMENT_SLIDER"]) ? $arParams["DISPLAY_ELEMENT_SLIDER"] : 10),
 		"SORT_BY1" => "SORT",
 		"SORT_ORDER1" => "ASC",
@@ -46,7 +46,8 @@ if($arRegion)
 		"AJAX_REQUEST" => $arParams["FROM_AJAX"],
 		"LINE_ELEMENT_COUNT" => "4",
 		"PROPERTY_CODE" => isset($arParams['LINKED_PROPERTY_CODE']) ? $arParams['LINKED_PROPERTY_CODE'] : $arParams['PROPERTY_CODE'],
-		"OFFERS_LIMIT" => "10",
+		"OFFERS_LIMIT" => $arParams["OFFERS_LIMIT"],
+		"OFFER_ADD_PICT_PROP" => $arParams["OFFER_ADD_PICT_PROP"],
 		"SECTION_URL" => "",
 		"DETAIL_URL" => "",
 		"BASKET_URL" => SITE_DIR."basket/",

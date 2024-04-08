@@ -4,21 +4,23 @@
 	"front_collection", 
 	array(
 		"IBLOCK_TYPE" => "aspro_max_catalog",
-		"IBLOCK_ID" => CMaxCache::$arIBlocks[SITE_ID]['aspro_max_catalog']['aspro_max_landing'][0],
-		"NEWS_COUNT" => "5",
+		"IBLOCK_ID" => CMaxCache::$arIBlocks[SITE_ID]["aspro_max_catalog"]["aspro_max_landing"][0],
+		"NEWS_COUNT" => "10",
 		"SORT_BY1" => "SORT",
 		"SORT_ORDER1" => "ASC",
 		"SORT_BY2" => "ID",
 		"SORT_ORDER2" => "DESC",
 		"FILTER_NAME" => "arRegionLinkFront",
 		"FIELD_CODE" => array(
-			0 => "PREVIEW_PICTURE",
-			1 => "PREVIEW_TEXT",
+			0 => "PREVIEW_TEXT",
+			1 => "PREVIEW_PICTURE",
 			2 => "DETAIL_PICTURE",
 			3 => "",
 		),
 		"PROPERTY_CODE" => array(
-			0 => "INDEX_TEXT",
+			0 => "",
+			1 => "INDEX_TEXT",
+			2 => "",
 		),
 		"CHECK_DATES" => "Y",
 		"DETAIL_URL" => "",
@@ -60,7 +62,7 @@
 		"SET_LAST_MODIFIED" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"STRICT_SECTION_CHECK" => "N",
-		"TITLE_BLOCK" => "Коллекции",
+		"TITLE_BLOCK" => "Форменная одежда",
 		"TITLE_BLOCK_ALL" => "Все коллекции",
 		"SHOW_ADD_REVIEW" => "Y",
 		"VIEW_TYPE" => "bg_img",
@@ -71,7 +73,11 @@
 		"MOBILE_TEMPLATE" => "Y",
 		"IS_AJAX" => CMax::checkAjaxRequest(),
 		"SIZE_IN_ROW" => "5",
-		"MESSAGE_404" => ""
+		"MESSAGE_404" => "",
+		"INCLUDE_FILE" => "",
+		"BG_POSITION" => "top left",
+		"NO_MARGIN" => "N",
+		"FILLED" => "N"
 	),
 	false
 );?>

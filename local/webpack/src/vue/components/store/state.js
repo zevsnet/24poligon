@@ -8,7 +8,9 @@ export default {
         defaultStore: null,
         PAN:''
     },
-
+    basketSignedTemplate:'',
+    basketSignedParams:'',
+    basketSessid:'',
     order: {},
     orderPropertiesValue: {},//Свойства заказа
     propertyGroupIdsCheckByStep: {},//Группы свойств

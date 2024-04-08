@@ -5,7 +5,7 @@
 	<?foreach($arMainPageOrder as $key => $optionCode):?>
 		<?$strTemplateName = $arTheme['TEMPLATE_PARAMS'][$arTheme['INDEX_TYPE']['VALUE']][$arTheme['INDEX_TYPE']['VALUE'].'_'.$optionCode.'_TEMPLATE']['VALUE'];?>
 		<?$subtype = strtolower($optionCode);?>
-		
+
 		<?$dopBodyClass .= ' '.$optionCode.'_'.$strTemplateName;?>
 
 		<?//BIG_BANNER_INDEX?>

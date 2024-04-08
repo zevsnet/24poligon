@@ -19,6 +19,7 @@ $colsm = 12;
 		<div class="items">
 			<?$indexSection = $arParams['ROOT_MENU_TYPE'];?>
 			<?$lastIndex = count($arResult) - 1;?>
+
 			<?foreach($arResult as $i => $arItem):?>
 				<?$arItem["CHILD"] = $arItem["CHILD"] ?? [];?>
 				<?if($i === 1 && !$arItem["CHILD"]):?>
@@ -41,6 +42,7 @@ $colsm = 12;
 						</div>
 					<?endif;?>
 				</div>
+
 				<?if($arItem["CHILD"]):?>
 					<div id="<?=$indexSection?>" class="wrap panel-collapse wrap_compact_mobile">
 						<?foreach($arItem["CHILD"] as $arSubItem):?>

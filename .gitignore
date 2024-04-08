@@ -53,6 +53,6 @@ logs/
 /personal/order/payment/*
 /personal/price_all/*
 #!/bitrix/modules/primepix.propertytoolkit/
-
+/home/bitrix/www/local/webpack/node_modules/
 # Bitrix core
 /bitrix/

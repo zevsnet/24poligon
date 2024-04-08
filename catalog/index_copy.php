@@ -233,7 +233,7 @@ $APPLICATION->IncludeComponent(
 		"USE_STORE_SCHEDULE" => "Y",
 		"USE_MIN_AMOUNT" => "N",
 		"MIN_AMOUNT" => "10",
-		"STORE_PATH" => "/contacts/stores/#store_id#/",
+		"STORE_PATH" => "/contacts/stores/#CODE#/",
 		"MAIN_TITLE" => "Наличие на складах",
 		"MAX_AMOUNT" => "20",
 		"USE_ONLY_MAX_AMOUNT" => "Y",

@@ -15,6 +15,7 @@ if (CMax::IsBasketPage()) {
 <?CMax::ShowPageType('search_title_component');?>
 <?CMax::setFooterTitle();
 CMax::showFooterBasket();?>
+<div id="body_iframe_wrapper"></div>
 <div id="popup_iframe_wrapper"></div>
 <?
 if ($arExt) {

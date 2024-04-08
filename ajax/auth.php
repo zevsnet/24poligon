@@ -1,10 +1,11 @@
 <?
 require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
+global $APPLICATION, $USER, $arTheme;
 
-global $USER;
+$url = (is_array($arTheme['PERSONAL_PAGE_URL']) ? $arTheme['PERSONAL_PAGE_URL']['VALUE'] : '') ?: SITE_DIR.'personal/';
 
 if($_GET['auth_service_error']){
-	LocalRedirect(SITE_DIR.'personal/');
+	LocalRedirect($url);
 }
 ?>
 <?if(!$USER->IsAuthorized()):?>
@@ -14,9 +15,10 @@ if($_GET['auth_service_error']){
 		if($_REQUEST['backurl'] != $_SERVER['REQUEST_URI']){
 			$_SERVER['QUERY_STRING'] = '';
 			$_SERVER['REQUEST_URI'] = $_REQUEST['backurl'];
-			//$APPLICATION->reinitPath();
+
 			$APPLICATION->sDocPath2 = GetPagePath(false, true);
 			$APPLICATION->sDirPath = GetDirPath($APPLICATION->sDocPath2);
+			// $APPLICATION->reinitPath();
 		}
 	}?>
 	<a href="#" class="close jqmClose"><?=CMax::showIconSvg('', SITE_TEMPLATE_PATH.'/images/svg/Close.svg')?></a>
@@ -41,16 +43,18 @@ if($_GET['auth_service_error']){
 		);?>
 	</div>
 <?elseif(strlen($_REQUEST['backurl'])):?>
-	<?LocalRedirect($_REQUEST['backurl']);?>
+	<script>location.href = <?var_export($_REQUEST['backurl'])?></script>
 <?else:?>
-	<?if(strpos($_SERVER['HTTP_REFERER'], SITE_DIR.'personal/') === false && strpos($_SERVER['HTTP_REFERER'], SITE_DIR.'ajax/form.php') === false):?>
-		$APPLICATION->ShowHead();
-		?>
+	<?if(
+		strpos($_SERVER['HTTP_REFERER'], $url) === false &&
+		strpos($_SERVER['HTTP_REFERER'], SITE_DIR.'ajax/form.php') === false
+	):?>
+		<?$APPLICATION->ShowHead();?>
 		<script>
 		jsAjaxUtil.ShowLocalWaitWindow('id', 'wrap_ajax_auth', true);
 		BX.reload(false)
 		</script>
 	<?else:?>
-		<?LocalRedirect(SITE_DIR.'personal/');?>
+		<script>location.href = <?var_export($url)?></script>
 	<?endif;?>
 <?endif;?>

@@ -33,15 +33,15 @@ if($bMap && $itemsCnt){
 				$arItem['GPS_N'] = $arStoreMap[1];
 			}
 			$html = '';
-	
+
 			$html .= '<div class="title"><a href="'.$arItem["DETAIL_PAGE_URL"].'" class="dark_link">'.$arItem['NAME'].($arItem['PROPERTY_ADDRESS_VALUE'] ? ', '.$arItem['PROPERTY_ADDRESS_VALUE'] : '').'</a></div>';
-			
+
 			if(strlen($arItem['PROPERTY_SCHEDULE_VALUE']['TEXT'] ?? '') || $arItem['PROPERTY_PHONE_VALUE'] || $arItem['PROPERTY_METRO_VALUE'] || $arItem['PROPERTY_EMAIL_VALUE']){
 				$html .= '<div class="properties">';
-					
+
 					$html .= ($arItem['PROPERTY_METRO_VALUE'] ? '<div class="property schedule"><div class="title-prop font_upper">'.$arProperties['METRO']['NAME'].'</div><div class="value font_sm">'.(is_array($arItem['PROPERTY_METRO_VALUE']) ? implode('<br /> ', $arItem['PROPERTY_METRO_VALUE']) : $arItem['PROPERTY_METRO_VALUE']).'</div></div>' : '');
 					$html .= (strlen($arItem['PROPERTY_SCHEDULE_VALUE']['TEXT'] ?? '') ? '<div class="property schedule"><div class="title-prop font_upper">'.$arProperties['SCHEDULE']['NAME'].'</div><div class="value font_sm">'.$arItem['~PROPERTY_SCHEDULE_VALUE']['TEXT'].'</div></div>' : '');
-					
+
 					if($arItem['PROPERTY_PHONE_VALUE']){
 						$phone = '';
 						if(is_array($arItem['PROPERTY_PHONE_VALUE'])){
@@ -51,12 +51,12 @@ if($bMap && $itemsCnt){
 						}
 						else{
 							$phone = '<div class="value font_sm"><a class="dark_link" rel= "nofollow" href="tel:'.str_replace(array(' ', ',', '-', '(', ')'), '', $arItem['PROPERTY_PHONE_VALUE']).'">'.$arItem['PROPERTY_PHONE_VALUE'].'</a></div>';
-						
-							
+
+
 						}
 						$html .= '<div class="property phone"><div class="title-prop font_upper">'.$arProperties['PHONE']['NAME'].'</div>'.$phone.'</div>';
 					}
-				
+
 					$html .= (strlen($arItem['PROPERTY_EMAIL_VALUE']) ? '<div class="property email"><div class="title-prop font_upper">'.$arProperties['EMAIL']['NAME'].'</div><div class="value font_sm"><a class="dark_link" href="mailto:'.$arItem['PROPERTY_EMAIL_VALUE'].'">'.$arItem['PROPERTY_EMAIL_VALUE'].'</a></div></div>' : '');
 				$html .= '</div>';
 			}
@@ -146,7 +146,7 @@ if($bMap && $itemsCnt){
 		</div>
 	<?}
 ?>
-
+    <h1 class="sb_h1_contacts_stores">Адреса магазинов спецназначения Полигон</h1>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"shops",

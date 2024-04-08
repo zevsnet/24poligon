@@ -8646,23 +8646,23 @@ if (!funcDefined("basketActions")) {
             basketFly("open", "N");
           }
         }
-        if (checkCounters("google")) {
-          BX.unbindAll(
-            BX.Sale.BasketComponent.getEntity(
-              BX.Sale.BasketComponent.getCacheNode(BX.Sale.BasketComponent.ids.basketRoot),
-              "basket-checkout-button"
-            )
-          );
-        }
+        // if (checkCounters("google")) {
+        //   BX.unbindAll(
+        //     BX.Sale.BasketComponent.getEntity(
+        //       BX.Sale.BasketComponent.getCacheNode(BX.Sale.BasketComponent.ids.basketRoot),
+        //       "basket-checkout-button"
+        //     )
+        //   );
+        // }
       });
-      if (checkCounters("google")) {
-        BX.unbindAll(
-          BX.Sale.BasketComponent.getEntity(
-            BX.Sale.BasketComponent.getCacheNode(BX.Sale.BasketComponent.ids.basketRoot),
-            "basket-checkout-button"
-          )
-        );
-      }
+      // if (checkCounters("google")) {
+      //   BX.unbindAll(
+      //     BX.Sale.BasketComponent.getEntity(
+      //       BX.Sale.BasketComponent.getCacheNode(BX.Sale.BasketComponent.ids.basketRoot),
+      //       "basket-checkout-button"
+      //     )
+      //   );
+      // }
       $(document).on(
         "click",
         ".bx_ordercart_order_pay_center .checkout, .basket-checkout-section-inner .basket-btn-checkout",

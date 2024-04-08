@@ -1,3 +1,6 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<? use Poligon\Core\Aspro\CMaxCustom;
+
+if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?$this->setFrameMode(true);?>
-<?CMax::drawShopDetail($arResult, $arParams, "N");?>
+
+<?CMaxCustom::drawShopDetail($arResult, $arParams, "N");?>

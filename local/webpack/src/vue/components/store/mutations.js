@@ -6,6 +6,15 @@ export default {
     setStores(state, payload) {
         state.stores = payload
     },
+    setBasketSignedTemplate(state, payload) {
+        state.basketSignedTemplate = payload
+    },
+    setBasketSignedParams(state, payload) {
+        state.basketSignedParams = payload
+    },
+    setBasketSessid(state, payload) {
+        state.basketSessid = payload
+    },
     setBasketItems(state, payload) {
         state.basketItems = payload
     },

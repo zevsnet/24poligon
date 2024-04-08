@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Информация по сайту военторга. Навигация по разделам: как купить армейские товары, сотрудничество и блог магазина.");
+$APPLICATION->SetPageProperty("title", "Полезная информация о покупке военных товаров в Полигоне");
 $APPLICATION->SetTitle("Справочная информация");
 ?><div class="inside_page_content">
 	<div>

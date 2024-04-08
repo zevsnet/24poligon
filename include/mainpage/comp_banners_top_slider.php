@@ -5,8 +5,8 @@
 
 
 <?$APPLICATION->IncludeComponent(
-	"aspro:com.banners.optimus", 
-	"top_slider_banners", 
+	"aspro:com.banners.optimus",
+	"top_slider_banners",
 	array(
 		"IBLOCK_TYPE" => "aspro_optimus_adv",
 		"IBLOCK_ID" => "141",

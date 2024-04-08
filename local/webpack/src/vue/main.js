@@ -39,6 +39,7 @@ $(function () {
     }
 
     /** Получение начальных данных */
+
     const basketElement = document.getElementById('basket')
 
     if (basketElement) {

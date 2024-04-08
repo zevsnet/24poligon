@@ -1,18 +1,18 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"О компании", 
-		"/company/", 
+		"Вакансии", 
+		"/company/vacancy/", 
 		Array(), 
-		Array(),
+		Array(), 
 		"" 
 	),
 	Array(
-		"Реквизиты",
-		"/company/rekvizity/",
-		Array(),
-		Array(),
-		""
+		"Реквизиты", 
+		"/company/rekvizity/", 
+		Array(), 
+		Array(), 
+		"" 
 	)
 );
 ?>

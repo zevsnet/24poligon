@@ -1,6 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Блог");
+$APPLICATION->SetPageProperty("description", "Статьи о жизни военных. Армейские новости, истории и интересные факты в блоге магазина Полигон.");
+$APPLICATION->SetPageProperty("title", "Блог магазина военных товаров Полигон");
+$APPLICATION->SetTitle("Блог ");
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
@@ -64,9 +66,9 @@ $APPLICATION->SetTitle("Блог");
 		),
 		"DETAIL_PROPERTY_CODE" => array(
 			0 => "LINK_GOODS",
-			1 => "FORM_QUESTION",
-			2 => "FORM_ORDER",
-			3 => "LINK_SERVICES",
+			1 => "LINK_SERVICES",
+			2 => "FORM_QUESTION",
+			3 => "FORM_ORDER",
 			4 => "PHOTOS",
 			5 => "DOCUMENTS",
 			6 => "",
@@ -154,7 +156,7 @@ $APPLICATION->SetTitle("Блог");
 		"LINKED_ELEMENST_PAGE_COUNT" => "20",
 		"SHOW_DISCOUNT_PERCENT_NUMBER" => "N",
 		"PRICE_CODE" => array(
-			0 => "BASE",
+			0 => "Розничная цена",
 		),
 		"STORES" => array(
 			0 => "",
@@ -199,6 +201,40 @@ $APPLICATION->SetTitle("Блог");
 		"IBLOCK_LINK_PARTNERS_ID" => "177",
 		"BLOCK_PARTNERS_NAME" => "Партнеры",
 		"DETAIL_LINKED_GOODS_SLIDER" => "Y",
+		"SHOW_DISCOUNT_PERCENT" => "N",
+		"SHOW_DISCOUNT_TIME" => "Y",
+		"SHOW_MEASURE" => "N",
+		"USE_SUBSCRIBE_IN_TOP" => "N",
+		"TAGS_SECTION_COUNT" => "",
+		"DISPLAY_LINKED_PAGER" => "Y",
+		"MAX_GALLERY_ITEMS" => "5",
+		"SHOW_GALLERY_GOODS" => "Y",
+		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
+		"CONVERT_CURRENCY" => "N",
+		"CURRENCY_ID" => "RUB",
+		"ADD_DETAIL_TO_SLIDER" => "Y",
+		"SHOW_ONE_CLICK_BUY" => "Y",
+		"SHOW_OLD_PRICE" => "N",
+		"SHOW_RATING" => "Y",
+		"DISPLAY_WISH_BUTTONS" => "Y",
+		"STIKERS_PROP" => "-",
+		"SALE_STIKER" => "-",
+		"SHOW_SECTIONS_FILTER" => "Y",
+		"LINKED_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"SHOW_COUNT_ELEMENTS" => "Y",
+		"LINKED_ELEMENT_TAB_SORT_FIELD" => "sort",
+		"LINKED_ELEMENT_TAB_SORT_ORDER" => "asc",
+		"LINKED_ELEMENT_TAB_SORT_FIELD2" => "id",
+		"LINKED_ELEMENT_TAB_SORT_ORDER2" => "desc",
+		"SORT_REGION_PRICE" => "Премиальная цена",
+		"SECTIONS_TAGS_DEPTH_LEVEL" => "2",
+		"ADD_PICT_PROP" => "",
+		"IBLOCK_CATALOG_TYPE" => "-",
+		"IBLOCK_CATALOG_ID" => "37",
+		"PRICE_VAT_INCLUDE" => "N",
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "#SECTION_CODE#/",

@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Важная информация о магазине военной амуниции: выбор и ассортимент армейских товаров, преимущества Полигона, условия работы с оптовыми представителями.");
+$APPLICATION->SetPageProperty("title", "Военторг Полигон - информация о магазине");
 $APPLICATION->SetTitle("О компании");
 ?><h2>
 Армейский интернет-магазин «Полигон» </h2>

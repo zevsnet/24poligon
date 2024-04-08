@@ -1,1 +1,1 @@
-<a href="mailto:connect@24poligon.ru">info@24poligon.ru</a>
+<a href="mailto:sale7@24poligon.ru">sale7@24poligon.ru</a>  

@@ -4,8 +4,33 @@ use SB\Site\General;
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/sb_site/init.php");
 $APPLICATION->SetTitle("Корзина");
+
+//убрать когда заказ оформление норм будет
 ?>
-<script>window.basketJSParams = window.basketJSParams || [];</script>
+<style>
+	.basket-checkout-block.basket-checkout-btn.checkout-order{
+		display: none;
+	}
+	.btn.btn-transparent-border-color.oneclickbuy{
+		background: #F25C05 ;
+		color: #fff;
+		display: none;
+	}
+	.btn.btn-transparent-border-color.oneclickbuy:hover{
+		background: #F24405 ;
+		color: #fff;
+	}	
+</style>
+<script>
+window.basketJSParams = window.basketJSParams || [];
+$(document).ready(function(){
+	 setTimeout(function(){
+		$('.btn.oneclickbuy').html('Оформить заказ'); 	
+		$('.btn.oneclickbuy').show(); 
+	 }, 1000);
+	
+});
+</script>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket", 
 	"v2", 

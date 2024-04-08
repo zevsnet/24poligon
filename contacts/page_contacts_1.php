@@ -10,7 +10,7 @@ use Poligon\Core\Aspro\CMaxCustom; ?>
 <div class="contacts-v2">
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
-	"mx_contacts", 
+	"mx_contacts",
 	array(
 		"IBLOCK_TYPE" => "aspro_max_content",
 		"IBLOCK_ID" => "165",
@@ -35,7 +35,7 @@ use Poligon\Core\Aspro\CMaxCustom; ?>
 		"CACHE_TIME" => "100000",
 		"CACHE_FILTER" => "N",
 		"CACHE_GROUPS" => "N",
-		"SET_TITLE" => "Y",
+		"SET_TITLE" => "N",
 		"SET_STATUS_404" => "N",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -179,7 +179,7 @@ use Poligon\Core\Aspro\CMaxCustom; ?>
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "",
-			"detail" => "stores/#ELEMENT_ID#/",
+			"detail" => "stores/#ELEMENT_CODE#/",
 			"rss" => "rss/",
 			"rss_section" => "#SECTION_ID#/rss/",
 		)

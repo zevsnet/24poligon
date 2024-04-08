@@ -1,57 +1,57 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Распродажа", 
-		"/catalog/?q=rasprodazha", 
+		"Товары для СВО", 
+		"//landings/svo/", 
 		Array(), 
-		Array("CLASS" => "rounded2 rasprod", "ICON"=> "icon_discount"),
+		Array("CLASS"=>"rounded2 rasprod", "ICON"=>"icon_discount"), 
+		"" 
+	),
+	Array(
+		"Заказ шевронов", 
+		"//chevron/", 
+		Array(), 
+		Array(), 
 		"" 
 	),
 	Array(
 		"Акции", 
-		"/sale/", 
+		"//sale/", 
 		Array(), 
 		Array("ICON"=>"icon_discount"), 
 		"" 
 	),
 	Array(
-		"Услуги", 
-		"/services/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
 		"Блог", 
-		"/blog/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Проекты", 
-		"/projects/", 
+		"//blog/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Как купить", 
-		"/help/", 
+		"//help/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Компания", 
-		"/company/", 
+		"//company/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Контакты", 
-		"/contacts/", 
+		"//contacts/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Вакансии", 
+		"//company/vacancy/", 
 		Array(), 
 		Array(), 
 		"" 

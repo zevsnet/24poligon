@@ -1,7 +1,7 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();?>
 <?$APPLICATION->IncludeComponent(
-	"aspro:com.banners.max", 
-	"top_big_banners_1_2", 
+	"aspro:com.banners.max",
+	"top_big_banners_1_2",
 	array(
 		"IBLOCK_TYPE" => "aspro_max_adv",
 		"IBLOCK_ID" => "181",
@@ -75,3 +75,7 @@
 	),
 	false
 );?>
+<?
+global $arRegion;
+?>
+<h1 class="sb_h1_main">Военторг Полигон в <?=$arRegion['PROPERTY_REGION_NAME_DECLINE_PP_VALUE']?></h1>

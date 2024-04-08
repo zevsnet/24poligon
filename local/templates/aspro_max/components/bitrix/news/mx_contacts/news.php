@@ -165,7 +165,7 @@ if($arItems)
 										<div class="property phone">
 												<div class="title font_upper muted">Телефон</div>
 												<div class="">
-														<div class="value darken" itemprop="telephone"><a title="звонок бесплатный по РФ" href="tel:+79676123562">+7 967 612-35-62</a></div>
+														<div class="value darken" itemprop="telephone"><a title="звонок бесплатный по РФ" href="tel:+73912001409">8(391) 2001409 доб.508</a></div>
 												</div>
 										</div>
 			</div>
@@ -175,7 +175,7 @@ if($arItems)
 												<div class="title font_upper muted">E-mail</div>
 												<div class="">
 														<div class="value darken" itemprop="email">
-																<a href="mailto:ra@24poligon.ru">ra@24poligon.ru</a>
+																<a href="mailto:sale7@24poligon.ru">sale7@24poligon.ru</a>
 														</div>
 												</div>
 										</div>
@@ -305,27 +305,30 @@ if($arItems)
 						<?endif;?>
 						<div class="contacts-page-map">
 							<?$APPLICATION->IncludeComponent(
-								"bitrix:map.yandex.view",
-								"map",
-								array(
-									"INIT_MAP_TYPE" => "MAP",
-									"MAP_DATA" => serialize(array("yandex_lat" => $mapLAT, "yandex_lon" => $mapLON, "yandex_scale" => 19, "PLACEMARKS" => $arPlacemarks)),
-									"MAP_WIDTH" => "100%",
-									"MAP_HEIGHT" => "550",
-									"CONTROLS" => array(
-										0 => "ZOOM",
-										1 => "TYPECONTROL",
-										2 => "SCALELINE",
-									),
-									"OPTIONS" => array(
-										0 => "ENABLE_DBLCLICK_ZOOM",
-										1 => "ENABLE_DRAGGING",
-									),
-									"MAP_ID" => "MAP_v33",
-									"COMPONENT_TEMPLATE" => "map"
-								),
-								false
-							);?>
+	"bitrix:map.yandex.view", 
+	"map", 
+	array(
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_DATA" => serialize(array("yandex_lat"=>$mapLAT,"yandex_lon"=>$mapLON,"yandex_scale"=>19,"PLACEMARKS"=>$arPlacemarks)),
+		"MAP_WIDTH" => "100%",
+		"MAP_HEIGHT" => "500",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "SMALLZOOM",
+			2 => "TYPECONTROL",
+			3 => "SCALELINE",
+		),
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+			1 => "ENABLE_DRAGGING",
+		),
+		"MAP_ID" => "MAP_v33",
+		"COMPONENT_TEMPLATE" => "map",
+		"API_KEY" => "",
+		"USE_REGION_DATA" => "N"
+	),
+	false
+);?>
 						</div>
 						<?if($arParams['SHOW_TOP_MAP'] == 'Y'):?>
 							<?$this->EndViewTarget();?>

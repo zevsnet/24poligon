@@ -1,0 +1,12 @@
+.tanais-order {
+  --color-primary-one-h: 344;
+  --color-primary-one-s: 78%;
+  --color-primary-one-l: 61%;
+
+  --color-primary-two-h: 189;
+  --color-primary-two-s: 100%;
+  --color-primary-two-l: 30%;
+
+  /*--color-block-header: #aacfd04f;*/
+  --color-block-header: hsl(182, 29%, 74%);
+}

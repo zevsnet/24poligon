@@ -20,7 +20,7 @@
 		"ELEMENT_SORT_ORDER2" => "desc",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"SHOW_ALL_WO_SECTION" => "Y",
-		"HIDE_NOT_AVAILABLE" => "N",
+		"HIDE_NOT_AVAILABLE" => "Y",
 		"ELEMENT_COUNT" => "30",
 		"CACHE_TYPE" => "A",
 		"CACHE_TIME" => "36000000",
@@ -63,7 +63,11 @@
 		"FIELDS" => array(
 			0 => "",
 			1 => "",
-		)
+		),
+		"SHOW_ONE_CLICK" => "Y",
+		"SHOW_GALLERY" => "Y",
+		"MAX_GALLERY_ITEMS" => "5",
+		"ADD_PICT_PROP" => "MORE_PHOTO"
 	),
 	false
 );?>

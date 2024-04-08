@@ -335,4 +335,13 @@ class Helper
         }
         return false;
     }
+
+    public static function countLine(){
+        switch($_SERVER['REQUEST_URI']){
+            case '/catalog/?q=rasprodazha':
+                return 4; break;
+            default:
+                return 3;
+        }
+    }
 }

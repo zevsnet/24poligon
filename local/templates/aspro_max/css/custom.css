@@ -6,7 +6,69 @@
 	padding-right: 5px;
 	border-radius: 2px;
 }
-
 .rasprod a div:hover {
 	background: #fce381;
+}
+.sb_h1_main{
+	text-align: center;
+	margin-top: -20px;
+}
+.sb_h1_contacts_stores{
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.shop-detail1 .left_block_store .address:not(.property) .value  h1{
+	font-size: 27px;
+	line-height: 1.35em;
+}
+.item.sb_border_block.mx_contact_item .sb_top_line {
+	border-top: 1px solid #ececec;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.item.sb_border_block.mx_contact_item .phones,
+.item.sb_border_block.mx_contact_item .emails,
+.item.sb_border_block.mx_contact_item .title,
+.item.sb_border_block.mx_contact_item .middle-prop,
+.item.sb_border_block.mx_contact_item .schedule
+{
+	padding-bottom: 10px;
+}
+.item.sb_border_block.mx_contact_item .middle-prop .show_on_map {
+	cursor: pointer;
+	font-weight: 800;
+}
+.item.sb_border_block.mx_contact_item .middle-prop i,
+.item.sb_border_block.mx_contact_item .schedule i{
+	margin-right: 10px;
+}
+.wrapper_inner_half.shop-detail1{
+	border-top:none;
+}
+.btn.btn-default, .catalog_detail .sku_props .bx_item_detail_size ul li.active, .bx_catalog_item_scu ul li.item.active {
+	background-color: #F25C05;
+	border-color: #F25C05;
+	color: #ffffff;
+}
+.btn.btn-default:hover, .btn.btn-default:active, .btn.btn-default:focus {
+	background-color: #F24405;
+	border-color: #F24405;
+}
+.btn.btn-transparent-border-color:hover {
+	background-color: #F24405;
+	border-color: #F24405;
+}
+body .basket-link.basket-count .count {
+	background-color: #F25C05;
+}
+#headerfixed a.basket-link:hover .svg.inline use {
+	fill: #F25C05;
+}
+
+.BIG_BANNER_INDEX{
+background: #fff!important;
+}
+.BIG_BANNER_INDEX h1{
+  margin-top: 40px!important;
 }

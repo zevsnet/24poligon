@@ -88,20 +88,20 @@ $arUrlRewrite=array (
     'PATH' => '/company/reviews/index.php',
     'SORT' => 100,
   ),
-  61 => 
-  array (
-    'CONDITION' => '#^/contacts/stores/#',
-    'RULE' => '',
-    'ID' => 'bitrix:catalog.store',
-    'PATH' => '/contacts/stores/index.php',
-    'SORT' => 100,
-  ),
-  72 => 
+  97 => 
   array (
     'CONDITION' => '#^/company/vacancy/#',
     'RULE' => '',
     'ID' => 'bitrix:news',
     'PATH' => '/company/vacancy/index.php',
+    'SORT' => 100,
+  ),
+  100 => 
+  array (
+    'CONDITION' => '#^/contacts/stores/#',
+    'RULE' => '',
+    'ID' => 'bitrix:catalog.store',
+    'PATH' => '/contacts/stores/index.php',
     'SORT' => 100,
   ),
   13 => 
@@ -224,15 +224,23 @@ $arUrlRewrite=array (
     'PATH' => '/projects/index.php',
     'SORT' => 100,
   ),
-  74 => 
+  92 => 
   array (
     'CONDITION' => '#^/landings/#',
     'RULE' => '',
-    'ID' => 'bitrix:catalog',
+    'ID' => 'bitrix:news',
     'PATH' => '/landings/index.php',
     'SORT' => 100,
   ),
-  88 => 
+  102 => 
+  array (
+    'CONDITION' => '#^/info/faq/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/info/faq/index.php',
+    'SORT' => 100,
+  ),
+  104 => 
   array (
     'CONDITION' => '#^/contacts/#',
     'RULE' => '',
@@ -240,7 +248,7 @@ $arUrlRewrite=array (
     'PATH' => '/contacts/page_contacts_1.php',
     'SORT' => 100,
   ),
-  89 => 
+  105 => 
   array (
     'CONDITION' => '#^/catalog/#',
     'RULE' => '',
@@ -256,14 +264,6 @@ $arUrlRewrite=array (
     'PATH' => '/news/index.php',
     'SORT' => 100,
   ),
-  44 => 
-  array (
-    'CONDITION' => '#^/sale/#',
-    'RULE' => '',
-    'ID' => 'bitrix:news',
-    'PATH' => '/sale/index.php',
-    'SORT' => 100,
-  ),
   62 => 
   array (
     'CONDITION' => '#^/ajax/#',
@@ -272,7 +272,15 @@ $arUrlRewrite=array (
     'PATH' => '/ajax/index.php',
     'SORT' => 100,
   ),
-  69 => 
+  70 => 
+  array (
+    'CONDITION' => '#^/auth/#',
+    'RULE' => '',
+    'ID' => 'aspro:auth.max',
+    'PATH' => '/auth/index.php',
+    'SORT' => 100,
+  ),
+  96 => 
   array (
     'CONDITION' => '#^/blog/#',
     'RULE' => '',
@@ -280,12 +288,12 @@ $arUrlRewrite=array (
     'PATH' => '/blog/index.php',
     'SORT' => 100,
   ),
-  70 => 
+  101 => 
   array (
-    'CONDITION' => '#^/auth/#',
+    'CONDITION' => '#^/sale/#',
     'RULE' => '',
-    'ID' => 'aspro:auth.max',
-    'PATH' => '/auth/index.php',
+    'ID' => 'bitrix:news',
+    'PATH' => '/sale/index.php',
     'SORT' => 100,
   ),
   66 => 

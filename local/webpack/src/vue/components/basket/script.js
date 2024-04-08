@@ -10,6 +10,16 @@ export default {
     components: {
         BasketInput
     },
+    data() {
+        return {
+            priceAnimationData: {
+                start: {},
+                finish: {},
+                currency: {},
+                int: {},
+            }
+        }
+    },
     mixins: [commonMixin],
     store,
     props: {
@@ -19,15 +29,16 @@ export default {
         } // Данные приложения, заполняются в шаблоне компонента
     },
     created: function () {
-        this.setOrderInfoKoronaBalance(this.application.KORONA_INNER)
-        this.refreshOrder()
+        this.loadParams();
     },
     computed: {
         ...mapState([
             'errorList',
             'basketValues',
             'basketItemUpdate',
-            'koronaBalance',
+            'basketSignedTemplate',
+            'basketSignedParams',
+            'basketSessid',
         ]),
         ...mapGetters([
             'getBasket',
@@ -35,8 +46,7 @@ export default {
             'getStores',
             'getStoreSelected',
             'getAjaxProcess',
-            'getKoronaBalance',
-            'getKoronaBalanceCode',
+
         ]),
 
         formData() {
@@ -57,7 +67,7 @@ export default {
                     res['PRICE'] = this.getBasket.allSum_FORMATED
                 }
                 if (this.getBasket.allSum) {
-                    res['PRICE_FORMATED'] = this.getBasket.allSum
+                    res['PRICE_FORMATED'] = (this.getBasket.allSum).toFixed(0) + ' руб.';
                 }
                 if (this.getBasket.DISCOUNT_PRICE_FORMATED) {
                     res['DISCOUNT_PRICE_FORMATED'] = this.getBasket.DISCOUNT_PRICE_FORMATED
@@ -69,14 +79,6 @@ export default {
                 if (this.getBasket.BONUS_PRICE_FORMATED) {
                     res['BONUS_PRICE_FORMATED'] = this.getBasket.BONUS_PRICE_FORMATED
                 }
-
-                // $PAN = $result['PAN'] ?: false;
-                // $priceBonus = General::getBonusSaleGetInfo2($totalData['PRICE'] * 100, General::getChequeOrder(), $PAN);
-                //
-                // if ($priceBonus) {
-                //     $totalData['BONUS_PRICE'] = $priceBonus / 100;
-                //     $totalData['BONUS_PRICE_FORMATED'] = CurrencyFormat($priceBonus / 100, 'RUB');
-                // }
 
 
                 return res
@@ -96,14 +98,6 @@ export default {
             },
             deep: true
         },
-        koronaBalance: {
-            handler() {
-                this.$nextTick(() => {
-                    this.refreshOrder()
-                })
-            },
-            deep: true
-        },
     }, // Наблюдатели
     methods: {
         ...mapActions([
@@ -115,14 +109,17 @@ export default {
             'setBasketItems',
             'setBasketItemId',
             'clearBasketItemUpdate',
-            'setOrderInfoKoronaBalance',
-            'setStores'
+            'setStores',
+            'setBasketSignedTemplate',
+            'setBasketSignedParams',
+            'setBasketSessid',
         ]),
         isDelayElement: (status) => {
             return status === 'Y'
         },
         setQuantityElement: function (id, method, count) {
             console.log(id, method);
+
             this.setBasketItemId({
                 name: id,
                 value: method,
@@ -130,11 +127,45 @@ export default {
             })
             this.refreshOrder()
         },
+        loadParams: function () {
+            var _this = this;
+            axios({
+                method: 'get',
+                url: '/bitrix/services/main/ajax.php?action=poligon%3Acore.sale.getSignet',
+            }).then((response) => {
+                _this.setBasketSignedTemplate(response.data.data.signedTemplate);
+                _this.setBasketSignedParams(response.data.data.signedParams);
+                _this.setBasketSessid(response.data.data.basketSessid);
+
+                _this.refreshOrder();
+
+            }).catch(function (error) {
+            })
+        },
         selectedStore: function (store_id) {
             this.setBasketValue({
                 name: 'selectedStore',
                 value: store_id
             })
+        },
+        clearPriceAnimationData: function () {
+            this.priceAnimationData = {
+                start: {},
+                finish: {},
+                currency: {},
+                int: {},
+            };
+        },
+        addPriceAnimationData: function (nodeId, start, finish, currency) {
+            if (!window.BX.type.isPlainObject(this.priceAnimationData)) {
+                this.clearPriceAnimationData();
+            }
+
+            this.priceAnimationData.start[nodeId] = parseFloat(start);
+            this.priceAnimationData.finish[nodeId] = parseFloat(finish);
+            this.priceAnimationData.currency[nodeId] = currency;
+            this.priceAnimationData.int[nodeId] =
+                parseFloat(start) === parseInt(start) && parseFloat(finish) === parseInt(finish);
         },
         refreshOrder: _.debounce(
             function () {
@@ -142,6 +173,14 @@ export default {
                 let params = new FormData()
                 params = this.getFormData()
                 params.append('action', 'recalculateAjax')
+                params.append('site_template_id', 'aspro_max');
+                params.append('sessid', this.basketSessid);
+                params.append('via_ajax', 'Y');
+                params.append('site_id', 's2');
+                params.append('fullRecalculation', 'N');
+                params.append('template', this.basketSignedTemplate);
+                params.append('signedParamsString', this.basketSignedParams);
+
                 this.clearBasketItemUpdate()
                 axios({
                     method: 'post',
@@ -150,28 +189,16 @@ export default {
                 }).then((response) => {
                     this.setBasket(response.data.BASKET_DATA)
                     this.setBasketItems(response.data.BASKET_DATA.GRID.ROWS)
-                    this.setStores(response.data.STORES)
 
-                    if (this.getStoreSelected == false) {
-                        this.setBasketValue({
-                            name: 'selectedStore',
-                            value: response.data.STORE_DEFAULT + '_def'
-                        })
-                        this.setBasketValue({
-                            name: 'defaultStore',
-                            value: response.data.STORE_DEFAULT + '_def'
-                        })
-                    }
                     window.BX.onCustomEvent('OnBasketChange');
-                    //vm.setAjaxProcess(false)
                 }).catch(function (error) {
-                    // vm.setAjaxProcess(false)
                 })
             },
             500
         ),
         getFormData(submit = false) {
-            let formData = new FormData()
+            let formData = new FormData();
+
             _.each(this.formData, (value, key) => {
                 formData.append(key, value)
             })
@@ -185,26 +212,18 @@ export default {
                     formData.append('basket[' + key + ']', value)
                 }
             })
-            formData.append('store_id', this.getStoreSelected)
-            if (this.getKoronaBalanceCode('PAN')) {
-                formData.append('pan', this.getKoronaBalanceCode('PAN'))
-            }
-            if (this.getKoronaBalanceCode('COUPON')) {
-                formData.append("basket[coupon]", this.getKoronaBalanceCode('COUPON'))
-            }
             return formData
         },
         nextStep2Order: function () {
             if (this.sumBasket.PRICE_FORMATED > 0) {
                 let params = new FormData()
-                params.append('PAN', this.getKoronaBalanceCode('PAN'));
                 params.append('STORE', this.getStoreSelected);
                 axios({
                     method: 'post',
                     url: '/ajax/Main/setSaveBasket',
                     data: params
                 }).then((response) => {
-                    if(response.data.status){
+                    if (response.data.status) {
                         window.location.href = '/order/';
                     }
                     vm.setAjaxProcess(false)

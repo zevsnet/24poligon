@@ -1,6 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Вакансии");
+$APPLICATION->SetPageProperty("description", "Работа в военторге Полигон. Вакансии компании по продаже военных товаров в регионах и по России.");
+$APPLICATION->SetPageProperty("title", "Вакансии магазина Полигон по всей России");
+$APPLICATION->SetTitle("Вакансии компании Полигон");
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 

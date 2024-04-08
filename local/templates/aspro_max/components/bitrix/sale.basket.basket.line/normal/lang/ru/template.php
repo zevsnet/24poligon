@@ -11,7 +11,7 @@
 	$MESS["ADDED_TO_BASKET"] = "В корзину добавлено";
 	$MESS["CHECKOUT"] = "Оформить заказ";
 	$MESS["GO_TO_CATALOG"] = "Перейти в каталог";
-	$MESS["GO_TO_BASKET"] = "Перейти в корзину";
+	$MESS["GO_TO_BASKET"] = "Оформить заказ";
 	$MESS["GO_TO_DELAY"] = "Перейти в отложенные";
 	$MESS["EMPTY_BASKET"] = "пуста";
 	$MESS["EMPTY_BLOCK"] = "пусто";

@@ -44,6 +44,11 @@ if($USER->IsAdmin() && (isset($_POST['SAVE_OPTIONS']) && $_POST['SAVE_OPTIONS'] 
 							$index_code = array_pop($arTmpOption);
 							$index_subvalue = implode('_', $arTmpOption);
 						}
+						elseif(strpos($optionCode, 'fon') !== false)
+						{
+							$index_code = preg_replace('/^fon(index\d+).*/', '$1', $optionCode);
+							$index_subvalue = $optionCode;
+						}
 						else
 						{
 							$arTmpOption = explode('_', $optionCode, 2);
@@ -123,8 +128,9 @@ if($USER->IsAdmin() && (isset($_POST['SAVE_OPTIONS']) && $_POST['SAVE_OPTIONS'] 
 									}
 									elseif(strpos($key2, 'SORT_ORDER_') !== false)
 										unset($arSubParams[$key2]);
-									elseif(strpos($key, 'fon') !== false)
-										\Bitrix\Main\Config\Option::set('aspro.max', $key."_".$key2, $value, SITE_ID);
+									elseif(strpos($key2, 'fon') !== false){
+										\Bitrix\Main\Config\Option::set('aspro.max', $key2, $value, SITE_ID);
+									}
 								}
 							}
 

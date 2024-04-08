@@ -50,7 +50,7 @@
 	$MESS["SALE_FAST_ORDER_DESCRIPTION"] = "Вам потребуется указать<br />только имя и номер телефона";
 	$MESS["NO_NEED_AMMOUNT"] = "";//"Данного количества<br/> нет на складе";
 	$MESS["BASKET_TITLE"] = "Корзина";
-	$MESS["GO_TO_BASKET"] = "Перейти в корзину";
+	$MESS["GO_TO_BASKET"] = "Оформить заказ";
 	$MESS["STILL"] = "Еще";
 	$MESS["IN_BASKET_SMALL"] = "в корзине";
 	$MESS["PRODUCTS_ONE"] = "товар";

@@ -1,0 +1,71 @@
+<? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+
+$APPLICATION->IncludeComponent(
+	"bitrix:sale.basket.basket", 
+	"tanais.basket.basket", 
+	array(
+		"BASKET_WITH_ORDER_INTEGRATION" => "Y",
+		"ACTION_VARIABLE" => "basketAction",
+		"ADDITIONAL_PICT_PROP_2" => "-",
+		"ADDITIONAL_PICT_PROP_3" => "-",
+		"AJAX_MODE" => "Y",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"AUTO_CALCULATION" => "Y",
+		"BASKET_IMAGES_SCALING" => "standard",
+		"COLUMNS_LIST" => array(
+			0 => "NAME",
+			1 => "DISCOUNT",
+			2 => "PRICE",
+			3 => "QUANTITY",
+			4 => "SUM",
+			5 => "PROPS",
+			6 => "DELETE",
+			7 => "DELAY",
+		),
+		"COLUMNS_LIST_EXT" => array(
+			0 => "PREVIEW_PICTURE",
+			1 => "DELETE",
+			2 => "SUM",
+		),
+		"COLUMNS_LIST_MOBILE" => array(
+			0 => "PREVIEW_PICTURE",
+			1 => "DELETE",
+			2 => "SUM",
+		),
+		"COMPATIBLE_MODE" => "N",
+		"CORRECT_RATIO" => "Y",
+		"COUNT_DISCOUNT_4_ALL_QUANTITY" => "N",
+		"DEFERRED_REFRESH" => "N",
+		"DISCOUNT_PERCENT_POSITION" => "bottom-right",
+		"DISPLAY_MODE" => "extended",
+		"EMPTY_BASKET_HINT_PATH" => "/",
+		"LABEL_PROP" => array(
+		),
+		"OFFERS_PROPS" => array(
+			0 => "SIZES_SHOES",
+			1 => "SIZES_CLOTHES"
+		),
+		"PATH_TO_ORDER" => "/personal/order/make/",
+		"PRICE_DISPLAY_MODE" => "N",
+		"PRICE_VAT_SHOW_VALUE" => "Y",
+		"PRODUCT_BLOCKS_ORDER" => "props,sku,columns",
+		"QUANTITY_FLOAT" => "N",
+		"SET_TITLE" => "N",
+		"SHOW_DISCOUNT_PERCENT" => "Y",
+		"SHOW_FILTER" => "N",
+		"SHOW_RESTORE" => "N",
+		"TEMPLATE_THEME" => "site",
+		"HIDE_COUPON" => "Y",
+		"TOTAL_BLOCK_DISPLAY" => array(),
+		"USE_DYNAMIC_SCROLL" => "N",
+		"USE_ENHANCED_ECOMMERCE" => "N",
+		"USE_GIFTS" => "N",
+		"USE_PREPAYMENT" => "N",
+		"USE_PRICE_ANIMATION" => "Y",
+		"COMPONENT_TEMPLATE" => "tanais.basket.basket"
+	),
+	false
+);

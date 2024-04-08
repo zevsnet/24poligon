@@ -1,18 +1,35 @@
+<?global $arRegion;
+if($arRegion)
+{
+	if($arRegion['LIST_PRICES'])
+	{
+		if(reset($arRegion['LIST_PRICES']) != 'component')
+			$arParams['PRICE_CODE'] = array_keys($arRegion['LIST_PRICES']);
+	}
+	if($arRegion['LIST_STORES'])
+	{
+		if(reset($arRegion['LIST_STORES']) != 'component')
+			$arParams['STORES'] = $arRegion['LIST_STORES'];
+	}
+}
+?>
+<?\Aspro\Functions\CAsproMax::replacePropsParams($arParams);?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.top", 
 	"products_slider", 
 	array(
-		"IBLOCK_TYPE" => "aspro_mshop_catalog",
-		"IBLOCK_ID" => "156",
+		"IBLOCK_TYPE" => "aspro_max_catalog",
+		"IBLOCK_ID" => \Bitrix\Main\Config\Option::get("aspro.max", "CATALOG_IBLOCK_ID", "#IBLOCK_CATALOG_ID#"),
 		"ELEMENT_SORT_FIELD" => "sort",
 		"ELEMENT_SORT_ORDER" => "asc",
-		"ELEMENT_COUNT" => "20",
+		"ELEMENT_COUNT" => ($arParams["LINKED_ELEMENST_PAGE_COUNT"] ? $arParams["LINKED_ELEMENST_PAGE_COUNT"] : 20),
 		"LINE_ELEMENT_COUNT" => "",
 		"PROPERTY_CODE" => array(
 			0 => "",
 			1 => "",
 		),
-		"OFFERS_LIMIT" => "10",
+		"OFFERS_LIMIT" => $arParams["OFFERS_LIMIT"],
+		"OFFER_ADD_PICT_PROP" => $arParams["OFFER_ADD_PICT_PROP"],
 		"SECTION_URL" => "",
 		"DETAIL_URL" => "",
 		"BASKET_URL" => SITE_DIR."basket/",
@@ -24,24 +41,26 @@
 		"CACHE_TYPE" => "A",
 		"CACHE_TIME" => "3600000",
 		"CACHE_GROUPS" => "N",
+		"CACHE_FILTER" => "Y",
 		"DISPLAY_COMPARE" => "Y",
-		"PRICE_CODE" => array(
-			0 => "Розничная цена",
-		),
-		"USE_PRICE_COUNT" => "N",
+		"PRICE_CODE" => $arParams["PRICE_CODE"],
+		"CUSTOM_FILTER" => $arParams["~CUSTOM_FILTER"],
+		"STORES" => $arParams["STORES"],
+		"USE_REGION" => ($arRegion ? "Y" : "N"),
+		"USE_PRICE_COUNT" => "Y",
 		"SHOW_PRICE_COUNT" => "1",
 		"PRICE_VAT_INCLUDE" => "Y",
 		"PRODUCT_PROPERTIES" => array(
 		),
 		"CONVERT_CURRENCY" => "N",
-		"FILTER_NAME" => $arParams["CATALOG_FILTER_NAME"],
+		"FILTER_NAME" => "arrProductsFilter",
 		"SHOW_BUY_BUTTONS" => $arParams["SHOW_BUY_BUTTONS"],
 		"USE_PRODUCT_QUANTITY" => "N",
 		"INIT_SLIDER" => "Y",
 		"COMPONENT_TEMPLATE" => "products_slider",
 		"ELEMENT_SORT_FIELD2" => "id",
 		"ELEMENT_SORT_ORDER2" => "desc",
-		"HIDE_NOT_AVAILABLE" => "N",
+		"HIDE_NOT_AVAILABLE" => $arParams["HIDE_NOT_AVAILABLE"],
 		"OFFERS_FIELD_CODE" => array(
 			0 => "ID",
 			1 => "NAME",
@@ -66,9 +85,12 @@
 		"SHOW_DISCOUNT_PERCENT" => "Y",
 		"SHOW_OLD_PRICE" => "Y",
 		"SHOW_RATING" => "Y",
-		"CUSTOM_FILTER" => "",
-		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
-		"COMPATIBLE_MODE" => "Y"
+		"STIKERS_PROP" => $arParams["STIKERS_PROP"],
+		"SALE_STIKER" => $arParams["SALE_STIKER"],
+		"SHOW_DISCOUNT_PERCENT_NUMBER" => $arParams["SHOW_DISCOUNT_PERCENT_NUMBER"],
+		"TITLE" => $arParams["TITLE"],
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
-	false
+	false, array("HIDE_ICONS" => "Y")
 );?>

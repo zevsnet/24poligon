@@ -36,15 +36,16 @@
 
 								<div class="item properties clearfix sb_border_block mx_contact_item" id="<?=$this->GetEditAreaId($arItem['ID'])?>">
 									
-									<div class="row">
+									<div class="row sb_top_line">
+                                        <?if($imageSrc):?>
+                                            <div class="image pull-left">
+                                                <a href="<?=$arItem["DETAIL_PAGE_URL"];?>">
+                                                    <img src="<?=\Aspro\Functions\CAsproMax::showBlankImg($imageSrc);?>" data-src="<?=$imageSrc;?>" alt="<?=$arItem['NAME'];?>" title="<?=$arItem['NAME'];?>" class="img-responsive lazy"/>
+                                                </a>
+                                            </div>
+                                        <?endif;?>
 										<div class="col-md-6 col-sm-6 col-xs-12 left-block-contacts">
-											<?if($imageSrc):?>
-												<div class="image pull-left">
-													<a href="<?=$arItem["DETAIL_PAGE_URL"];?>">
-														<img src="<?=\Aspro\Functions\CAsproMax::showBlankImg($imageSrc);?>" data-src="<?=$imageSrc;?>" alt="<?=$arItem['NAME'];?>" title="<?=$arItem['NAME'];?>" class="img-responsive lazy"/>
-													</a>
-												</div>
-											<?endif;?>
+
 											<div class="top-wrap">
 												<div class="title font_mxs darken">
 													<a href="<?=$arItem["DETAIL_PAGE_URL"];?>" class="darken">

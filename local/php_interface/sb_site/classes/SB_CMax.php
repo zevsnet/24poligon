@@ -188,7 +188,7 @@ class SB_CMax extends \CMax
             <?=str_replace(['text'],'hidden',$arQuestion["HTML_CODE"]);?>
         <?else:?>
             <div class="form-control">
-                <label><span><?=$arQuestion["CAPTION"]?><?=($arQuestion["REQUIRED"] == "Y" ? '&nbsp;<span class="star">*</span>' : '')?></span></label>
+                <label><span><?=($arQuestion["REQUIRED"] == "Y" ? '&nbsp;<span class="star">*</span>' : '')?></span></label>
                 <?
                 if(strpos($arQuestion["HTML_CODE"], "class=") === false)
                     $arQuestion["HTML_CODE"] = str_replace('input', 'input class=""', $arQuestion["HTML_CODE"]);

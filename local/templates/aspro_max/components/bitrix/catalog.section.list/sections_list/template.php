@@ -14,6 +14,7 @@
 			$this->AddEditAction($arItems['ID'], $arItems['EDIT_LINK'], CIBlock::GetArrayByID($arItems["IBLOCK_ID"], "SECTION_EDIT"));
 			$this->AddDeleteAction($arItems['ID'], $arItems['DELETE_LINK'], CIBlock::GetArrayByID($arItems["IBLOCK_ID"], "SECTION_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_SECTION_DELETE_CONFIRM')));
 			$bSlide = false;
+			if ($arItems["ELEMENT_CNT"]) {
 		?>
 			<div class="item_block <?=$arParams['VIEW_TYPE'];?><?=($bBigBlock ? ' col-lg-20' : '')?> <?if($bSlideBlock):?>col-xs-12<?else:?>col-md-<?=($arParams['VIEW_TYPE'] ? 4 : 6)?> col-xs-6<?endif;?>">
 				<div class="section_item item bordered box-shadow" id="<?=$this->GetEditAreaId($arItems['ID']);?>">
@@ -87,6 +88,6 @@
 					</table>
 				</div>
 			</div>
-		<?}?>
+		<?}}?>
 	</div>
 <?}?>
