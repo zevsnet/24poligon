@@ -69,7 +69,7 @@ if(!$USER->IsAdmin()):?>
                 <div class="property phone">
                     <div class="title font_upper muted">Телефон</div>
                     <div class="">
-                        <div class="value darken" itemprop="telephone"><a title="звонок бесплатный по РФ" href="tel:+79676123562">+7 967 612-35-62</a></div>
+                        <div class="value darken" itemprop="telephone"><a title="звонок бесплатный по РФ" href="tel:+79293060372">+7 929 306-03-72</a></div>
                     </div>
                 </div>
 	</div>
@@ -131,7 +131,8 @@ if(!$USER->IsAdmin()):?>
 		<?global $arSite;?>
 		<span itemprop="name"><?=$arSite["NAME"];?></span>
 	</div>
-</div>
+</div>
+
 <?else:?>
 
 <div class="contacts-v2">
