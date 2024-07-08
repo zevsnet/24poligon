@@ -69,7 +69,7 @@ if(!$USER->IsAdmin()):?>
                 <div class="property phone">
                     <div class="title font_upper muted">Телефон</div>
                     <div class="">
-                        <div class="value darken" itemprop="telephone"><a title="звонок бесплатный по РФ" href="tel:+79293060372">+7 929 306-03-72</a></div>
+                        <div class="value darken" itemprop="telephone"><a title="звонок бесплатный по РФ" href="tel:+79676125595">+7 967 612-55-95</a></div>
                     </div>
                 </div>
 	</div>
@@ -79,7 +79,7 @@ if(!$USER->IsAdmin()):?>
                     <div class="title font_upper muted">E-mail</div>
                     <div class="">
                         <div class="value darken" itemprop="email">
-                            <a href="mailto:ra@24poligon.ru">ra@24poligon.ru</a>
+                            <a href="mailto:ra@24poligon.ru">opt@24poligon.ru</a>
                         </div>
                     </div>
                 </div>
