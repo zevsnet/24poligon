@@ -2,7 +2,7 @@ const path = require('path')
 const common = require('./webpack.common.js')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
-const publicPath = 'http://localhost:8080/'
+  const publicPath = 'http://localhost:8080/'
 
 module.exports = merge.smart(common, {
   mode: 'development',
@@ -15,6 +15,7 @@ module.exports = merge.smart(common, {
   },
   devServer: {
     headers: {'Access-Control-Allow-Origin': '*'},
+    allowedHosts: ['24poligon.ru']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

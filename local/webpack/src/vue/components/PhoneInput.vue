@@ -2,7 +2,8 @@
         <masked-input :required="isRequired"
                       :value="value"
                       @input="onInput"
-
+                      :id="'ORDER_PROP_' + property.ID"
+                      class="input__input"
                       :parameters="{clearIncomplete: true}"
                       type="tel"></masked-input>
 </template>

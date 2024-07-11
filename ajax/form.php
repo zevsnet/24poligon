@@ -30,7 +30,7 @@ if (\Bitrix\Main\Loader::includeModule("aspro.max")) {
 	<?$url_sizes = htmlspecialcharsbx(isset($request['url']) && $request['url'] ? $_SERVER['DOCUMENT_ROOT'] . $request['url'] : '');?>
 	<?if(
 		$url_sizes &&
-		strpos(realpath($url_sizes), $_SERVER['DOCUMENT_ROOT'].SITE_DIR.'include') === 0 &&
+		strpos(realpath($url_sizes), realpath($_SERVER['DOCUMENT_ROOT'].SITE_DIR.'include')) === 0 &&
 		file_exists($url_sizes)
 	):?>
 		<a href="#" class="close jqmClose"><?=CMax::showIconSvg('', SITE_TEMPLATE_PATH.'/images/svg/Close.svg')?></a>

@@ -1,13 +1,17 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Оформление заказа");
-?>
-<?
-global $USER;
-LocalRedirect('/basket/');
+$template = "main_vue";
+/*if(isset($_GET['testnika'])&&($_GET['testnika']=="Y")){
+	$template = "v1";
+}
+elseif(isset($_GET['testnika2'])&&($_GET['testnika2']=="Y")){
+	$template = "v2";
+}*/
+$template = "v1";
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.order.ajax", 
-	"tanais.order.ajax_v2", 
+	$template, 
 	array(
 		"PAY_FROM_ACCOUNT" => "N",
 		"ONLY_FULL_PAY_FROM_ACCOUNT" => "N",
@@ -31,11 +35,11 @@ LocalRedirect('/basket/');
 		"PATH_TO_AUTH" => SITE_DIR."auth/",
 		"SET_TITLE" => "Y",
 		"PRODUCT_COLUMNS" => "",
-		"DISABLE_BASKET_REDIRECT" => "Y",
+		"DISABLE_BASKET_REDIRECT" => "N",
 		"DISPLAY_IMG_WIDTH" => "90",
 		"DISPLAY_IMG_HEIGHT" => "90",
-		"COMPONENT_TEMPLATE" => "tanais.order.ajax_v2",
-		"ALLOW_NEW_PROFILE" => "N",
+		"COMPONENT_TEMPLATE" => $template,
+		"ALLOW_NEW_PROFILE" => "Y",
 		"SHOW_PAYMENT_SERVICES_NAMES" => "Y",
 		"COMPATIBLE_MODE" => "Y",
 		"BASKET_IMAGES_SCALING" => "adaptive",
@@ -47,7 +51,7 @@ LocalRedirect('/basket/');
 		"SHOW_DELIVERY_LIST_NAMES" => "Y",
 		"SHOW_DELIVERY_INFO_NAME" => "Y",
 		"SHOW_DELIVERY_PARENT_NAMES" => "N",
-		"BASKET_POSITION" => "after",
+		"BASKET_POSITION" => "before",
 		"SHOW_BASKET_HEADERS" => "Y",
 		"DELIVERY_FADE_EXTRA_SERVICES" => "Y",
 		"SHOW_COUPONS_BASKET" => "Y",
@@ -79,8 +83,7 @@ LocalRedirect('/basket/');
 		),
 		"ADDITIONAL_PICT_PROP_13" => "-",
 		"ADDITIONAL_PICT_PROP_14" => "-",
-		"PRODUCT_COLUMNS_HIDDEN" => array(
-		),
+		"PRODUCT_COLUMNS_HIDDEN" => "",
 		"USE_YM_GOALS" => "Y",
 		"USE_CUSTOM_MAIN_MESSAGES" => "Y",
 		"USE_CUSTOM_ADDITIONAL_MESSAGES" => "Y",
@@ -157,8 +160,7 @@ LocalRedirect('/basket/');
 			3 => "51",
 		),
 		"MESS_MORE_DETAILS" => "Подробнее",
-		"PROPS_FADE_LIST_6" => array(
-		),
+		"PROPS_FADE_LIST_6" => "",
 		"YM_GOALS_COUNTER" => "43218779",
 		"YM_GOALS_INITIALIZE" => "BX-order-init",
 		"YM_GOALS_EDIT_REGION" => "BX-region-edit",
@@ -175,7 +177,9 @@ LocalRedirect('/basket/');
 		"YM_GOALS_NEXT_BASKET" => "BX-basket-next",
 		"YM_GOALS_SAVE_ORDER" => "BX-order-save",
 		"DATA_LAYER_NAME" => "dataLayer",
-		"BRAND_PROPERTY" => "PROPERTY_BRAND"
+		"BRAND_PROPERTY" => "PROPERTY_BRAND",
+		"ADDITIONAL_PICT_PROP_176" => "-",
+		"ADDITIONAL_PICT_PROP_194" => "-"
 	),
 	false
 );?>

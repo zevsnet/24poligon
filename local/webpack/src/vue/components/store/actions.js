@@ -1,8 +1,13 @@
 import _ from 'lodash'
 
 export default {
+    setDeliveryInit({commit, state, getters}, result) {
+        commit('setDeliveryItems', result.data.delivery.items)
+        commit('setDeliveryPickupItems', result.data.delivery.pickup)
+    },
     setOrder({commit, state, getters}, order) {
         commit('setOrder', order)
+        //commit('setDeliveryPickupItems', result.data.delivery.pickup)
         commit('setOrderPropertiesValue', _.reduce(order.ORDER_PROP.properties, (result, item) => {
             if (item['CODE'] == 'CITY') {
                 if (item['VALUE'][0] == 'Красноярск') {

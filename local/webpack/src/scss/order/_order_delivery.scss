@@ -1,0 +1,38 @@
+.order-delivery {
+  $p: 'order-delivery';
+
+  .type-selector_title {
+    margin: 30px 0 10px;
+    font-size: 20px;
+
+    background: #FFF2F8;
+    padding: 8px 17px;
+    color: #333;
+    font-style: normal;
+    height: 37px;
+    img{
+      margin-right: 15px;
+    }
+  }
+
+  .order-line-selector {
+    margin-top: 10px;
+  }
+
+  .#{$p}_country-message {
+    background-color: #ffd7eb85;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .#{$p}_country-message-icon {
+    color: #a3185b;
+    width: 50px;
+    font-size: 30px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

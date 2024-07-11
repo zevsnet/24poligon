@@ -23,7 +23,7 @@ Vue.use(VueGoogleMaps, {
 Vue.use(VueRouter)
 $(function () {
     /** Получение начальных данных */
-    const appElement = document.getElementById('app')
+    const appElement = document.getElementById('order')
 
     if (appElement) {
         console.log(appElement.dataset);

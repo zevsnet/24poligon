@@ -13,8 +13,15 @@ export default {
     basketSessid:'',
     order: {},
     orderPropertiesValue: {},//Свойства заказа
+    orderPropertiesDeliveryValue: {},//Свойства доставки
     propertyGroupIdsCheckByStep: {},//Группы свойств
     orderValues: {
+        // ADDRESS: null,
+        // ZIP: null,
+        // RUSSIANPOST_TYPEDLV: null,
+        // PCL: null,
+        // PICKUP_STORE: null,
+
         PERSON_TYPE: null,
         DELIVERY_ID: null,
         PAY_SYSTEM_ID: null,
@@ -29,21 +36,11 @@ export default {
         ZIP_PROPERTY_CHANGED: 'Y'
     },
     deliveryPickupId: [2],
-    koronaBalance: {
-        COUPON: false,
-        PAN: false,
-        Balance: null,
-        BalanceFormat: null,
-        Procent: null,
-        maxSaleBonus: 0,
-        PAY_TOKEN: '',
-        tokenRequired: 'Y'
-    },
     service: {
         step: 1,
         isDate: 1,
         countryId: 24,
-        typeDeliveryId: 'N',
+        typeDeliveryId: 'pickup',
         cityName: '',
         regionName: '',
         isAjaxProcess: false,
@@ -62,4 +59,18 @@ export default {
     ],
     errorList: [],
     errorListProperty: {},
+    delivery: {
+        country: [],
+        types: [
+            {
+                id:1,
+                selected:true,
+                name:'Самовывоз',
+            }
+        ],
+        fields: [],
+        serviceFields: [],
+        items: [],
+        pickupItems: []
+    },
 }

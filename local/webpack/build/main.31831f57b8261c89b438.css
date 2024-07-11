@@ -1,0 +1,130 @@
+@font-face {
+  font-family: "Roboto";
+  src: url(/local/webpack/build/font/ec4c9962ba54eb91787aa93d361c10a8-Roboto-Black.ttf) format("truetype");
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_title {
+  margin: 30px 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_row {
+  display: flex;
+  height: 550px;
+}
+
+.order-delivery-pickup-selector .ymap-container {
+  width: 100%;
+  height: 100%;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_list {
+  flex-shrink: 0;
+  position: relative;
+  width: 295px;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_list:before {
+  position: absolute;
+  content: '';
+  height: calc(100% - 10px);
+  width: 5px;
+  top: 5px;
+  right: 3.5px;
+  border-radius: 3.5px;
+  background-color: #f3f4f2;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_list .scrollbar-wrap .scrollbar {
+  opacity: 1;
+  width: 5px;
+  background-color: #fc8507;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_list-item {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: all .3s ease;
+  margin-right: 20px;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_list-item.active {
+  border-color: #fc8507;
+  background-color: rgba(211,137,173,0.07);
+  box-shadow: 0px 0px 2px 0px #fc8507;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_list-item:hover {
+  border-color: #fc8507;
+  box-shadow: 0px 0px 2px 0px #fc8507;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_list-item .title {
+  font-size: 16px;
+  color: #fc8507;
+  line-height: 1.1;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_list-item .description {
+  font-size: 13px;
+  color: #b0b0b3;
+  margin-top: 10px;
+}
+
+.order-delivery-pickup-selector .order-delivery-pickup-selector_map {
+  flex-grow: 1;
+  height: 100%;
+  margin-left: 20px;
+}
+
+.order-delivery-pickup-selector .balloon-container {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-delivery-pickup-selector .balloon-container .name {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #959595;
+}
+
+.order-delivery-pickup-selector .balloon-container .desc {
+  text-align: center;
+}
+
+.order-delivery-pickup-selector .balloon-container .button {
+  margin-top: 10px;
+  background-color: #fc8507;
+  padding: 5px 10px;
+  color: #fff;
+  line-height: 1;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.order-delivery-pickup-selector .balloon-container .button:hover {
+  background-color: #ce6b02;
+}
+
+@media (max-width: 767px) {
+  .order-delivery-pickup-selector .order-delivery-pickup-selector_row {
+    height: 300px;
+  }
+
+  .order-delivery-pickup-selector .order-delivery-pickup-selector_list {
+    display: none;
+  }
+
+  .order-delivery-pickup-selector .order-delivery-pickup-selector_list-item {
+    padding: 10px;
+  }
+}

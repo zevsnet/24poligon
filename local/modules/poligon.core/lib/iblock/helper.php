@@ -236,6 +236,14 @@ class Helper
         return new \Bitrix\Iblock\InheritedProperty\ElementValues($IBLOCK_ID, $ELEMENT_ID);
     }
 
+    /**
+     * Вернет цену в нужном формате
+     * @param $getPrice
+     */
+    public static function getFormatPrice($getPrice)
+    {
+        return CurrencyFormat($getPrice, 'RUB');
+    }
 
     /**
      * Добавляет/Обновляет элемент инфоблока

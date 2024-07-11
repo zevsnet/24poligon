@@ -1,0 +1,40 @@
+$sidePadding: 15px;
+
+.order-basket {
+  $p: 'order-basket';
+
+  border: 2px solid #a3185b;
+  border-radius: 5px;
+
+  .#{$p}_top {
+    padding: 20px #{$sidePadding};
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: space-between;
+    color: #a3185b;
+    border-bottom: 1px solid #aaa;
+  }
+
+  .#{$p}_link-wrapper {
+    padding: $sidePadding;
+
+    a {
+      display: block;
+      background-color: #eee;
+      padding: 10px 16px;
+      width: 100%;
+      font-size: 13px;
+      border-radius: 3px;
+      text-align: center;
+      color: #000;
+      transition: all .3s ease;
+
+      &:hover {
+        background-color: darken(#eee, 10%);
+      }
+    }
+  }
+}
+
+

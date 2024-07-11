@@ -1,3 +1,4 @@
+<?use Aspro\Max\Grupper;?>
 <?define("STATISTIC_SKIP_ACTIVITY_CHECK", "true");?>
 <?define('STOP_STATISTICS', true);
 define('PUBLIC_AJAX_MODE', true);?>
@@ -34,7 +35,7 @@ if(!$arPost['CLASS'])
 	}
 
 	$bDetail = isset($arPost["PARAMS"]["IS_DETAIL"]) && $arPost["PARAMS"]["IS_DETAIL"] === 'Y';
-	$bPropsGroup = \Bitrix\Main\Config\Option::get('aspro.max', 'GRUPPER_PROPS', 'NOT', $arPost["SITE_ID"]) === "ASPRO_PROPS_GROUP";
+
 	$typeSku = \Bitrix\Main\Config\Option::get('aspro.max', 'TYPE_SKU', 'TYPE_1', $arPost["SITE_ID"]);
 	$bChangeTitleItem = $bDetail
 		? \Bitrix\Main\Config\Option::get('aspro.max', 'CHANGE_TITLE_ITEM_LIST', 'N', $arPost["SITE_ID"]) === 'Y'
@@ -866,22 +867,52 @@ if(!$arPost['CLASS'])
 			$arItems["ITEMS"][$key]["PREVIEW_TEXT"] = $arItem['PREVIEW_TEXT'] ?? '';
 			$arItems["ITEMS"][$key]["DETAIL_TEXT"] = $arItem['DETAIL_TEXT'] ?? '';
 
-			if($bDetail && $bPropsGroup){
-				ob_start();
-				$APPLICATION->IncludeComponent(
-					'aspro:props.group',
-					'',
-					array(
-						'DISPLAY_PROPERTIES' => $arItem['DISPLAY_PROPERTIES'],
-						'IBLOCK_ID' => $arPost["IBLOCK_ID"],
-						'OFFERS_MODE' => 'Y',
-						'MODULE_ID' => "aspro.max",
-						'SHOW_HINTS' => $arPost["PARAMS"]['SHOW_HINTS'],
-					),
-					$component, array('HIDE_ICONS'=>'Y')
-				);
-				$htmlProps = ob_get_clean();
-				$arItems["ITEMS"][$key]["PROPS_GROUP_HTML"] = $htmlProps;
+
+			if ($bDetail) {
+				$grupperProps = Grupper::get($arPost['SITE_ID']);
+				if ($grupperProps) {
+					$arPost['PARAMS']['PROPERTIES_DISPLAY_TYPE'] = 'TABLE';
+
+					if (
+						(
+							$grupperProps == 'GRUPPER' &&
+							!\Bitrix\Main\Loader::includeModule('redsign.grupper')
+						) ||
+						(
+							$grupperProps == 'WEBDEBUG' &&
+							!\Bitrix\Main\Loader::includeModule('webdebug.utilities')
+						) ||
+						(
+							$grupperProps == 'YENISITE_GRUPPER' &&
+							!\Bitrix\Main\Loader::includeModule('yenisite.infoblockpropsplus')
+						)
+					) {
+						$grupperProps = 'NOT';
+					}
+				}
+
+
+				if (
+					$grupperProps === 'ASPRO_PROPS_GROUP' ||
+					$grupperProps === 'NOT'
+				) {
+
+					ob_start();
+					$APPLICATION->IncludeComponent(
+						'aspro:props.group.max',
+						'',
+						array(
+							'DISPLAY_PROPERTIES' => $arItem['DISPLAY_PROPERTIES'],
+							'IBLOCK_ID' => $arPost["IBLOCK_ID"],
+							'OFFERS_MODE' => 'Y',
+							'MODULE_ID' => "aspro.max",
+							'SHOW_HINTS' => $arPost["PARAMS"]['SHOW_HINTS'],
+						),
+						$component, array('HIDE_ICONS'=>'Y')
+					);
+					$htmlProps = ob_get_clean();
+					$arItems["ITEMS"][$key]["PROPS_GROUP_HTML"] = $htmlProps;
+				}
 			}
 		}
 		unset($arItem);

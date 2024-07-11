@@ -5,7 +5,7 @@
 	<?foreach($arMainPageOrder as $key => $optionCode):?>
 		<?$strTemplateName = $arTheme['TEMPLATE_PARAMS'][$arTheme['INDEX_TYPE']['VALUE']][$arTheme['INDEX_TYPE']['VALUE'].'_'.$optionCode.'_TEMPLATE']['VALUE'];?>
 		<?$subtype = strtolower($optionCode);?>
-
+		
 		<?$dopBodyClass .= ' '.$optionCode.'_'.$strTemplateName;?>
 
 		<?//BIG_BANNER_INDEX?>
@@ -151,6 +151,16 @@
 			<?if($bShowBlog):?>
 				<div class="drag-block container <?=$optionCode?> <?=$bBlogIndexClass;?>" data-class="<?=$subtype?>_drag" data-order="<?=++$key;?>">
 					<?=CMax::ShowPageType('mainpage', $subtype, $strTemplateName, true);?>
+				</div>
+			<?endif;?>
+		<?endif;?>
+
+		<?//GALLERY?>
+		<?if($optionCode == "GALLERY"):?>
+			<?global $bShowGallery, $bGalleryIndexClass;?>			
+			<?if($bShowGallery):?>
+				<div class="drag-block container <?=$optionCode?> <?=$bGalleryIndexClass;?>" data-class="<?=$subtype?>_drag" data-order="<?=++$key;?>">
+				<?=CMax::ShowPageType('mainpage', $subtype, $strTemplateName, true);?>
 				</div>
 			<?endif;?>
 		<?endif;?>

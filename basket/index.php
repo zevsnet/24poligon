@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Корзина");
 ?>
 <style>
 	.basket-checkout-block.basket-checkout-btn.checkout-order{
-		display: none;
+		/*display: none;*/
 	}
 	.btn.btn-transparent-border-color.oneclickbuy{
 		background: #F25C05 ;
@@ -25,8 +25,8 @@ $APPLICATION->SetTitle("Корзина");
 window.basketJSParams = window.basketJSParams || [];
 $(document).ready(function(){
 	 setTimeout(function(){
-		$('.btn.oneclickbuy').html('Оформить заказ'); 	
-		$('.btn.oneclickbuy').show(); 
+		// $('.btn.oneclickbuy').html('Оформить заказ');
+		$('.btn.oneclickbuy').show();
 	 }, 1000);
 	
 });

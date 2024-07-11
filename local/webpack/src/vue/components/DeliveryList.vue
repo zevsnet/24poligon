@@ -2,40 +2,19 @@
     <div class="delivery-list pos-rel col-md-12">
         <div class="row">
             <div class="col-md-12 pb-10" v-for="delivery in deliveryList" :key="+delivery.ID"
-                 v-bind:class="{active:delivery.CHECKED == 'Y'}"
-                 :gutter="10">
+                 v-bind:class="{active:delivery.CHECKED == 'Y'}" :gutter="10" v-if="isDelivery(delivery)">
                 <div class="row">
                     <div class="col-md-7">
                         <el-radio v-model="value" :label="+delivery.ID">
-                            <img class="delivery-img" v-if="delivery.LOGOTIP_SRC" :src="delivery.LOGOTIP_SRC">
+                            <div class="sb-radio_btn_default"><i class="el-icon-check"></i></div>
                             <span class="sb-name-delivery">{{delivery.NAME}}</span>
+                            <p class="f-choice-radio__description" v-if="delivery.ID == 85">Самовывоз из отделения Почты России</p>
                         </el-radio>
                     </div>
-                    <div class="col-md-3">
-                        <span v-if="false" class="text-muted sb-delivery-time" v-html="delivery.PERIOD_TEXT"></span>
-                        <div v-if="delivery.CALCULATE_ERRORS" :span="24"><p
-                                style="padding: 10px 0; color:red"
-                                v-html="delivery.CALCULATE_ERRORS"></p>
-                        </div>
-                        <template v-if="isSdek(delivery) || isEnergy(delivery) || isDPD(delivery)" :span="24"
-                                  style="margin-top: 20px">
-                            <el-button @click="onClick()" class="big_btn button" type="info">Выбрать <span
-                                    v-if="addressValue">другой</span> склад
-                            </el-button>
-                            <jquery-input v-if="isSdek(delivery)" class="order-pickup-input"
-                                          @change="changeAddress"
-                                          name="PICKUP_ADDRESS" readonly></jquery-input>
-                            <template v-else-if="isDPD(delivery)">
-                                <jquery-input class="order-pickup-input" @change="changeAddress" name="PICKUP_ADDRESS"
-                                              readonly></jquery-input>
-                            </template>
-                            <p v-else style="margin-top: 10px">{{addressValue}}</p>
-                        </template>
-                    </div>
-                    <div class="col-md-2 text-right">
-                        <span class="sb-delivery-price">{{ getPriceDelivery(delivery) }}</span>
-                    </div>
-                    <div class="col-md-12" v-if="+delivery.ID == 70">
+                    <div class="col-md-2 text-right"><span class="sb-delivery-price">{{ getPriceDelivery(delivery) }}</span></div>
+
+
+                    <div class="col-md-12" v-if="+delivery.ID == 86">
                         <el-select v-model="sb_date_delivery" placeholder="Select"
                                    v-if="getPropertyByCode('DELIVERY_REQUIRED_DATE')">
                             <el-option
@@ -68,24 +47,24 @@
     }">
                             </el-time-select>
                         </template>
-
                     </div>
+
                 </div>
             </div>
         </div>
-
-
     </div>
 </template>
 
 <script>
     import JQueryInput from './JQueryInput'
+    import DeliveryProperties from './DeliveryProperties'
     import {mapState, mapGetters, mapMutations} from 'vuex'
 
     export default {
         name: 'delivery-list',
         components: {
-            'jquery-input': JQueryInput
+            'jquery-input': JQueryInput,
+            'delivery-properties': DeliveryProperties
         },
         props: {
             deliveryInfo: {
@@ -195,7 +174,7 @@
             },
             getPriceDelivery(delivery) {
                 let priceDelivery = 0;
-                debugger
+
                 if (delivery.DELIVERY_DISCOUNT_PRICE) {
                     priceDelivery = delivery.DELIVERY_DISCOUNT_PRICE_FORMATED
                 } else {
@@ -236,6 +215,22 @@
                     id: this.getPropertyIdByCode('ADDRESS'),
                     value: value
                 })
+            },
+            isDelivery(delivery) {
+                return this.deliveryInfo.delivery.indexOf(+delivery.ID) >= 0;
+            },
+            isDeliveryNoPickup() {
+                if (this.deliveryId) {
+                    switch (+this.deliveryId) {
+                        case 73:
+                        case 40:
+                            break;
+                        default:
+                            return true;
+                            break;
+                    }
+                }
+                return false;
             },
 
         }

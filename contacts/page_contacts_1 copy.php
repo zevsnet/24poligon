@@ -131,7 +131,8 @@ if(!$USER->IsAdmin()):?>
 		<?global $arSite;?>
 		<span itemprop="name"><?=$arSite["NAME"];?></span>
 	</div>
-</div>
+</div>
+
 <?else:?>
 
 <div class="contacts-v2">

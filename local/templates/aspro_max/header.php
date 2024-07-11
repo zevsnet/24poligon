@@ -10,38 +10,22 @@ $bIncludedModule = (\Bitrix\Main\Loader::includeModule("aspro.max"));?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" <?=($htmlClass ? 'class="'.$htmlClass.'"' : '')?> <?=($bIncludedModule ? CMax::getCurrentHtmlClass() : '')?>>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><?$APPLICATION->ShowTitle()?></title>
 	<?$APPLICATION->ShowMeta("viewport");?>
 	<?$APPLICATION->ShowMeta("HandheldFriendly");?>
 	<?$APPLICATION->ShowMeta("apple-mobile-web-app-capable", "yes");?>
 	<?$APPLICATION->ShowMeta("apple-mobile-web-app-status-bar-style");?>
 	<?$APPLICATION->ShowMeta("SKYPE_TOOLBAR");?>
-	<?
-		//$APPLICATION->ShowHead();
-		$APPLICATION->ShowMeta("robots");
-		//$APPLICATION->ShowMeta("keywords");
-		$APPLICATION->ShowMeta("description");
-		$APPLICATION->ShowLink("canonical");
-		$APPLICATION->ShowCSS();
-		$APPLICATION->ShowHeadStrings();
-		$APPLICATION->ShowHeadScripts();	
-	?>
+	<?$APPLICATION->ShowHead();?>
 	<?$APPLICATION->AddHeadString('<script>BX.message('.CUtil::PhpToJSObject( $MESS, false ).')</script>', true);?>
 	<?if($bIncludedModule)
 		CMax::Start(SITE_ID);?>
 	<?include_once(str_replace('//', '/', $_SERVER['DOCUMENT_ROOT'].'/'.SITE_DIR.'include/header_include/head.php'));?>
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
+    <script src="//code.jivo.ru/widget/E1rzvzgUhC" async></script>
+
 </head>
 <?$bIndexBot = CMax::checkIndexBot();?>
 <body class="<?=($bIndexBot ? "wbot" : "");?> site_<?=SITE_ID?> <?=($bIncludedModule ? CMax::getCurrentBodyClass() : '')?>" id="main" data-site="<?=SITE_DIR?>">
-
 	<?if(!$bIncludedModule):?>
 		<?$APPLICATION->SetTitle(GetMessage("ERROR_INCLUDE_MODULE_ASPRO_MAX_TITLE"));?>
 		<center><?$APPLICATION->IncludeFile(SITE_DIR."include/error_include_module.php");?></center></body></html><?die();?>

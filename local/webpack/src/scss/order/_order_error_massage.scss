@@ -1,0 +1,47 @@
+.order-error-massage{
+  $p: 'order-error-massage';
+  border: 2px solid #a3185b;
+  border-radius: 5px;
+  display: flex;
+
+
+  .#{$p}_icon{
+    background-color: #ffd7eb85;
+    color: #a3185b;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-size: 30px;
+    min-height: 70px;
+  }
+
+  .#{$p}_errors{
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &>div{
+      margin: 0px 0;
+
+      b{
+        color: red;
+      }
+    }
+  }
+
+
+  &.user-info-errors{
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  &.delivery-errors{
+    margin-top: 20px;
+  }
+
+  &.order-global-errors{
+    margin-top: 20px;
+  }
+}

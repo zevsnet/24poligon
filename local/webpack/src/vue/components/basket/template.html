@@ -36,42 +36,49 @@
                                             <div class="alert alert-warning text-center">Товара <b>нет в наличии</b> на выбранном пункте.</div>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="basket-items-list-item-amount-outer">
-                                    <div class="basket-item-amount">
-                                        <span class="basket-item-btn-minus"  v-on:click="setQuantityElement(arElement.ID,'minus')" ></span>
-                                        <div class="basket-item-amount-filed-block">
-                                            <input type="text" class="basket-item-amount-filed":value="arElement.QUANTITY" >
-                                        </div>
-                                        <span class="basket-item-btn-plus" v-on:click="setQuantityElement(arElement.ID,'plus')"></span>
-
-                                    </div>
-                                    <div class="basket-items-list-item-price basket-items-list-item-price-for-one hidden-xs1">
-                                        <div class="basket-item-price">
-                                            <div class="basket-item-price-current">
-                                                <span class="basket-item-price-current-text">
-                                                    {{arElement.FULL_PRICE_FORMATED}}/<div class="basket-item-amount-field-description">{{arElement.MEASURE_NAME}}</div>
-                                                </span>
+                                    <div class="basket-items-list-item-amount-outer">
+                                        <div class="basket-item-amount">
+                                            <span class="basket-item-btn-minus"  v-on:click="setQuantityElement(arElement.ID,'minus')" ></span>
+                                            <div class="basket-item-amount-filed-block">
+                                                <input type="text" class="basket-item-amount-filed":value="arElement.QUANTITY" >
                                             </div>
+                                            <span class="basket-item-btn-plus" v-on:click="setQuantityElement(arElement.ID,'plus')"></span>
                                         </div>
                                     </div>
                                 </td>
+
                                 <td class="basket-items-list-item-price">
+                                    <div class="basket-items-list-item-removes"><div class="basket-item-block-actions"><span class="basket-item-actions-remove" v-on:click="setQuantityElement(arElement.ID,'del')"></span></div></div>
                                     <div class="basket-item-price"><div class="basket-item-price-current"><div class="basket-item-price-current-value">{{arElement.SUM_FULL_PRICE_FORMATED}}</div></div></div>
-                                    <div class="basket-items-list-item-removes">
-                                        <div class="basket-item-block-actions">
-                                            <span class="basket-item-actions-remove" v-on:click="setQuantityElement(arElement.ID,'del')"></span>
-                                        </div>
-                                    </div>
                                 </td>
                             </tr>
-                            <tr class="basket-services-list-item-container hidden" id="basket-services-item-44884" data-entity="basket-services-item" data-id="44884">
-                                <td class="col_with_services" colspan="4">
-                                    <div class="services_in_basket_page buy_services_wrap w_picture" data-parent_product="157597">
-
+                            <tr >
+                                <td colspan="3">
+                                <div class="product-accessories__info"><span class="additions__title product-accessories__title">Сопутствующие товары</span></div>
+                                <div class="sb_block_product_slider">
+                                    <div class="sb_block_product_slider_item">
+                                        <a href="#" class="sb_block_product_slider_item__img"><img src="https://c.dns-shop.ru/thumb/st4/fit/320/250/a2c994fbcd96ce895b69941ca920f464/c038d4842aa7c44322a5d011762d9b8c2bbef597d6f62f156ce78d47b582e8cc.jpg" alt=""></a>
+                                        <a href="#" class="sb_block_product_slider_item__price">399 ₽</a>
                                     </div>
+                                    <div class="sb_block_product_slider_item">
+                                        <a href="#" class="sb_block_product_slider_item__img"><img src="https://c.dns-shop.ru/thumb/st4/fit/320/250/dc32c31155b13257eae9173a5c8d00ec/cb04c31baadff4b86006f6886d5aed55756d436ea578202dfd0d653c05a5b585.jpg" alt=""></a>
+                                        <a href="#" class="sb_block_product_slider_item__price">399 ₽</a>
+                                    </div>
+                                    <div class="sb_block_product_slider_item">
+                                        <a href="#" class="sb_block_product_slider_item__img"><img src="https://c.dns-shop.ru/thumb/st4/fit/320/250/a2c994fbcd96ce895b69941ca920f464/c038d4842aa7c44322a5d011762d9b8c2bbef597d6f62f156ce78d47b582e8cc.jpg" alt=""></a>
+                                        <a href="#" class="sb_block_product_slider_item__price">399 ₽</a>
+                                    </div>
+                                    <div class="sb_block_product_slider_item">
+                                        <a href="#" class="sb_block_product_slider_item__img"><img src="https://c.dns-shop.ru/thumb/st4/fit/320/250/a2c994fbcd96ce895b69941ca920f464/c038d4842aa7c44322a5d011762d9b8c2bbef597d6f62f156ce78d47b582e8cc.jpg" alt=""></a>
+                                        <a href="#" class="sb_block_product_slider_item__price">399 ₽</a>
+                                    </div>
+                                    <div class="sb_block_product_slider_item">
+                                        <a href="#" class="sb_block_product_slider_item__img"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.4261 5.75666C12.719 5.46376 13.1939 5.46376 13.4868 5.75666L19.1998 11.4697C19.3405 11.6103 19.4195 11.8011 19.4195 12C19.4195 12.1989 19.3405 12.3897 19.1998 12.5303L13.4868 18.2433C13.1939 18.5362 12.719 18.5362 12.4261 18.2433C12.1332 17.9504 12.1332 17.4755 12.4261 17.1827L16.8588 12.75H5.35547C4.94126 12.75 4.60547 12.4142 4.60547 12C4.60547 11.5858 4.94126 11.25 5.35547 11.25H16.8588L12.4261 6.81732C12.1332 6.52442 12.1332 6.04955 12.4261 5.75666Z" fill="black"></path></svg></a>
+                                        <a href="#" class="sb_block_product_slider_item__text">Смотреть все</a>
+                                    </div>
+
+                                </div>
                                 </td>
-                                <td></td>
                             </tr>
                         </template>
                         </tbody>

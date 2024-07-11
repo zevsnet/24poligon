@@ -1,83 +1,71 @@
-<div :class="{'order':true}">
-    <form class="order-form">
-        <div class="order_loader" v-if="service.isAjaxProcess">
-            <div class="sb_preloader"></div>
-        </div>
-        <div class="row" id="bx-soa-order">
-            <div class="col-sm-9 bx-soa">
-                <div class="row pb-10">
-                    <div class="col-md-12 sb-order-name-step">Ваши данные:</div>
-                </div>
-                <div class="row py-3">
-                    <user-properties></user-properties>
-                </div>
-                <div class="row py-3 sb_button_finish">
-                    <div class="col-md-12 sb_btn2pay pb-4">
-                        <el-button class="big_btn button"
-                                   v-if="service.step == 1"
-                                   type="success"
-                                   id="sb_btn_save"
-                                   @click="nextStep">ВЫБРАТЬ ДОСТАВКУ
-                        </el-button>
+<div class="row" >
+    <div class="col-md-12">
+        <div class="checkout-client">
+            <div class="base-step">
+                <div class="base-step-label__numbe">1</div>
+                Данные покупателя
+            </div>
+            <div class="base-step-left-line">
+                <div class="base-checkout-client-individual checkout-client__individual">
+                    <div class="base-login-button base-checkout-client-individual__login-button"
+                         v-if="!getIsAuthorizated">
+                        <a rel="nofollow" title="Мой кабинет" class="base-login-button__link" data-event="jqm"
+                           data-param-type="auth" data-name="auth" href="/personal/">
+                            <div class="base-login-button__img"></div>
+                            <div class="base-login-button__title">Есть учетная запись? Войти</div>
+                        </a>
                     </div>
-                </div>
-                <template v-if="service.step == 2">
-                    <div class="row py-3" v-if="getPropertyValueByCode('LOCATION')">
-                        <div class="col-md-12 sb-order-name-step">Способ доставки:</div>
-                        <data-delivery :deliveryInfo="application.info.deliveryIdList" :info="application.info"></data-delivery>
-                    </div>
-                    <div class="row py-3">
-                        <div class="col-md-12 sb-order-name-step">Способ оплаты:</div>
-                        <payment-list></payment-list>
-                    </div>
-
-                    <div class="row py-3 sb_button_finish">
-                        <div class="col-md-12 sb_btn2pay pb-4">
-                            <el-button class="big_btn button"
-                                       type="success"
-                                       id="sb_btn_save"
-                                       @click="saveOrder">ОПЛАТИТЬ
-                            </el-button>
-                        </div>
-                        <div class="col-md-12 sb_pay_description">
-                            После оплаты с вами свяжется оператор для подтверждения адреса доставки
-                        </div>
-                        <div class="col-md-12 sb_silver_text">
-                            Нажимая "ОПЛАТИТЬ" вы переходите на страницу оформления платежа
-                        </div>
-                    </div>
-                </template>
-                <div class="row pb-3">
-                    <div class="col-md-6">
-                        <transition-group name="bounce" tag="div">
-                            <el-alert style="margin: 6px 0;" v-for="error in errorList"
-                                      :key="error" :title="error" type="error" :closable="false"></el-alert>
-                        </transition-group>
+                    <div class="base-checkout-client-individual__input-row-container">
+                        <user-properties></user-properties>
                     </div>
                 </div>
             </div>
-
-
-            <div id="bx-soa-total" class="col-sm-3 bx-soa-sidebar">
-                <div class=" row sb-cart-header">
-                    <div class="col-md-6 sb-cart-t-bold sb-cart-t-main">Ваш заказ</div>
-                    <div class="col-md-6 text-right"><a href="/basket/">Изменить</a></div>
+        </div>
+        <div class="checkout-client">
+            <div class="base-step">
+                <div class="base-step-label__numbe">2</div>
+                Выберите способ получения
+            </div>
+            <div class="base-step-left-line">
+                <div class="property-input" v-if="getPropertyByCode('CITY')">
+                    <div class="sb-block-input input__input"><da-data-input :property="getPropertyByCode('CITY')" ajaxPath="daDataCity" :minLength="4" @select="onCitySelect"/></div>
+                    <div class="sb-block-title"><label :for="'ORDER_PROP_' + getPropertyByCode('CITY')['ID']">Город:</label></div>
                 </div>
-                <div class="row sb-cart-content">
-                    <div class="col-md-6">Товаров на:</div>
-                    <div class="col-md-6 text-right">{{ application.order.TOTAL.ORDER_PRICE_FORMATED }}</div>
-                    <template v-if="service.step == 2">
-                        <div class="col-md-6">Доставка:</div>
-                        <div class="col-md-6 text-right">{{ application.order.TOTAL.DELIVERY_PRICE_FORMATED }}</div>
-                    </template>
+
+                <div class="property-input" v-if="getPropertyByCode('ADDRESS')">
+                    <div class="sb-block-input input__input"><da-data-input-address  :property="getPropertyByCode('ADDRESS')" ajaxPath="daDataAddress" :minLength="4" @select="onAddressSelect"/></div>
+                    <div class="sb-block-title"><label :for="'ORDER_PROP_' + getPropertyByCode('ADDRESS')['ID']">{{getPropertyByCode('ADDRESS')['NAME']}}:</label></div>
                 </div>
-                <div class=" row sb-cart-footer">
-                    <div class="col-md-6 sb-cart-t-bold sb-cart-t-main">Итого:</div>
-                    <div class="col-md-6 sb-cart-price-total text-right sb-cart-t-bold" v-if="service.step == 1">{{application.order.TOTAL.ORDER_PRICE_FORMATED}}</div>
-                    <div class="col-md-6 sb-cart-price-total text-right sb-cart-t-bold" v-if="service.step == 2">{{application.order.TOTAL.ORDER_TOTAL_PRICE_FORMATED}}</div>
+                <div class="checkout-delivery__vue-checkout-delivery">
+                    <el-tabs v-model="activeNameDelivery" @tab-click="tabhandleClick">
+                        <el-tab-pane label="Самовывоз" name="pickup">
+                            <data-delivery-pickup :deliveryInfo="application.info.deliveryIdList" :info="application.info"></data-delivery-pickup>
+                        </el-tab-pane>
+                        <el-tab-pane label="Доставка" name="delivery">
+                            <data-delivery :deliveryInfo="application.info.deliveryIdList" :info="application.info"></data-delivery>
+                        </el-tab-pane>
+                    </el-tabs>
                 </div>
             </div>
         </div>
-    </form>
-
+        <div class="checkout-client">
+            <div class="base-step">
+                <div class="base-step-label__numbe">3</div>
+                Выберите способ оплаты
+            </div>
+            <div class="base-step-left-line">
+                <div class="checkout-payment__vue-checkout-payment">
+                    <el-tabs v-model="activeNamePay" @tab-click="tabhandleClick">
+                        <el-tab-pane label="Онлайн" name="onlain"><payment-list></payment-list></el-tab-pane>
+                        <el-tab-pane label="При получении" name="pickup" v-if="isPayCashItem"><payment-list-cash></payment-list-cash></el-tab-pane>
+                    </el-tabs>
+                </div>
+            </div>
+        </div>
+        <div class="checkout-container__apply-wrapper">
+            <div class="checkout-container__apply">
+                <button class="btn btn-default" @click="onOrderClick"><span class="base-ui-button__text">Подтвердить заказ</span></button>
+            </div>
+        </div>
+    </div>
 </div>

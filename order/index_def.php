@@ -3,11 +3,11 @@ $APPLICATION->SetTitle("Оформление заказа");
 ?>
 <?
 global $USER;
-LocalRedirect('/basket/');
+
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.order.ajax", 
-	"tanais.order.ajax_v2", 
+	"",
 	array(
 		"PAY_FROM_ACCOUNT" => "N",
 		"ONLY_FULL_PAY_FROM_ACCOUNT" => "N",

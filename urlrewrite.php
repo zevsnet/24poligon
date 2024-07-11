@@ -240,7 +240,7 @@ $arUrlRewrite=array (
     'PATH' => '/info/faq/index.php',
     'SORT' => 100,
   ),
-  104 => 
+  106 => 
   array (
     'CONDITION' => '#^/contacts/#',
     'RULE' => '',

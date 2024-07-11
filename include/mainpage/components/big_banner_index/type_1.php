@@ -78,4 +78,4 @@
 <?
 global $arRegion;
 ?>
-<h1 class="sb_h1_main">Военторг Полигон в <?=$arRegion['PROPERTY_REGION_NAME_DECLINE_PP_VALUE']?></h1>
+<h1 class="sb_h1_main">Полигон в <?=$arRegion['PROPERTY_REGION_NAME_DECLINE_PP_VALUE']?></h1>

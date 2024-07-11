@@ -1,23 +1,12 @@
-export default {
+import forEach from 'lodash/forEach'
 
-    setBasket(state, payload) {
-        state.basket = payload
-    },
-    setStores(state, payload) {
-        state.stores = payload
-    },
-    setBasketSignedTemplate(state, payload) {
-        state.basketSignedTemplate = payload
-    },
-    setBasketSignedParams(state, payload) {
-        state.basketSignedParams = payload
-    },
-    setBasketSessid(state, payload) {
-        state.basketSessid = payload
-    },
-    setBasketItems(state, payload) {
-        state.basketItems = payload
-    },
+export default {
+    setBasket: (state, payload) => state.basket = payload,
+    setStores: (state, payload) => state.stores = payload,
+    setBasketSignedTemplate: (state, payload) => state.basketSignedTemplate = payload,
+    setBasketSignedParams: (state, payload) => state.basketSignedParams = payload,
+    setBasketSessid: (state, payload) => state.basketSessid = payload,
+    setBasketItems: (state, payload) => state.basketItems = payload,
     setBasketItemId(state, payload) {
         let $newCount = 0
         console.log(payload)
@@ -46,74 +35,42 @@ export default {
                 }
                 break;
             case 'del_coupon':
-                //state.basketItemUpdate['delete_coupon']
-                // let t1 = {};
-                // t1[payload.name] = payload.name;
-                // state.basketItemUpdate = {
-                //     delete_coupon: t1
-                // }
                 state.basketItemUpdate['delete_coupon'] = {}
                 state.basketItemUpdate['delete_coupon'][payload.name] = payload.name
                 break;
         }
 
     },
-    clearBasketItemUpdate(state) {
-        state.basketItemUpdate = {}
-    },
-    setBasketValues(state, payload) {
-        state.basketValues = payload
-    },
+    clearBasketItemUpdate: (state) => state.basketItemUpdate = {},
+    setBasketValues: (state, payload) => state.basketValues = payload,
     setBasketValue(state, payload) {
         let tmp = {}
         tmp[payload.name] = payload.value
         state.basketValues = {...state.basketValues, ...tmp}
     },
 
-    SET_STEP(state, step) {
-        state.service.step = step
-    },
-    SET_ERROR_PROPERTY_VALUE(state, payload) {
-        state.errorListProperty = Object.assign({}, state.errorListProperty, {[payload.name]: payload.value})
-    },
+    SET_STEP: (state, step) => state.service.step = step,
+    SET_ERROR_PROPERTY_VALUE: (state, payload) => state.errorListProperty = Object.assign({}, state.errorListProperty, {[payload.name]: payload.value}),
     //Оформление
-    setOrder(state, payload) {
-        state.order = payload
-    },
-    setOrderInfoDeliveryPickupId(state, payload) {
-        state.deliveryPickupId = payload
-    },
-    setOrderInfoKoronaBalance(state, payload) {
-        state.koronaBalance = payload
-    },
-    setOrderValues(state, payload) {
-        state.orderValues = payload
-    },
+    setOrder: (state, payload) => state.order = payload,
+
+    setOrderValues: (state, payload) => state.orderValues = payload,
     setOrderValue(state, payload) {
         let tmp = {}
         tmp[payload.name] = payload.value
         state.orderValues = {...state.orderValues, ...tmp}
     },
-    setKoronaBalanceValue(state, payload) {
+    setOrderValuesAddition: (state, payload) => state.orderValuesAddition = payload,
+    setOrderValueAddition: (state, payload) => state.orderValuesAddition[payload.name] = payload.value,
+    setOrderPropertyValue: (state, payload) => state.orderPropertiesValue[payload.id] = payload.value,
+    setOrderPropertiesValue: (state, payload) => state.orderPropertiesValue = payload,
+    setOrderPropertiesDeliveryValue: (state, payload) => {
         let tmp = {}
+        debugger
         tmp[payload.name] = payload.value
-        state.koronaBalance = {...state.koronaBalance, ...tmp}
-    },
-    setOrderValuesAddition(state, payload) {
-        state.orderValuesAddition = payload
-    },
-    setOrderValueAddition(state, payload) {
-        state.orderValuesAddition[payload.name] = payload.value
-    },
-    setOrderPropertyValue(state, payload) {
-        state.orderPropertiesValue[payload.id] = payload.value
-    },
-    setOrderPropertiesValue(state, payload) {
-        state.orderPropertiesValue = payload
-    },
-    setPropertyGroupIdsCheckByStep(state, payload) {
-        state.propertyGroupIdsCheckByStep = payload
-    },
+        state.orderPropertiesDeliveryValue = {...state.orderPropertiesDeliveryValue, ...tmp}
+        },
+    setPropertyGroupIdsCheckByStep: (state, payload) => state.propertyGroupIdsCheckByStep = payload,
     setErrors(state, payload) {
 
         state.errorList = []
@@ -124,59 +81,44 @@ export default {
                     if (payload.value[key][key2] == 'Склад обязательно для заполнения') {
                         payload.value[key][key2] = 'Необходимо выбрать склад самовывоза'
                     }
-                    // if (payload.value[key][key2] == 'Адрес доставки обязательно для заполнения') {
-                    //     delete payload.value[key][key2]
-                    // }
-
                 }
 
                 state.errorList = [...state.errorList, ...payload.value[key]]
             }
         }
     },
-    addError(state, payload) {
-        state.errorList[payload.name].push(payload.value)
-    },
-    setAjaxProcess(state, value) {
-        state.service.isAjaxProcess = value
-    },
-    setShowEnergy(state, value) {
-        state.service.showEnergy = value
-    },
-    setShowDPD(state, value) {
-        state.service.showDPD = value
-    },
-    setPhoneSuccess(state, value) {
-        state.service.isPhoneSuccess = value
-    },
-    setCountryId(state, value) {
-        state.service.countryId = value
-    },
-    setTypeDeliveryId(state, value) {
-        state.service.typeDeliveryId = value
-    },
-    setStep(state, step) {
-        if (state.errorList.properties.length === 0) {
-            state.service.step = step
-        }
-    },
-    triggeredOrder(state) {
-        state.service.triggerOrder = !state.service.triggerOrder
-    },
-    triggeredSaveOrder(state) {
-        state.service.triggerSaveOrder = !state.service.triggerSaveOrder
-    },
-    setCityName(state, value) {
-        state.service.cityName = value
-    },
-    setRegionName(state, value) {
-        state.service.regionName = value
-    },
-    setDeliveryPickupId(state, type) {
-        state.service.typeDeliveryId = type
-    },
-    SET_CHANG_DATE(state) {
-        this.state.service.isDate++;
-    }
+    addError: (state, payload) => state.errorList[payload.name].push(payload.value),
+    setAjaxProcess: (state, value) => state.service.isAjaxProcess = value,
+    setShowEnergy: (state, value) => state.service.showEnergy = value,
+    setShowDPD: (state, value) => state.service.showDPD = value,
+    setPhoneSuccess: (state, value) => state.service.isPhoneSuccess = value,
+    setCountryId: (state, value) => state.service.countryId = value,
 
+    triggeredOrder: (state) => state.service.triggerOrder = !state.service.triggerOrder,
+    triggeredSaveOrder: (state) => state.service.triggerSaveOrder = !state.service.triggerSaveOrder,
+    setCityName: (state, value) => state.service.cityName = value,
+    setRegionName: (state, value) => state.service.regionName = value,
+    SET_CHANG_DATE: (state) => {
+        return state.service.isDate++
+    },
+
+    setOrderInfoDeliveryPickupId: (state, payload) => state.deliveryPickupId = payload,
+    setTypeDeliveryId: (state, value) => state.service.typeDeliveryId = value,
+    setDeliveryPoint: (state, payload) => state.delivery.pickupItems = payload,
+    setDeliveryPickupId: (state, type) => state.service.typeDeliveryId = type,
+    setDeliveryPickupItems: (state, list) => state.delivery.pickupItems = list,
+    setDeliveryServiceFiledValueByCode: (state, {code, value}) => {
+
+        let tmp = {};
+        tmp[code] = value
+        state.delivery.fields = {...state.delivery.fields, ...tmp}
+    },
+    setDeliveryPickupItemById: (state, id) => {
+        state.delivery.pickupItems = forEach(state.delivery.pickupItems, e => {
+            e['selected'] = id === e.id
+        })
+    },
+    setDeliveryItems: (state, list) => {
+        state.delivery.items = list;
+    },
 }

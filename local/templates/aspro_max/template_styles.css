@@ -1146,7 +1146,7 @@ input.medium {
 }
 input.error,
 textarea.error {
-  border-color: #e62222;
+  border-color: #e62222 !important;
 }
 .bxml-dialog input[type="text"] {
   width: auto;

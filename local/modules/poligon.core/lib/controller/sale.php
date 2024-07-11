@@ -17,9 +17,12 @@ use Bitrix\Sale\ProductTable;
 use CCatalogSku;
 use CFile;
 use CIBlockElement;
+use CMaxCondition;
 use COption;
 use CUser;
 use Poligon\Core\Iblock\Helper;
+use Poligon\Core\Order\DaData\City;
+use Poligon\Core\Order\DaData\Street;
 
 
 Loader::includeModule('sale');
@@ -42,15 +45,72 @@ class Sale extends Controller
             'addOrderItem' => ['prefilters' => []],
             'addProductBasket' => ['prefilters' => []],
             'dadatacity' => ['prefilters' => []],
+            'dadataaddress' => ['prefilters' => []],
             'clearAndAddBasket' => ['prefilters' => []],
             'getBasketCount' => ['prefilters' => []],
             'getSignet' => ['prefilters' => []],
+            'getPlusProduct' => ['prefilters' => []],
 
         ];
     }
 
 
-    public function getSignetAction(){
+    public function getPlusProductAction($product_id)
+    {
+        $arIdElementParent = [];
+        $tmpOffersParent = [];
+        $obElementsOffers = CIBlockElement::GetList([], ['IBLOCK_ID' => 182, 'ID' => $product_id], false, false, ['ID', 'PROPERTY_CML2_LINK']);
+        while ($arElementOffer = $obElementsOffers->GetNext()) {
+            $arIdElementParent[] = $arElementOffer['PROPERTY_CML2_LINK_VALUE'];
+            $tmpOffersParent[$arElementOffer['ID']] = $arElementOffer['PROPERTY_CML2_LINK_VALUE'];
+        }
+        unset($obElementsOffers);
+        unset($arElementOffer);
+        $arResultTmp = [];
+        $obElements = CIBlockElement::GetList([], ['IBLOCK_ID' => 180, 'ID' => $arIdElementParent], false, false, ['ID', 'PROPERTY_EXPANDABLES_FILTER']);
+        while ($arElement = $obElements->GetNext()) {
+
+            $cond = new CMaxCondition();
+            try {
+                $arTmpExp = \Bitrix\Main\Web\Json::decode($arElement['~PROPERTY_EXPANDABLES_FILTER_VALUE']);
+                $arExpandablesFilter = $cond->parseCondition($arTmpExp, []);
+            } catch (\Exception $e) {
+                $arExpandablesFilter = array();
+            }
+
+            $arResultTmp[$arElement['ID']] = $arExpandablesFilter;
+        }
+        unset($obElements);
+        unset($arElement);
+        $arResult = [];
+        foreach ($tmpOffersParent as $keyIdOffers => $idParent) {
+            foreach ($arResultTmp as $keyId => $item) {
+                if ($keyId == $idParent) {
+                    $arFilterId = $item['ID'];
+                    $obElements = CIBlockElement::GetList([], ['IBLOCK_ID' => 180, 'ID' => $arFilterId]);
+                    $arResInfo = [];
+                    while ($obElement = $obElements->GetNextElement()) {
+                        $arFields = $obElement->GetFields();
+                        $arFields['PROP'] = $obElement->GetProperties();
+                        $arInfo = [
+                            'NAME' => $arFields['NAME'],
+                            'DETAIL_PICTURE' => $arFields['DETAIL_PICTURE'],
+                            'DETAIL_PAGE_URL' => $arFields['DETAIL_PAGE_URL'],
+                        ];
+                        if ($arInfo['DETAIL_PICTURE']) {
+                            $arInfo['DETAIL_PICTURE'] = CFile::GetPath($arInfo['DETAIL_PICTURE']);
+                        }
+                        $arResInfo[] = $arInfo;
+                    }
+                    $arResult[$keyIdOffers] = $arResInfo;//$item['ID'];
+                }
+            }
+        }
+        return $arResult;
+    }
+
+    public function getSignetAction()
+    {
         $signer = new \Bitrix\Main\Security\Sign\Signer;
         $signedTemplate = $signer->sign('main_vue', 'sale.basket.basket');
         $signedParams = $signer->sign(base64_encode(serialize(array(
@@ -65,9 +125,8 @@ class Sale extends Controller
                 7 => "QUANTITY",
                 8 => "SUM",
             ),
-            "OFFERS_PROPS" => array(
-            ),
-            "PATH_TO_ORDER" => SITE_DIR."order/",
+            "OFFERS_PROPS" => array(),
+            "PATH_TO_ORDER" => SITE_DIR . "order/",
             "HIDE_COUPON" => "N",
             "PRICE_VAT_SHOW_VALUE" => "N",
             "COUNT_DISCOUNT_4_ALL_QUANTITY" => "N",
@@ -102,7 +161,7 @@ class Sale extends Controller
             "GIFTS_PAGE_ELEMENT_COUNT" => "4",
             "GIFTS_CONVERT_CURRENCY" => "N",
             "GIFTS_HIDE_NOT_AVAILABLE" => "N",
-            "EMPTY_BASKET_HINT_PATH" => SITE_DIR."catalog/",
+            "EMPTY_BASKET_HINT_PATH" => SITE_DIR . "catalog/",
             "DEFERRED_REFRESH" => "Y",
             "USE_DYNAMIC_SCROLL" => "Y",
             "SHOW_FILTER" => "Y",
@@ -132,8 +191,7 @@ class Sale extends Controller
             "DISCOUNT_PERCENT_POSITION" => "bottom-right",
             "PRODUCT_BLOCKS_ORDER" => "props,sku,columns",
             "USE_PRICE_ANIMATION" => "Y",
-            "LABEL_PROP" => array(
-            ),
+            "LABEL_PROP" => array(),
             "CORRECT_RATIO" => "Y",
             "COMPATIBLE_MODE" => "Y",
             "ADDITIONAL_PICT_PROP_136" => "-",
@@ -144,11 +202,12 @@ class Sale extends Controller
             "USE_ENHANCED_ECOMMERCE" => "N"
         ))), 'sale.basket.basket');
         return [
-                'signedTemplate'=>$signedTemplate,
-                'signedParams'=>$signedParams,
-                'basketSessid'=>$_SESSION['fixed_session_id'],
+            'signedTemplate' => $signedTemplate,
+            'signedParams' => $signedParams,
+            'basketSessid' => $_SESSION['fixed_session_id'],
         ];
     }
+
     public function addAction($fio, $email, $phone)
     {
         //получаем эти данные и привязываем к ИД пользователя
@@ -653,24 +712,25 @@ class Sale extends Controller
                                     $procent = Option::get('webdvl.core', 'bonus_procent', 1);
                                     $bonus = ($price / 100) * $procent;
                                     ?>
-                                    <div>За заказ вы получите до <b><?= round($bonus) ?> бонусов</b> ( =<?= round($bonus) ?> ₽)
+                                    <div>За заказ вы получите до <b><?= round($bonus) ?> бонусов</b> (
+                                        =<?= round($bonus) ?> ₽)
                                     </div>
                                 </li>
-                                <?if($showPickup == false):?>
+                                <? if ($showPickup == false): ?>
                                     <li class="inf-list__item">
                                         <svg class="icon icon--airplane-tilt-2">
                                             <use href="<?= SITE_TEMPLATE_PATH ?>/img/sprite.svg#airplane-tilt-2"></use>
                                         </svg>
                                         <div><b>Доставка</b> — среда, 27 сентября, или позже, от 550 ₽</div>
                                     </li>
-                                <?else:?>
+                                <? else: ?>
                                     <li class="inf-list__item">
                                         <svg class="icon icon--box-2">
                                             <use href="<?= SITE_TEMPLATE_PATH ?>/img/sprite.svg#box-2"></use>
                                         </svg>
                                         <div><b>Забрать в магазине</b> — Сегодня, или позже, бесплатно</div>
                                     </li>
-                                <?endif;?>
+                                <? endif; ?>
                             </ul>
                         <? else: ?>
                             <p>Ваша Корзинка Пустая :(</p>
@@ -720,4 +780,17 @@ class Sale extends Controller
 
     }
 
+    public static function dadatacityAction($city)
+    {
+        return (new City())->setData([
+            'query' => $city
+        ])->execute();
+    }
+    public static function dadataaddressAction($address,$city)
+    {
+        return (new Street())->setData([
+            'query' => $address,
+            'city' => $city
+        ])->execute();
+    }
 }

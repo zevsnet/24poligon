@@ -6,13 +6,16 @@
 	padding-right: 5px;
 	border-radius: 2px;
 }
+
 .rasprod a div:hover {
 	background: #fce381;
 }
+
 .sb_h1_main{
 	text-align: center;
 	margin-top: -20px;
 }
+
 .sb_h1_contacts_stores{
 	text-align: center;
 	padding-top: 20px;
@@ -22,6 +25,7 @@
 	font-size: 27px;
 	line-height: 1.35em;
 }
+
 .item.sb_border_block.mx_contact_item .sb_top_line {
 	border-top: 1px solid #ececec;
 	padding-top: 20px;
@@ -33,6 +37,7 @@
 .item.sb_border_block.mx_contact_item .middle-prop,
 .item.sb_border_block.mx_contact_item .schedule
 {
+
 	padding-bottom: 10px;
 }
 .item.sb_border_block.mx_contact_item .middle-prop .show_on_map {
@@ -46,29 +51,73 @@
 .wrapper_inner_half.shop-detail1{
 	border-top:none;
 }
-.btn.btn-default, .catalog_detail .sku_props .bx_item_detail_size ul li.active, .bx_catalog_item_scu ul li.item.active {
-	background-color: #F25C05;
-	border-color: #F25C05;
+.sb_hide_prop{display: none;}
+
+.delivery-list .el-radio.is-checked .sb-radio_btn_default,
+.vue-checkout-payment__slider-icon-container
+{
+	background-image: url(/images/check-mark-svgrepo-com.svg) !important;
+	background-size: 60% !important;
+	background-repeat: no-repeat!important;
+	background-position: center!important;
+}
+.checkout-container__apply .btn.btn-default{
+	background-color: #fc8507;
+	border-color: #fc8507;
 	color: #ffffff;
 }
-.btn.btn-default:hover, .btn.btn-default:active, .btn.btn-default:focus {
-	background-color: #F24405;
-	border-color: #F24405;
-}
-.btn.btn-transparent-border-color:hover {
-	background-color: #F24405;
-	border-color: #F24405;
-}
-body .basket-link.basket-count .count {
-	background-color: #F25C05;
-}
-#headerfixed a.basket-link:hover .svg.inline use {
-	fill: #F25C05;
-}
 
-.BIG_BANNER_INDEX{
-background: #fff!important;
+
+.skeleton-loading .sb-block-input,
+.skeleton-loading .sb_btn_delivery,
+.skeleton-loading .order-delivery-pickup-selector_list-item:before
+{
+	position: relative;
 }
-.BIG_BANNER_INDEX h1{
-  margin-top: 40px!important;
+.skeleton-loading .sb-block-input:before,
+.skeleton-loading .sb_btn_delivery:before,
+.skeleton-loading .order-delivery-pickup-selector_list-item:before,
+.skeleton-loading .ymap-container:before,
+.skeleton-loading .pay-system-list .pay_item:before,
+.skeleton-loading .pay-system-list .pay_item.is-checked:after
+{
+	content: '';
+	left: 0;
+	top: 0;
+	position: absolute;
+	display: block;
+	width: 100%;
+	background: linear-gradient(to right, #ccc 0%, #E0E0E0 50%, #ccc 100%);
+	animation: loading 1.2s infinite;
+	height: 100%;
+	z-index: 100;
+
+}
+.placing-an-order.order-is-processed .sb_link_detail{
+	font-weight: 800;
+}
+.placing-an-order.order-is-processed{
+	text-align: center;
+}
+.placing-an-order.order-is-processed .order-is-processed__header-img-w{}
+.placing-an-order.order-is-processed .order-is-processed__header-img-w .order-is-processed__header-img{
+	width: 170px;
+}
+.placing-an-order.order-is-processed h1{text-align: center}
+.placing-an-order.order-is-processed .ps_logo{
+	display: none;
+}
+.placing-an-order.order-is-processed .order-is-processed__description{
+	display: flex;
+	justify-content: center;
+}
+.placing-an-order.order-is-processed .btn.sb_open_catalog {
+	background-color: #c1262c;
+	font-weight: 600;
+	color: white;
+}
+.placing-an-order.order-is-processed .btn.sb_open_jivosite {
+	background-color: #acffa5;
+	font-weight: 600;
+	border: none;
 }

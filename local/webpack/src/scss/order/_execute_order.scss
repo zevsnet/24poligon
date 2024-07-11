@@ -1,0 +1,138 @@
+.order-execute {
+  $p: 'order-execute';
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  flex-wrap: wrap;
+
+  .#{$p}_text-wrapper{
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  .#{$p}_subscribe {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+
+    .checkbox-text {
+      font-weight: normal;
+      transition: all .3s ease;
+      font-size: 13px;
+      line-height: 1.1;
+    }
+
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    &:hover {
+      .checkbox-mark {
+        border-color: darken(#bfbfbf, 10%);
+      }
+
+      input:checked {
+        & ~ .checkbox-mark {
+          border-color: darken(#bfbfbf, 10%);
+        }
+      }
+
+      .checkbox-text{
+        color: #a3185b;
+      }
+    }
+
+    .checkbox-mark {
+      position: relative;
+      height: 14px;
+      width: 14px;
+      border: 1px solid #bfbfbf;
+      border-radius: 2px;
+      transition: border .3s ease;
+      margin-right: 10px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 4px;
+        top: 1px;
+        width: 4px;
+        height: 8px;
+        border: solid #a3185b;
+        border-width: 0 1px 1px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    input:checked {
+      & ~ .checkbox-mark {
+        border-color: #a3185b;
+
+        &:after {
+          display: block;
+        }
+      }
+    }
+
+  }
+
+  .#{$p}_policy{
+    margin-top: 20px;
+    font-size: 13px;
+    a{
+      color: #a3185b;
+    }
+  }
+
+  .#{$p}_btn{
+    background-color: #e4e4e5;
+    color: #fff;
+    height: 50px;
+    width: 195px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: 600;
+    flex-shrink: 0;
+    cursor: default;
+    margin: 0 60px;
+    transition: all .3s ease;
+
+    &.active{
+      cursor: pointer;
+      background-color: #a3185b;
+
+      &:hover{
+        background-color: lighten(#a3185b, 5%);
+      }
+    }
+  }
+
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    margin-top: 20px;
+
+    .#{$p}_text-wrapper{
+      margin-left: 0;
+    }
+
+    .#{$p}_btn{
+      width: 100%;
+      margin: 20px 0 0 0;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .visible-lg-block {
+    display: none!important;
+  }
+}

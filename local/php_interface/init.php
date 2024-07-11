@@ -6,16 +6,18 @@ use Bitrix\Main\Event;
 use Bitrix\Sale;
 use Bitrix\Sale\Delivery\Services\Manager;
 use Bitrix\Catalog\PriceTable;
+
+COption::SetOptionString("catalog", "DEFAULT_SKIP_SOURCE_CHECK", "Y" ); 
+COption::SetOptionString("sale", "secure_1c_exchange", "N" );
+
+include_once("include/discount.php");//для реализации расширенных цен
+
 if ($_REQUEST['mode'] !== 'import') { // FIX 1c
 
     \Bitrix\Main\Loader::includeModule('poligon.core');
     if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/test/sb_site/init.php')) {
         include_once $_SERVER['DOCUMENT_ROOT'] . '/test/sb_site/init.php';
     }
-
-
-    //require_once("sb_tools/init.php"); //подключение общих классов
-    //require_once("sb_site/init.php");
 
 
     // Roistat content BEGIN
@@ -394,3 +396,4 @@ if (isset($_SERVER['HTTP_REFERER']))
         define('BX_SECURITY_SKIP_FRAMECHECK', true);
     }
 }
+

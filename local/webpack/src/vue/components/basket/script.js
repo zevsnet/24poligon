@@ -170,6 +170,7 @@ export default {
         refreshOrder: _.debounce(
             function () {
                 console.log('Обновление корзины')
+                var _this = this
                 let params = new FormData()
                 params = this.getFormData()
                 params.append('action', 'recalculateAjax')
@@ -184,18 +185,35 @@ export default {
                 this.clearBasketItemUpdate()
                 axios({
                     method: 'post',
-                    url: this.application.component.ajaxUrl,
+                    url: '/local/templates/aspro_max/components/bitrix/sale.basket.basket/main_vue/ajax.php',
                     data: params
                 }).then((response) => {
                     this.setBasket(response.data.BASKET_DATA)
                     this.setBasketItems(response.data.BASKET_DATA.GRID.ROWS)
 
+                    var rows = response.data.BASKET_DATA.GRID.ROWS;
+                    var idArray = [];
+                    for (var key in rows) {
+                        if (rows.hasOwnProperty(key)) {
+                            var id = rows[key].PRODUCT_ID;
+                            idArray.push(id);
+                        }
+                    }
+                    //Делаем запрос на получение для товаров сопутки
+                    _this.setPlusProduct(idArray);
                     window.BX.onCustomEvent('OnBasketChange');
                 }).catch(function (error) {
                 })
             },
             500
         ),
+        setPlusProduct(product_id){
+            window.BX.ajax.runAction('poligon:core.sale.getPlusProduct',{
+               data:{ product_id:product_id}
+            }).then(function (res) {
+            });
+
+        },
         getFormData(submit = false) {
             let formData = new FormData();
 

@@ -1,9 +1,10 @@
 import _ from 'lodash'
+import find from 'lodash/find'
 
 export default {
     //Корзина
     getBasketItems: state => {
-        debugger
+
         if (!_.isEmpty(state.basketItems)) {
             return state.basketItems
         }
@@ -15,20 +16,23 @@ export default {
         }
         return false
     },
+
     getStoreSelected: state => {
         if (state.basketValues.selectedStore) {
             return state.basketValues.selectedStore
         }
         return false
     },
-    getBasket: state => {
-        return state.basket
-    },
-    getBasketValue: (state, getters) => {
-        return state.basketValues.PAN
-    },
+    getBasket: state => state.basket,
+    getBasketValue: (state, getters) => state.basketValues.PAN,
 
     //Оформление заказа
+    getIsAuthorizated: state => {
+        if (state.order) {
+            return state.order.IS_AUTHORIZED
+        }
+        return false
+    },
     orderProperties: state => {
         if (!_.isEmpty(state.order)) {
             return state.order['ORDER_PROP'].properties
@@ -65,60 +69,42 @@ export default {
         }
         return false
     },
-    personType: (state, getters) => {
-        return getters.getChecked(getters.personTypeList)
-    },
+    personType: (state, getters) => getters.getChecked(getters.personTypeList),
     personTypeId: (state, getters) => {
         return +getters.personType.ID || null
     },
     // данные по доставке
     deliveryList: (state, getters) => {
         let arDeliver = state.order['DELIVERY']
-        // let isDeletPickup = true;
-        // switch ((state.service.cityName).toUpperCase()) {
-        //     case 'КРАСНОЯРСК':
-        //     case 'КРАСНОЯРС':
-        //     case 'КРАСНОЯР':
-        //     case 'RHFCYJZHCR':
-        //     case 'RHFCYJZHC':
-        //     case 'RHFCYJZH':
-        //         isDeletPickup = false;
-        //         break;
-        // }
-        // switch ((state.service.regionName).toUpperCase()) {
-        //     case 'КРАСНОЯРСКИЙ КРАЙ':
-        //         isDeletPickup = false;
-        //         break;
-        // }
-        // if (isDeletPickup) {
-        //     arDeliver = _.pickBy(state.order['DELIVERY'], (element, key) => {
-        //         return (state.deliveryPickupId.indexOf(parseInt(key)) !== -1)
-        //     })
-        //     state.service.typeDeliveryId = 47
-        // }else{
-        //     // console.log(arDeliver[47])
-        // }
+
         return arDeliver
     },
     delivery: (state, getters) => {
-        let delivery = getters.getChecked(getters.deliveryList)
-        let arDelivery = Object.values(getters.deliveryList)
+        if(getters.deliveryList){
+            let delivery = getters.getChecked(getters.deliveryList)
+            let arDelivery = Object.values(getters.deliveryList)
 
-        if (Array.isArray(delivery) && delivery.length === 0 && arDelivery.length >
-            0) {
-            delivery = null
+            if (Array.isArray(delivery) && delivery.length === 0 && arDelivery.length >
+                0) {
+                delivery = null
 
-            for (let deliveryItem of arDelivery) {
-                if (!delivery) {
-                    delivery = deliveryItem
-                    break
+                for (let deliveryItem of arDelivery) {
+                    if (!delivery) {
+                        delivery = deliveryItem
+                        break
+                    }
                 }
             }
+            return delivery
         }
-        return delivery
+
+        return null;
     },
     deliveryId: (state, getters) => {
-        return +getters.delivery.ID || null
+        if(getters.delivery){
+            return +getters.delivery.ID || null
+        }
+        return  null
     },
 
     // данные по платежным системам
@@ -129,41 +115,26 @@ export default {
             return item.ID != '10' ? true : false;
         })
     },
-    payment: (state, getters) => {
-        return getters.getChecked(getters.paymentList)
-    },
+    payment: (state, getters) => getters.getChecked(getters.paymentList),
     paymentId: (state, getters) => {
         return +getters.payment.ID || null
     },
     // данные по профилям
-    profileList: state => {
-        return state.order['USER_PROFILES']
-    },
-    profile: (state, getters) => {
-        return getters.getChecked(getters.profileList)
-    },
+    profileList: state => state.order['USER_PROFILES'],
+    profile: (state, getters) => getters.getChecked(getters.profileList),
     profileId: (state, getters) => {
         return +getters.profile.ID || 0
     },
-    getAjaxProcess: state => {
-        return state.service.isAjaxProcess
-    },
+    getAjaxProcess: state => state.service.isAjaxProcess,
     // вспомогательные геттеры
     getChecked: () => data => {
         return _.find(data, item => {
             return item.CHECKED === 'Y'
         }) || []
     },
-    getPropertyByCode: (state, getters) => code => {
-        return _.find(getters.orderProperties, ['CODE', code])
-    },
-    getPropertyIdByCode: (state, getters) => code => {
-        let property = getters.getPropertyByCode(code)
-        return property ? property.ID : null
-    },
-    getPropertyValueByCode: (state, getters) => code => {
-        return state.orderPropertiesValue[getters.getPropertyIdByCode(code)]
-    },
+    getPropertyByCode: (state, getters) => code => _.find(getters.orderProperties, ['CODE', code]),
+    getPropertyIdByCode: (state, getters) => code => getters.getPropertyByCode(code) ? getters.getPropertyByCode(code).ID : null,
+    getPropertyValueByCode: (state, getters) => code => state.orderPropertiesValue[getters.getPropertyIdByCode(code)],
 
     getResponsePropertyValueByCode: (state, getters) => code => {
         let property = getters.getPropertyByCode(code)
@@ -173,29 +144,50 @@ export default {
         let phone = getters.getPropertyByCode('PHONE')
         return phone ? _.result(phone, 'VALUE[0]', '') : ''
     },
-    countryName: (state, getters) => {
-        return _.find(state.countyList, (item) => {
-            return item.id === state.service.countryId
-        }).name
-    },
-    paymentListKorona: state => {
-        if (state.koronaBalance.Balance !== null && state.koronaBalance.Balance > 0) {
-            return _.filter(state.order['PAY_SYSTEM'], (item) => {
-                //TODO: вынести в переменную
-                return item.ID === '10' ? true : false;
-            })
+    countryName: (state, getters) => _.find(state.countyList, (item) => {
+        return item.id === state.service.countryId
+    }).name,
+    GET_ERROR_PROPERTY: state => code => state.errorListProperty[code],
+
+    isPayCashItem: state => {
+        if (state.order && state.order['PAY_SYSTEM']) {
+            for (let payItem of state.order['PAY_SYSTEM']) {
+                if (payItem.CODE == 'CASH') {
+                    return true;
+                }
+            }
         }
-        return []
-    },
-    getKoronaBalance: state => {
-        return state.koronaBalance;
-    },
-    getKoronaBalanceCode: (state, getters) => code => {
-        return state.koronaBalance[code] || false
+        return false;
     },
 
-    GET_ERROR_PROPERTY: state  => code => {
-        return  state.errorListProperty[code]
+    getDeliveryTypes: state => state.delivery.types,
+    getDeliveryTypeSelected: state => find(state.delivery.types, 'selected'),
+    getDeliveryPickupItems: state => state.delivery.pickupItems,
+    getDeliveryPickupItemSelected: state => {
+        var tmpIndex;
+        for (tmpIndex in state.delivery.pickupItems) {
+            var item = state.delivery.pickupItems[tmpIndex];
+            if (item.selected == true) {
+                return item
+            }
+        }
+        return {'lat': 0, 'lon': 0};
+    },
+    getDeliveryItemSelected: state => {
+        for (var tmpIndex in state.delivery.items) {
+            var item = state.delivery.items[tmpIndex];
+            if (item.selected == true) {
+                return item
+            }
+        }
+    },
+    getDeliveryFieldByCode: state => code => {
+        for (var incI in state.delivery.fields) {
+            debugger
+            if (incI == code) {
+                return state.delivery.fields[incI]
+            }
+        }
     },
 
 
