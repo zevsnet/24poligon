@@ -295,5 +295,4 @@ if(!$USER->IsAdmin()):?>
 	false
 );?>
 </div>
-
 <?endif?>
